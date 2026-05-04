@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import "./globals.css";
 import CinematicProvider from "@/components/CinematicProvider";
 import Preloader from "@/components/Preloader";

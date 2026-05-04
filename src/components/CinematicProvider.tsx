@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import Lenis from '@studio-freight/lenis';
+import Lenis from 'lenis';
 
 export default function CinematicProvider({ children }: { children: React.ReactNode }) {
   const cursorRef = useRef<HTMLDivElement>(null);

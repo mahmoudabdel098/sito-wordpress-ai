@@ -266,36 +266,38 @@ const industryData = {
 // --- LOGIC TEMPLATES FOR SLIDES ---
 const slideLogic = {
   AUTHORITY: [
-    (title, ind) => ({ title, text: `Nel settore ${ind}, l'autorità non si dichiara, si dimostra. Link2Digital definisce nuovi standard.` }),
-    (title, ind) => ({ title: "L'ANALISI DEL PARADIGMA", text: "Molti brand ignorano che il mercato è cambiato. Il sito non è un costo, è l'asset principale del tuo business." }),
-    (title, ind) => ({ title: "LA VISIONE L2D", text: "Integriamo psicologia d'acquisto e design d'avanguardia per separarti definitivamente dalla concorrenza." }),
-    (title, ind) => ({ title: "RISULTATI TANGIBILI", text: "Meno rumore, più conversioni. Ecco come trasformiamo la tua presenza digitale in una macchina da vendita." }),
-    (title, ind) => ({ title: "DOMINA IL MERCATO", text: "Il futuro del tuo brand inizia da un'architettura digitale d'élite. Prenota ora la tua consulenza." })
+    (title: string, ind: string) => ({ title, text: `Nel settore ${ind}, l'autorità non si dichiara, si dimostra. Link2Digital definisce nuovi standard.` }),
+    (title: string, ind: string) => ({ title: "L'ANALISI DEL PARADIGMA", text: "Molti brand ignorano che il mercato è cambiato. Il sito non è un costo, è l'asset principale del tuo business." }),
+    (title: string, ind: string) => ({ title: "LA VISIONE L2D", text: "Integriamo psicologia d'acquisto e design d'avanguardia per separarti definitivamente dalla concorrenza." }),
+    (title: string, ind: string) => ({ title: "RISULTATI TANGIBILI", text: "Meno rumore, più conversioni. Ecco come trasformiamo la tua presenza digitale in una macchina da vendita." }),
+    (title: string, ind: string) => ({ title: "DOMINA IL MERCATO", text: "Il futuro del tuo brand inizia da un'architettura digitale d'élite. Prenota ora la tua consulenza." })
   ],
   EDUCATIONAL: [
-    (title, ind) => ({ title, text: "Swipe per scoprire il metodo definitivo che sta rivoluzionando il posizionamento online." }),
-    (title, ind) => ({ title: "STEP 01: FONDAMENTA", text: "Senza una strategia di base, ogni sforzo di design è vano. Analizziamo i touchpoint critici del tuo utente." }),
-    (title, ind) => ({ title: "STEP 02: ESPERIENZA", text: "La UX (User Experience) deve essere invisibile. L'utente deve arrivare alla conversione senza attriti." }),
-    (title, ind) => ({ title: "STEP 03: AUTORITÀ", text: "Inseriamo segnali di fiducia e storytelling che elevano il valore percepito del tuo servizio o prodotto." }),
-    (title, ind) => ({ title: "STEP 04: CONVERSIONE", text: "Ogni pixel deve avere un obiettivo. Trasformiamo l'attenzione in azione immediata e misurabile." }),
-    (title, ind) => ({ title: "IL RISULTATO FINALE", text: "Un ecosistema digitale pronto a scalare, ottimizzato per Google e per il cuore dei tuoi clienti." }),
-    (title, ind) => ({ title: "SEI PRONTO A SCALARE?", text: "Applica questo metodo al tuo business. Link2Digital è qui per guidare la tua trasformazione." })
+    (title: string, ind: string) => ({ title, text: "Swipe per scoprire il metodo definitivo che sta rivoluzionando il posizionamento online." }),
+    (title: string, ind: string) => ({ title: "STEP 01: FONDAMENTA", text: "Senza una strategia di base, ogni sforzo di design è vano. Analizziamo i touchpoint critici del tuo utente." }),
+    (title: string, ind: string) => ({ title: "STEP 02: ESPERIENZA", text: "La UX (User Experience) deve essere invisibile. L'utente deve arrivare alla conversione senza attriti." }),
+    (title: string, ind: string) => ({ title: "STEP 03: AUTORITÀ", text: "Inseriamo segnali di fiducia e storytelling che elevano il valore percepito del tuo servizio o prodotto." }),
+    (title: string, ind: string) => ({ title: "STEP 04: CONVERSIONE", text: "Ogni pixel deve avere un obiettivo. Trasformiamo l'attenzione in azione immediata e misurabile." }),
+    (title: string, ind: string) => ({ title: "IL RISULTATO FINALE", text: "Un ecosistema digitale pronto a scalare, ottimizzato per Google e per il cuore dei tuoi clienti." }),
+    (title: string, ind: string) => ({ title: "SEI PRONTO A SCALARE?", text: "Applica questo metodo al tuo business. Link2Digital è qui per guidare la tua trasformazione." })
   ],
   PROBLEM_SOLUTION: [
-    (title, ind) => ({ title, text: "Hai la sensazione che il tuo sito stia lavorando contro di te? Ecco la verità che nessuno ti dice." }),
-    (title, ind) => ({ title: "IL PROBLEMA REALE", text: "Non è la mancanza di traffico. È la mancanza di una strategia di conversione che trasmetta il tuo vero valore." }),
-    (title, ind) => ({ title: "L'ERRORE COMUNE", text: "Continuare a investire in pubblicità su un sito che 'perde' clienti. È come versare acqua in un secchio bucato." }),
-    (title, ind) => ({ title: "LA SOLUZIONE L2D", text: "Ricostruiamo il tuo funnel partendo dai dati. Design, velocità e psicologia applicata per chiudere il cerchio." }),
-    (title, ind) => ({ title: "TORNA A CRESCERE", text: "Smetti di sprecare budget. Trasforma il tuo sito nel tuo miglior commerciale attivo 24/7." })
+    (title: string, ind: string) => ({ title, text: "Hai la sensazione che il tuo sito stia lavorando contro di te? Ecco la verità che nessuno ti dice." }),
+    (title: string, ind: string) => ({ title: "IL PROBLEMA REALE", text: "Non è la mancanza di traffico. È la mancanza di una strategia di conversione che trasmetta il tuo vero valore." }),
+    (title: string, ind: string) => ({ title: "L'ERRORE COMUNE", text: "Continuare a investire in pubblicità su un sito che 'perde' clienti. È come versare acqua in un secchio bucato." }),
+    (title: string, ind: string) => ({ title: "LA SOLUZIONE L2D", text: "Ricostruiamo il tuo funnel partendo dai dati. Design, velocità e psicologia applicata per chiudere il cerchio." }),
+    (title: string, ind: string) => ({ title: "TORNA A CRESCERE", text: "Smetti di sprecare budget. Trasforma il tuo sito nel tuo miglior commerciale attivo 24/7." })
   ],
   VIRAL_HOOK: [
-    (title, ind) => ({ title, text: "Questa è la differenza tra chi sopravvive online e chi domina il settore. La scelta è tua. Link2Digital è la soluzione." })
+    (title: string, ind: string) => ({ title, text: "Questa è la differenza tra chi sopravvive online e chi domina il settore. La scelta è tua. Link2Digital è la soluzione." })
   ]
 };
 
 // --- CAPTION GENERATOR ---
-const generateCaption = (title, pillar, ind) => {
-  const hooks = {
+type Pillar = 'AUTHORITY' | 'EDUCATIONAL' | 'PROBLEM_SOLUTION' | 'PERSONAL_BRAND' | 'VIRAL_HOOK';
+
+const generateCaption = (title: string, pillar: Pillar, ind: string) => {
+  const hooks: Record<string, string> = {
     AUTHORITY: `L'autorità nel settore ${ind} non è un'opzione, è una necessità. 🏛️`,
     EDUCATIONAL: `Vuoi sapere come scalare il tuo business nel settore ${ind}? 📊`,
     PROBLEM_SOLUTION: `Smetti di perdere clienti preziosi nel settore ${ind}. ⚠️`,
@@ -314,9 +316,9 @@ export const generatePosts = (count: number) => {
   
   for (let i = 0; i < count; i++) {
     const industry = industries[i % industries.length];
-    const pool = industryData[industry.id] || industryData.agency;
+    const pool = industryData[industry.id as keyof typeof industryData] || industryData.agency;
     
-    let pillar = 'PROBLEM_SOLUTION';
+    let pillar: Pillar = 'PROBLEM_SOLUTION';
     const rand = i % 10; 
     if (rand < 4) pillar = 'PROBLEM_SOLUTION';
     else if (rand < 7) pillar = 'EDUCATIONAL';

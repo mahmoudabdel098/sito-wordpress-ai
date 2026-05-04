@@ -8,7 +8,26 @@ import { generatePosts } from '@/data/socialContent';
 
 const postsData = generatePosts(300);
 
-const getPillarIcon = (pillar) => {
+type Pillar = 'AUTHORITY' | 'EDUCATIONAL' | 'PROBLEM_SOLUTION' | 'PERSONAL_BRAND' | 'VIRAL_HOOK';
+
+interface Slide {
+  title: string;
+  text: string;
+}
+
+interface Post {
+  id: number;
+  day: string;
+  industryId: string;
+  industryTitle: string;
+  industryTag: string;
+  pillarName: Pillar;
+  styleVariant: number;
+  slides: Slide[];
+  caption: string;
+}
+
+const getPillarIcon = (pillar: string) => {
   switch(pillar) {
     case 'AUTHORITY': return <ShieldCheck size={14} className="text-[#ccff00]"/>;
     case 'EDUCATIONAL': return <BookOpen size={14} className="text-[#ccff00]"/>;
@@ -36,9 +55,9 @@ export default function SocialStudioV16() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const selectedPost = posts[selectedPostIndex];
-  const slideRef = useRef(null);
+  const slideRef = useRef<HTMLDivElement>(null);
 
-  const handleLogin = (e) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (user.toLowerCase() === 'admin' && pass.toLowerCase() === 'admin') {
       setIsAuthenticated(true);
@@ -48,13 +67,13 @@ export default function SocialStudioV16() {
     }
   };
 
-  const updatePostText = (slideIndex, field, value) => {
+  const updatePostText = (slideIndex: number, field: keyof Slide, value: string) => {
     const updatedPosts = [...posts];
     updatedPosts[selectedPostIndex].slides[slideIndex][field] = value;
     setPosts(updatedPosts);
   };
 
-  const updateCaption = (value) => {
+  const updateCaption = (value: string) => {
     const updatedPosts = [...posts];
     updatedPosts[selectedPostIndex].caption = value;
     setPosts(updatedPosts);
@@ -75,7 +94,7 @@ export default function SocialStudioV16() {
     }
   };
 
-  const renderSlideContent = (post, slideIdx, isSmall = false) => {
+  const renderSlideContent = (post: Post, slideIdx: number, isSmall: boolean = false) => {
     const slide = post.slides[slideIdx];
     const variant = post.styleVariant;
     const titleSize = isSmall ? 'text-2xl' : 'text-[2.6rem]';
