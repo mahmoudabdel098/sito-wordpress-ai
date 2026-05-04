@@ -142,6 +142,16 @@ export default function Contact() {
               <ArrowUpRight size={18} className="text-white/20 group-hover:text-black transition-colors" />
            </div>
         </div>
+
+        {/* Local SEO & Contact Markers */}
+        <section className="sr-only" aria-hidden="true">
+          <h2>Contatta la nostra Web Agency a Milano</h2>
+          <p>
+            Vieni a trovarci nel nostro studio a Milano in Via Montenapoleone 12, o scrivici a hello@link2digital.it 
+            per una consulenza su sviluppo web Next.js, strategie SEO e branding d'élite. Link2Digital è attiva su tutto 
+            il territorio milanese e lombardo.
+          </p>
+        </section>
       </motion.div>
     </div>
   );

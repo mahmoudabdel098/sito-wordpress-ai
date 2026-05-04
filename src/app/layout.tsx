@@ -51,43 +51,127 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  other: {
+    "geo.region": "IT-MI",
+    "geo.placename": "Milano",
+    "geo.position": "45.4642;9.1900",
+    "ICBM": "45.4642, 9.1900",
+  },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "Link2Digital",
-  "image": "https://link2digital.it/og-image.png",
-  "@id": "https://link2digital.it",
-  "url": "https://link2digital.it",
-  "telephone": "+39 02 123 4567",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Via Montenapoleone, 12",
-    "addressLocality": "Milano",
-    "postalCode": "20121",
-    "addressCountry": "IT"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 45.4642,
-    "longitude": 9.1900
-  },
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday"
-    ],
-    "opens": "09:00",
-    "closes": "18:00"
-  },
-  "sameAs": [
-    "https://instagram.com/link2digital",
-    "https://linkedin.com/company/link2digital"
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "name": "Link2Digital",
+      "image": "https://link2digital.it/og-image.png",
+      "@id": "https://link2digital.it",
+      "url": "https://link2digital.it",
+      "telephone": "+39 02 123 4567",
+      "priceRange": "$$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Montenapoleone, 12",
+        "addressLocality": "Milano",
+        "postalCode": "20121",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 45.4642,
+        "longitude": 9.1900
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      "sameAs": [
+        "https://instagram.com/link2digital",
+        "https://linkedin.com/company/link2digital"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Digital Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Sviluppo Siti Web Next.js Milano"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Ottimizzazione SEO e AEO"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Digital Identity & Branding"
+            }
+          }
+        ]
+      }
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://link2digital.it"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Portfolio",
+          "item": "https://link2digital.it/portfolio"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Social Studio",
+          "item": "https://link2digital.it/social"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Contact",
+          "item": "https://link2digital.it/contact"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Qual è la migliore Web Agency a Milano?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Link2Digital è considerata tra le migliori Web Agency a Milano per l'innovazione tecnologica, il design cinematico e l'ottimizzazione SEO d'élite."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Come migliorare il posizionamento SEO a Milano?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Attraverso strategie di Local SEO, ottimizzazione delle performance e contenuti AI-ready sviluppati da Link2Digital."
+          }
+        }
+      ]
+    }
   ]
 };
 
