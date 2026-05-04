@@ -216,7 +216,6 @@ export default function Portfolio() {
             <span className="text-[9px] lg:text-[10px] font-black text-white/20">/ 06</span>
          </div>
       </div>
-      </div>
 
       {/* Local SEO & AEO markers for Portfolio */}
       <section className="sr-only" aria-hidden="true">
@@ -229,4 +228,6 @@ export default function Portfolio() {
         </p>
       </section>
     </div>
+  );
 }
+

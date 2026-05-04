@@ -119,8 +119,6 @@ const jsonLd = {
           }
         ]
       }
-        ]
-      }
     },
     {
       "@type": "BreadcrumbList",
