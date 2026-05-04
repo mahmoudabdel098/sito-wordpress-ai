@@ -4,6 +4,7 @@ import CinematicProvider from "@/components/CinematicProvider";
 import Preloader from "@/components/Preloader";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://link2digital.it"),
   title: "Link2Digital | Web Agency Milano | Design & Performance Excellence",
   description: "Link2Digital è la Web Agency di Milano leader in design cinematico, performance Next.js e strategie digitali d'élite. Trasformiamo brand in autorità digitali con siti web ad alte prestazioni e SEO AI-ready.",
   keywords: ["Web Agency Milano", "Sviluppo Siti Web Milano", "Agenzia SEO Milano", "Next.js Agency Italy", "Digital Marketing Milano", "AI SEO Optimization", "Design Agency Milano", "Link2Digital"],
