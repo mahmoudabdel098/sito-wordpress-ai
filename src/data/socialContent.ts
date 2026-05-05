@@ -195,76 +195,105 @@ const industryData = {
   },
   pmi: {
     AUTHORITY: [
-      "Perché il sito web è il dipendente più importante per una PMI",
-      "Come competere con i grandi brand attraverso l'agilità digitale",
-      "Il valore della presenza locale online per le piccole imprese",
-      "Perché investire in un sito proprietario invece di soli social"
+      "Il sito web è il tuo dipendente più instancabile",
+      "Come le PMI possono battere i giganti con la velocità",
+      "Perché il posizionamento locale è la tua miniera d'oro",
+      "L'importanza di possedere la propria piattaforma"
     ],
     EDUCATIONAL: [
-      "3 Semplici modi per migliorare la tua visibilità locale",
-      "Come gestire i contatti che arrivano dal sito in modo efficace",
-      "L'importanza di avere orari e contatti sempre aggiornati sul web",
-      "Come presentare i tuoi servizi in modo chiaro e professionale"
+      "Checklist per la tua presenza locale online",
+      "Gestione dei lead: come rispondere in tempo reale",
+      "L'impatto di un sito professionale sulla fiducia",
+      "Semplificare i servizi per vendere di più"
     ],
     PROBLEM_SOLUTION: [
-      "Pochi clienti nuovi? Forse il tuo sito non ti sta aiutando",
-      "Sito vecchio e non aggiornabile? Vediamo come renderlo moderno",
-      "Stanco di perdere tempo con contatti non qualificati? La soluzione è nel funnel",
-      "Come rendere la tua impresa visibile su Google senza sprechi"
+      "Sito che non converte? Analizziamo i motivi",
+      "Dallo statico al dinamico: l'evoluzione della PMI",
+      "Funnel di acquisizione contatti per il business locale",
+      "Google Business Profile + Sito: la combo perfetta"
     ],
     VIRAL_HOOK: [
-      "La digitalizzazione non è solo per i giganti, è per chi vuole crescere",
-      "Il tuo business merita una casa digitale solida e accogliente",
-      "Fai il primo passo verso la scalabilità con un sito professionale"
+      "Il digitale è l'alleato numero uno della tua impresa",
+      "Non lasciare che la tecnologia sia un ostacolo",
+      "La tua azienda merita una vetrina all'altezza"
     ]
   }
 };
 
-// --- LOGIC TEMPLATES FOR SLIDES (Value Pills) ---
+// --- DYNAMIC SLIDE LOGIC (Anti-Repetitive) ---
 const slideLogic = {
   AUTHORITY: [
-    (title: string) => ({ title, text: "Swipe per capire come trasformare la tua presenza digitale in un vantaggio competitivo reale." }),
-    (title: string) => ({ title: "L'ANALISI CRITICA", text: "Molte aziende hanno siti belli che però non vendono. La differenza sta nell'architettura tecnica e psicologica." }),
-    (title: string) => ({ title: "IL NOSTRO APPROCCIO", text: "Lavoriamo per rendere il tuo sito non solo esteticamente eccellente, ma uno strumento attivo di crescita." }),
-    (title: string) => ({ title: "DATA DRIVEN", text: "Ogni scelta di design è basata su come gli utenti interagiscono davvero con il web oggi." }),
-    (title: string) => ({ title: "PARLIAMO DI TE", text: "Non ci interessa essere i più bravi, ci interessa far crescere il tuo business. Contattaci per una consulenza." })
+    (title: string, ind: string) => ({ title, text: "Un'analisi rapida su come questo concetto cambia le regole del gioco." }),
+    (title: string, ind: string) => ({ title: "IL CONTESTO", text: `Nel mondo ${ind}, l'attenzione è la moneta più preziosa. Se il tuo sito non la cattura subito, hai già perso.` }),
+    (title: string, ind: string) => ({ title: "COSA CAMBIA", text: "Passare da una vetrina statica a uno strumento interattivo aumenta la fiducia del 70%." }),
+    (title: string, ind: string) => ({ title: "LA NOSTRA FILOSOFIA", text: "Costruiamo soluzioni che risolvono problemi, non solo layout belli da vedere." }),
+    (title: string, ind: string) => ({ title: "PROSSIMO PASSO", text: "Se vuoi approfondire come applicare questo al tuo business, scrivici." })
   ],
   EDUCATIONAL: [
-    (title: string) => ({ title, text: "Ecco una pillola veloce per migliorare i tuoi risultati online oggi stesso." }),
-    (title: string) => ({ title: "IL PUNTO DI PARTENZA", text: "Spesso la soluzione è più semplice di quanto pensi. Focalizzati sull'esperienza dell'utente." }),
-    (title: string) => ({ title: "AZIONI PRATICHE", text: "Controlla la velocità di caricamento e la chiarezza del messaggio principale sulla tua home page." }),
-    (title: string) => ({ title: "OTTIMIZZAZIONE", text: "Usa font leggibili, colori coerenti e pulsanti d'azione che siano impossibili da ignorare." }),
-    (title: string) => ({ title: "COSTRUIAMO INSIEME", text: "Se vuoi implementare queste soluzioni in modo professionale, siamo qui per aiutarti." }),
-    (title: string) => ({ title: "CONCLUSIONE", text: "Un piccolo cambiamento oggi può portare grandi risultati domani. Seguici per altri consigli." })
+    (title: string, ind: string) => ({ title, text: "Ecco alcuni spunti tecnici per migliorare la tua presenza online." }),
+    (title: string, ind: string) => ({ title: "PUNTO 01", text: "La velocità non è un dettaglio. Ogni decimo di secondo di attesa riduce le tue conversioni." }),
+    (title: string, ind: string) => ({ title: "PUNTO 02", text: "La chiarezza vince sulla creatività fine a se stessa. L'utente deve capire subito cosa offri." }),
+    (title: string, ind: string) => ({ title: "PUNTO 03", text: `Per il settore ${ind}, la prova sociale e le recensioni sono il motore della vendita.` }),
+    (title: string, ind: string) => ({ title: "APPLICAZIONE", text: "Inizia testando il tuo sito da mobile: è lì che si decide il tuo successo." }),
+    (title: string, ind: string) => ({ title: "AIUTO ESPERTO", text: "Se non sai da dove iniziare, possiamo fare un check gratuito insieme." })
   ],
   PROBLEM_SOLUTION: [
-    (title: string) => ({ title, text: "Ti senti bloccato con un sito che non porta risultati? Vediamo insieme come sbloccare la situazione." }),
-    (title: string) => ({ title: "INDIVIDUA IL BLOCCO", text: "Il problema è spesso invisibile ad occhio nudo: tempi di risposta del server o UX confusa." }),
-    (title: string) => ({ title: "LA SOLUZIONE", text: "Ripartiamo dalle basi. Struttura pulita, codice ottimizzato e un percorso utente senza ostacoli." }),
-    (title: string) => ({ title: "IL RISULTATO", text: "Un sito che carica all'istante e che trasmette fiducia immediata a chi lo visita." }),
-    (title: string) => ({ title: "FACCIAMO DUE CHIACCHIERE", text: "Raccontaci il tuo progetto. Analizzeremo insieme i punti di forza e di debolezza del tuo sito attuale." })
+    (title: string, ind: string) => ({ title, text: "Molti si scontrano con questo ostacolo. Vediamo come superarlo." }),
+    (title: string, ind: string) => ({ title: "LA CAUSA", text: "Spesso il problema risiede in una tecnologia obsoleta o in una struttura poco chiara." }),
+    (title: string, ind: string) => ({ title: "LA SOLUZIONE", text: "Ottimizzare il codice e semplificare il percorso d'acquisto è la chiave per ripartire." }),
+    (title: string, ind: string) => ({ title: "IL BENEFICIO", text: "Meno frizione per l'utente significa più contatti qualificati per te." }),
+    (title: string, ind: string) => ({ title: "CONTATTACI", text: "Sblocca il potenziale del tuo sito. Raccontaci la tua sfida in DM." })
   ],
   VIRAL_HOOK: [
-    (title: string) => ({ title, text: "Il web corre veloce. Non lasciare che il tuo brand resti indietro con tecnologie obsolete." })
+    (title: string, ind: string) => ({ title, text: `Non restare fermo mentre il settore ${ind} si evolve. Il momento di agire è adesso.` })
   ]
 };
 
 // --- CAPTION GENERATOR ---
 type Pillar = 'AUTHORITY' | 'EDUCATIONAL' | 'PROBLEM_SOLUTION' | 'PERSONAL_BRAND' | 'VIRAL_HOOK';
 
-const generateCaption = (title: string, pillar: Pillar, ind: string) => {
-  const hooks: Record<string, string> = {
-    AUTHORITY: `Consiglio digitale per il settore ${ind}: l'esperienza utente vince sempre. 🏛️`,
-    EDUCATIONAL: `Pillola del giorno per chi opera nel settore ${ind}. 📊`,
-    PROBLEM_SOLUTION: `Come risolvere i problemi comuni del web nel settore ${ind}. ⚠️`,
-    VIRAL_HOOK: `Il mondo digitale cambia, non restare indietro. ⚡`
+const generateCaption = (title: string, pillar: Pillar, ind: string, variant: number) => {
+  const hooks: Record<string, string[]> = {
+    AUTHORITY: [
+      `Consiglio digitale per il settore ${ind}: l'esperienza utente vince sempre. 🏛️`,
+      `Ecco perché la solidità tecnica è fondamentale nel settore ${ind}. 💎`,
+      `Leadership digitale: come distinguersi nel settore ${ind}. 🚀`
+    ],
+    EDUCATIONAL: [
+      `Pillola del giorno per chi opera nel settore ${ind}. 📊`,
+      `Mini-guida: ottimizzare la tua presenza nel settore ${ind}. 💡`,
+      `3 Cose da sapere subito sul web per il settore ${ind}. 📝`
+    ],
+    PROBLEM_SOLUTION: [
+      `Come risolvere i problemi comuni del web nel settore ${ind}. ⚠️`,
+      `Basta sprecare budget nel settore ${ind}. Ecco la soluzione. 🛠️`,
+      `Il tuo sito nel settore ${ind} non funziona? Leggi qui. 🔍`
+    ],
+    VIRAL_HOOK: [
+      `Il mondo digitale cambia, non restare indietro nel settore ${ind}. ⚡`,
+      `La verità scomoda sul web nel settore ${ind}. 🤐`,
+      `Stai ancora usando metodi del 2010 per il settore ${ind}? 🕒`
+    ]
   };
 
-  const body = `In Link2Digital ci piace risolvere problemi reali con soluzioni tecniche eleganti. Non creiamo solo siti, ma strumenti di lavoro che semplificano la tua vita e quella dei tuoi clienti. \n\n${title} è uno dei temi che affrontiamo ogni giorno con i nostri partner.`;
+  const bodies = [
+    `In Link2Digital risolviamo problemi reali con soluzioni tecniche eleganti. Non creiamo solo siti, ma strumenti di lavoro che semplificano la tua vita.`,
+    `Il nostro approccio è basato sui dati e sull'esperienza dell'utente. Vogliamo che il tuo business cresca in modo sano e costante.`,
+    `Crediamo che la tecnologia debba essere un supporto, non un ostacolo. Ecco come vediamo l'evoluzione del web per il tuo settore.`
+  ];
 
-  const cta = "👉 Scrivici in DM se vuoi analizzare il tuo sito attuale.";
+  const ctas = [
+    "👉 Scrivici in DM se vuoi analizzare il tuo sito attuale.",
+    "👉 Clicca sul link in bio per scoprire come lavoriamo.",
+    "👉 Prenota un check gratuito della tua presenza online."
+  ];
 
-  return `${hooks[pillar] || ''} \n\n ${body} \n\n ${cta} \n\n #Link2Digital #WebDevelopment #UserExperience #SitoWeb #DigitalTips #${ind.replace(/\s+/g, '')}`;
+  const hookPool = hooks[pillar] || hooks.AUTHORITY;
+  const hook = hookPool[variant % hookPool.length];
+  const body = bodies[variant % bodies.length];
+  const cta = ctas[variant % ctas.length];
+
+  return `${hook} \n\n ${body} \n\n ${title} è un tema centrale oggi. \n\n ${cta} \n\n #Link2Digital #WebDevelopment #UX #DigitalStrategy #${ind.replace(/\s+/g, '')}`;
 };
 
 export const generatePosts = (count: number) => {
@@ -300,7 +329,7 @@ export const generatePosts = (count: number) => {
       pillarName: pillar,
       styleVariant: styleVariant,
       slides: slides,
-      caption: generateCaption(title, pillar, industry.title)
+      caption: generateCaption(title, pillar, industry.title, styleVariant)
     });
   }
   
