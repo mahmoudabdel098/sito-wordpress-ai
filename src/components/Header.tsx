@@ -8,25 +8,8 @@ import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Header({ inverted = false }: { inverted?: boolean }) {
-  const [time, setTime] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
-
-  useEffect(() => {
-    const updateTime = () => {
-      const milanoTime = new Intl.DateTimeFormat('it-IT', {
-        timeZone: 'Europe/Rome',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-      }).format(new Date());
-      setTime(milanoTime);
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   const textColor = inverted ? 'text-white' : 'text-black';
   const opacityColor = inverted ? 'opacity-40 hover:opacity-100' : 'opacity-30 hover:opacity-100';
@@ -42,10 +25,6 @@ export default function Header({ inverted = false }: { inverted?: boolean }) {
           </Link>
         </Magnetic>
         
-        <div className={`hidden xl:flex flex-col border-l h-8 justify-center pl-8 ${inverted ? 'border-white/10' : 'border-black/5'}`}>
-          <span className="text-[7px] uppercase font-bold opacity-30 tracking-widest leading-none mb-1">Local Time</span>
-          <span className="text-[10px] font-black font-syne leading-none uppercase">{time} MILANO</span>
-        </div>
       </div>
       
       <div className="flex items-center gap-4 lg:gap-12">
