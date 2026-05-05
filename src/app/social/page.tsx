@@ -45,6 +45,24 @@ export default function SocialStudioV16() {
   const [error, setError] = useState(false);
   
   const [posts, setPosts] = useState(postsData);
+  
+  // Persistence: Load from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('l2d_social_posts');
+    if (saved) {
+      try {
+        setPosts(JSON.parse(saved));
+      } catch (e) {
+        console.error("Failed to load saved posts", e);
+      }
+    }
+  }, []);
+
+  // Persistence: Save to localStorage when posts change
+  useEffect(() => {
+    localStorage.setItem('l2d_social_posts', JSON.stringify(posts));
+  }, [posts]);
+
   const [selectedPostIndex, setSelectedPostIndex] = useState(0);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
@@ -113,15 +131,43 @@ export default function SocialStudioV16() {
       </div>
     );
 
+    const updateSlide = (field: keyof Slide, val: string) => {
+      updatePostText(slideIdx, field, val);
+    };
+
+    const EditableTitle = ({ text, className }: { text: string, className: string }) => {
+      if (!isEditing) return <h3 className={className}>{text}</h3>;
+      return (
+        <textarea 
+          value={text} 
+          onChange={(e) => updateSlide('title', e.target.value)}
+          className={`${className} bg-white/10 border-b border-[#ccff00] outline-none resize-none w-full`}
+          rows={2}
+        />
+      );
+    };
+
+    const EditableText = ({ text, className }: { text: string, className: string }) => {
+      if (!isEditing) return <p className={className}>{text}</p>;
+      return (
+        <textarea 
+          value={text} 
+          onChange={(e) => updateSlide('text', e.target.value)}
+          className={`${className} bg-white/10 border-b border-[#ccff00] outline-none resize-none w-full`}
+          rows={3}
+        />
+      );
+    };
+
     switch(variant) {
       case 1: 
         return (
           <div className="absolute inset-0 flex flex-col">
             <div className="flex-1 bg-[#d1d9cf] p-10 flex flex-col justify-center text-black">
-               <h3 className={`${titleSize} font-syne font-black uppercase leading-[0.85] tracking-tighter`}>{slide.title}</h3>
+               <EditableTitle text={slide.title} className={`${titleSize} font-syne font-black uppercase leading-[0.85] tracking-tighter`} />
             </div>
             <div className="flex-1 bg-[#1a1a1a] p-10 flex flex-col justify-center text-white relative">
-               <p className={`${bodySize} font-bold opacity-60 leading-snug max-w-[90%]`}>{slide.text}</p>
+               <EditableText text={slide.text} className={`${bodySize} font-bold opacity-60 leading-snug max-w-[90%]`} />
                <CTA />
             </div>
           </div>
@@ -132,8 +178,8 @@ export default function SocialStudioV16() {
              <div className="absolute -top-10 -right-10 text-[20rem] font-syne font-black opacity-[0.05] leading-none select-none">0{slideIdx+1}</div>
              <div className="z-10">
                 <Branding />
-                <h3 className={`${titleSize} font-syne font-black uppercase leading-[0.85] tracking-tighter mb-6`}>{slide.title}</h3>
-                <p className={`${bodySize} font-bold opacity-60 leading-snug max-w-[80%]`}>{slide.text}</p>
+                <EditableTitle text={slide.title} className={`${titleSize} font-syne font-black uppercase leading-[0.85] tracking-tighter mb-6`} />
+                <EditableText text={slide.text} className={`${bodySize} font-bold opacity-60 leading-snug max-w-[80%]`} />
              </div>
              <CTA />
           </div>
@@ -142,8 +188,8 @@ export default function SocialStudioV16() {
         return (
           <div className="absolute inset-0 p-10 flex flex-col items-center justify-center text-center bg-[#d1d9cf]">
              <div className="w-12 h-1 px-1 bg-black mb-8" />
-             <h3 className="text-[2.2rem] font-syne font-black uppercase leading-[0.9] tracking-tighter mb-6 max-w-[85%]">{slide.title}</h3>
-             <p className="text-sm font-bold opacity-40 max-w-[75%] mb-8 leading-snug">{slide.text}</p>
+             <EditableTitle text={slide.title} className="text-[2.2rem] font-syne font-black uppercase leading-[0.9] tracking-tighter mb-6 max-w-[85%]" />
+             <EditableText text={slide.text} className="text-sm font-bold opacity-40 max-w-[75%] mb-8 leading-snug" />
              <CTA />
           </div>
         );
@@ -155,10 +201,10 @@ export default function SocialStudioV16() {
                 <div className="w-6 h-6 rounded-full bg-[#ccff00]" />
              </div>
              <div className="border-b border-black/10 p-4">
-                <p className="text-[9px] font-bold opacity-40 leading-tight italic">{slide.text}</p>
+                <EditableText text={slide.text} className="text-[9px] font-bold opacity-40 leading-tight italic" />
              </div>
              <div className="p-4 col-span-2 flex flex-col justify-end">
-                <h3 className="text-[2.4rem] font-syne font-black uppercase leading-[0.85] tracking-tighter mb-4">{slide.title}</h3>
+                <EditableTitle text={slide.title} className="text-[2.4rem] font-syne font-black uppercase leading-[0.85] tracking-tighter mb-4" />
                 <CTA />
              </div>
           </div>
@@ -168,8 +214,8 @@ export default function SocialStudioV16() {
           <div className="absolute inset-0 bg-[#d1d9cf] overflow-hidden flex flex-col justify-center p-10">
              <div className="absolute inset-0 bg-[#1a1a1a] origin-bottom-right -rotate-12 translate-y-1/2 opacity-10" />
              <div className="z-10">
-                <h3 className="text-[2.8rem] font-syne font-black uppercase leading-[0.75] tracking-tighter mb-6">{slide.title}</h3>
-                <p className="text-base font-bold opacity-70 leading-snug max-w-[85%] mb-8">{slide.text}</p>
+                <EditableTitle text={slide.title} className="text-[2.8rem] font-syne font-black uppercase leading-[0.75] tracking-tighter mb-6" />
+                <EditableText text={slide.text} className="text-base font-bold opacity-70 leading-snug max-w-[85%] mb-8" />
                 <CTA />
              </div>
           </div>
@@ -178,10 +224,10 @@ export default function SocialStudioV16() {
         return (
           <div className="absolute inset-0 p-10 bg-[#d1d9cf] flex flex-col gap-8">
              <div className="bg-black text-white px-8 py-5 rounded-[25px] shadow-2xl">
-                <h3 className="text-[1.8rem] font-syne font-black uppercase leading-tight tracking-tighter">{slide.title}</h3>
+                <EditableTitle text={slide.title} className="text-[1.8rem] font-syne font-black uppercase leading-tight tracking-tighter" />
              </div>
              <div className="px-2">
-                <p className="text-base font-bold opacity-60 leading-snug mb-8">{slide.text}</p>
+                <EditableText text={slide.text} className="text-base font-bold opacity-60 leading-snug mb-8" />
                 <CTA />
              </div>
           </div>
@@ -191,8 +237,8 @@ export default function SocialStudioV16() {
           <div className="absolute inset-0 p-10 bg-[#d1d9cf] flex flex-col justify-end">
              <div className="flex flex-col gap-4 border-l-4 border-[#ccff00] pl-6">
                 <span className="text-[9px] font-black uppercase tracking-widest opacity-20">Performance Design</span>
-                <h3 className="text-[2.4rem] font-syne font-black uppercase leading-[0.85] tracking-tighter">{slide.title}</h3>
-                <p className="text-sm font-bold opacity-60 leading-tight max-w-[85%]">{slide.text}</p>
+                <EditableTitle text={slide.title} className="text-[2.4rem] font-syne font-black uppercase leading-[0.85] tracking-tighter" />
+                <EditableText text={slide.text} className="text-sm font-bold opacity-60 leading-tight max-w-[85%]" />
                 <CTA />
              </div>
           </div>
@@ -206,8 +252,8 @@ export default function SocialStudioV16() {
                    <div className="w-2 h-2 bg-[#ccff00] rounded-full" />
                 </div>
                 <div>
-                   <h3 className="text-[2.1rem] font-syne font-black uppercase leading-[0.9] tracking-tighter mb-4">{slide.title}</h3>
-                   <p className="text-sm font-bold opacity-50 leading-snug">{slide.text}</p>
+                   <EditableTitle text={slide.title} className="text-[2.1rem] font-syne font-black uppercase leading-[0.9] tracking-tighter mb-4" />
+                   <EditableText text={slide.text} className="text-sm font-bold opacity-50 leading-snug" />
                 </div>
                 <CTA />
              </div>
@@ -222,15 +268,18 @@ export default function SocialStudioV16() {
               </div>
               <div className="flex flex-col flex-1 justify-center gap-0 mt-4 mb-4 relative">
                 <div className="relative z-10">
-                    <h3 className={`font-syne font-black uppercase leading-[0.85] tracking-tighter mb-4 ${slide.title.length > 25 ? 'text-[1.8rem]' : 'text-[2.6rem]'}`}>
-                      {slide.title}
-                    </h3>
-                    <h3 className={`absolute -top-4 left-0 w-full font-syne font-black uppercase leading-[0.85] tracking-tighter opacity-[0.02] select-none -z-10 ${slide.title.length > 25 ? 'text-[4rem]' : 'text-[6rem]'}`}>
-                      {slide.title.split(' ').slice(0, 2).join(' ')}
-                    </h3>
+                    <EditableTitle 
+                      text={slide.title} 
+                      className={`font-syne font-black uppercase leading-[0.85] tracking-tighter mb-4 ${slide.title.length > 25 ? 'text-[1.8rem]' : 'text-[2.6rem]'}`} 
+                    />
+                    {!isEditing && (
+                      <h3 className={`absolute -top-4 left-0 w-full font-syne font-black uppercase leading-[0.85] tracking-tighter opacity-[0.02] select-none -z-10 ${slide.title.length > 25 ? 'text-[4rem]' : 'text-[6rem]'}`}>
+                        {slide.title.split(' ').slice(0, 2).join(' ')}
+                      </h3>
+                    )}
                 </div>
                 <div className="mt-4 flex flex-col items-start gap-4 z-20">
-                    <p className="text-sm font-bold opacity-60 leading-snug max-w-[90%]">{slide.text}</p>
+                    <EditableText text={slide.text} className="text-sm font-bold opacity-60 leading-snug max-w-[90%]" />
                     <CTA />
                 </div>
               </div>
@@ -296,16 +345,25 @@ export default function SocialStudioV16() {
           data-lenis-prevent 
           className={`fixed lg:static inset-y-0 left-0 w-[280px] sm:w-[360px] bg-white border-r border-black/5 flex flex-col overflow-hidden shadow-2xl z-[70] transition-transform duration-500 lg:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
         >
-           <div className="p-6 lg:p-8 border-b border-black/5 flex justify-between items-center">
-              <div className="flex items-center gap-4">
-                 <div className="w-8 h-8 lg:w-10 lg:h-10 bg-black rounded-xl rotate-12 flex items-center justify-center text-[#ccff00]"><Layout size={18}/></div>
-                 <div>
-                    <h2 className="font-black text-xs lg:text-sm uppercase tracking-widest leading-none">Social Studio</h2>
-                    <span className="text-[8px] lg:text-[9px] font-bold opacity-30 uppercase tracking-[0.2em]">Strategy v16.0</span>
-                 </div>
-              </div>
-              <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden p-2"><X size={20}/></button>
-           </div>
+            <div className="p-6 lg:p-8 border-b border-black/5 flex justify-between items-center">
+               <div className="flex items-center gap-4">
+                  <div className="w-8 h-8 lg:w-10 lg:h-10 bg-black rounded-xl rotate-12 flex items-center justify-center text-[#ccff00]"><Layout size={18}/></div>
+                  <div>
+                     <h2 className="font-black text-xs lg:text-sm uppercase tracking-widest leading-none">Social Studio</h2>
+                     <span className="text-[8px] lg:text-[9px] font-bold opacity-30 uppercase tracking-[0.2em]">Strategy v16.0</span>
+                  </div>
+               </div>
+               <div className="flex items-center gap-2">
+                  <button 
+                    onClick={() => { if(confirm('Reset all edits to defaults?')) { localStorage.removeItem('l2d_social_posts'); window.location.reload(); } }} 
+                    className="p-2 text-black/20 hover:text-red-500 transition-all"
+                    title="Reset Strategy"
+                  >
+                    <Zap size={16} />
+                  </button>
+                  <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden p-2"><X size={20}/></button>
+               </div>
+            </div>
            
            <div className="p-6 lg:p-8 border-b border-black/5 space-y-6">
               <div className="flex bg-black/5 p-1 rounded-xl">
