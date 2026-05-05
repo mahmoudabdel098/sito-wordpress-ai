@@ -74,7 +74,15 @@ export default function SocialStudioV16() {
       setTimeout(async () => {
         if (batchRef.current) {
           try {
-            const dataUrl = await toPng(batchRef.current, { cacheBust: true, pixelRatio: 2, quality: 0.95 });
+            const dataUrl = await toPng(batchRef.current, { 
+              cacheBust: true, 
+              pixelRatio: 4, 
+              quality: 1,
+              style: {
+                borderRadius: '0',
+                transform: 'scale(1)'
+              }
+            });
             resolve(dataUrl);
           } catch (err) {
             reject(err);
@@ -165,7 +173,15 @@ export default function SocialStudioV16() {
     try {
       const { toPng } = await import('html-to-image');
       if (slideRef.current) {
-        const dataUrl = await toPng(slideRef.current, { cacheBust: true, pixelRatio: 3, quality: 1 });
+        const dataUrl = await toPng(slideRef.current, { 
+          cacheBust: true, 
+          pixelRatio: 4, 
+          quality: 1,
+          style: {
+            borderRadius: '0',
+            transform: 'scale(1)'
+          }
+        });
         const link = document.createElement('a');
         link.download = `L2D-SOCIAL-DAY${selectedPost.id}.png`;
         link.href = dataUrl;
@@ -643,7 +659,7 @@ export default function SocialStudioV16() {
 
       {/* Hidden Batch Renderer */}
       <div className="fixed -left-[2000px] top-0 pointer-events-none">
-        <div ref={batchRef} className="w-[500px] h-[500px] bg-[#d1d9cf]">
+        <div ref={batchRef} className={`${format === 'story' ? 'w-[360px] h-[640px]' : 'w-[500px] h-[500px]'} bg-[#d1d9cf]`}>
            {batchPost && renderSlideContent(batchPost.post, batchPost.sIdx)}
         </div>
       </div>
