@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import CinematicProvider from "@/components/CinematicProvider";
 import Preloader from "@/components/Preloader";
-import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://link2digital.it"),
