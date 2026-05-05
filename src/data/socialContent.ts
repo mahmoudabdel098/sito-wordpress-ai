@@ -9,6 +9,23 @@ export const industries = [
   { id: 'pmi', title: 'Brand Generali / PMI', tag: 'Business' }
 ];
 
+export type PostStatus = 'DRAFT' | 'READY' | 'PUBLISHED';
+
+export type Pillar = 'PROBLEM_SOLUTION' | 'AUTHORITY' | 'HOW_TO' | 'MISTAKE' | 'CASE_STUDY' | 'EDUCATIONAL' | 'VIRAL_HOOK';
+
+export interface Post {
+  id: number;
+  day: string;
+  industryId: string;
+  industryTitle: string;
+  industryTag: string;
+  pillarName: Pillar;
+  styleVariant: number;
+  slides: { title: string; text: string }[];
+  caption: string;
+  status: PostStatus;
+}
+
 // --- HIGH CONVERSION CONTENT (7-SLIDE STRUCTURE) ---
 const highConversionPosts = [
   {
@@ -460,7 +477,6 @@ const slideLogic = {
 };
 
 // --- CAPTION GENERATOR ---
-type Pillar = 'AUTHORITY' | 'EDUCATIONAL' | 'PROBLEM_SOLUTION' | 'VIRAL_HOOK';
 
 const generateCaption = (title: string, pillar: Pillar, ind: string, variant: number) => {
   const hooks: Record<string, string[]> = {
@@ -506,8 +522,8 @@ const generateCaption = (title: string, pillar: Pillar, ind: string, variant: nu
   return `${hook} \n\n ${body} \n\n ${title} è un tema centrale oggi. \n\n ${cta} \n\n #Link2Digital #WebDevelopment #UX #DigitalStrategy #${ind.replace(/\s+/g, '')}`;
 };
 
-export const generatePosts = (count: number) => {
-  const allPosts = [];
+export const generatePosts = (count: number = 300): Post[] => {
+  const allPosts: Post[] = [];
   
   // 1. Add all 15 high-conversion posts first
   highConversionPosts.forEach((hcPost, i) => {
@@ -517,10 +533,11 @@ export const generatePosts = (count: number) => {
       industryId: 'digital',
       industryTitle: 'Digital Strategy',
       industryTag: 'Conversion',
-      pillarName: hcPost.pillar,
+      pillarName: hcPost.pillar as Pillar,
       styleVariant: i % 10,
       slides: hcPost.slides,
-      caption: generateCaption(hcPost.slides[0].title, hcPost.pillar as Pillar, "Digital", i)
+      caption: generateCaption(hcPost.slides[0].title, hcPost.pillar as Pillar, "Digital", i),
+      status: 'DRAFT'
     });
   });
 
@@ -534,15 +551,15 @@ export const generatePosts = (count: number) => {
     const pillarIndex = Math.floor((i - highConversionPosts.length) / industries.length) % pillars.length;
     const pillar = pillars[pillarIndex];
     
-    const titles = pool[pillar] || pool['AUTHORITY'];
+    const titles = (pool as any)[pillar] || pool['AUTHORITY'];
     const titleIndex = Math.floor((i - highConversionPosts.length) / (industries.length * pillars.length)) % titles.length;
     const title = titles[titleIndex];
     
     const day = i + 1;
     const styleVariant = i % 10;
     
-    const logicTemplates = slideLogic[pillar] || slideLogic.AUTHORITY;
-    const slides = logicTemplates.map(template => template(title, industry.title));
+    const logicTemplates = (slideLogic as any)[pillar] || slideLogic.AUTHORITY;
+    const slides = logicTemplates.map((template: any) => template(title, industry.title));
 
     allPosts.push({
       id: day,
@@ -553,7 +570,8 @@ export const generatePosts = (count: number) => {
       pillarName: pillar,
       styleVariant: styleVariant,
       slides: slides,
-      caption: generateCaption(title, pillar, industry.title, styleVariant)
+      caption: generateCaption(title, pillar, industry.title, styleVariant),
+      status: 'DRAFT'
     });
   }
   

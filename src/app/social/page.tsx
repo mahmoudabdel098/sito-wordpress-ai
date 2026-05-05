@@ -5,27 +5,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Lock, Instagram, Layout, Sparkles, Download, Copy, ArrowRight, ChevronLeft, ChevronRight, Share2, Calendar, Search, Grid, Monitor, Smartphone, Edit3, Check, Maximize2, X, Target, Zap, ShieldCheck, TrendingUp, BookOpen, Layers, Users, AlertCircle, Menu } from 'lucide-react';
 import Header from '@/components/Header';
 import { generatePosts } from '@/data/socialContent';
-
-const postsData = generatePosts(300);
-
-type Pillar = 'AUTHORITY' | 'EDUCATIONAL' | 'PROBLEM_SOLUTION' | 'PERSONAL_BRAND' | 'VIRAL_HOOK';
+import type { Post, PostStatus } from '@/data/socialContent';
 
 interface Slide {
   title: string;
   text: string;
 }
 
-interface Post {
-  id: number;
-  day: string;
-  industryId: string;
-  industryTitle: string;
-  industryTag: string;
-  pillarName: Pillar;
-  styleVariant: number;
-  slides: Slide[];
-  caption: string;
-}
+const postsData = generatePosts(300);
+
 
 const getPillarIcon = (pillar: string) => {
   switch(pillar) {
@@ -94,6 +82,18 @@ export default function SocialStudioV16() {
   const updateCaption = (value: string) => {
     const updatedPosts = [...posts];
     updatedPosts[selectedPostIndex].caption = value;
+    setPosts(updatedPosts);
+  };
+
+  const updatePostStatus = (status: 'DRAFT' | 'READY' | 'PUBLISHED') => {
+    const updatedPosts = [...posts];
+    updatedPosts[selectedPostIndex].status = status;
+    setPosts(updatedPosts);
+  };
+
+  const updateStyleVariant = (variant: number) => {
+    const updatedPosts = [...posts];
+    updatedPosts[selectedPostIndex].styleVariant = variant;
     setPosts(updatedPosts);
   };
 
@@ -364,6 +364,33 @@ export default function SocialStudioV16() {
                   <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden p-2"><X size={20}/></button>
                </div>
             </div>
+
+            <div className="p-6 lg:p-8 border-b border-black/5 bg-[#fcfcfc]">
+               <div className="flex justify-between items-end mb-4">
+                  <span className="text-[10px] font-black uppercase tracking-widest opacity-40">Strategy Progress</span>
+                  <span className="text-xl font-black text-black">
+                    {Math.round((posts.filter(p => p.status === 'READY' || p.status === 'PUBLISHED').length / posts.length) * 100)}%
+                  </span>
+               </div>
+               <div className="w-full h-1.5 bg-black/10 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-[#ccff00] transition-all duration-1000" 
+                    style={{ width: `${(posts.filter(p => p.status === 'READY' || p.status === 'PUBLISHED').length / posts.length) * 100}%` }} 
+                  />
+               </div>
+               <div className="mt-4 flex justify-between">
+                  <div className="flex flex-col">
+                     <span className="text-[7px] font-black opacity-30 uppercase tracking-tighter">Total Posts</span>
+                     <span className="text-[10px] font-black">{posts.length}</span>
+                  </div>
+                  <div className="flex flex-col items-end">
+                     <span className="text-[7px] font-black opacity-30 uppercase tracking-tighter">Ready to Post</span>
+                     <span className="text-[10px] font-black text-[#ccff00] drop-shadow-[0_0_10px_rgba(204,255,0,0.5)] bg-black px-2 py-0.5 rounded-md">
+                        {posts.filter(p => p.status === 'READY' || p.status === 'PUBLISHED').length}
+                     </span>
+                  </div>
+               </div>
+            </div>
            
            <div className="p-6 lg:p-8 border-b border-black/5 space-y-6">
               <div className="flex bg-black/5 p-1 rounded-xl">
@@ -393,7 +420,12 @@ export default function SocialStudioV16() {
                             <h4 className="text-[8px] lg:text-[9px] font-black opacity-40 uppercase tracking-widest mb-1">{post.industryTitle}</h4>
                             <h4 className="text-[9px] lg:text-[10px] font-black uppercase tracking-tight leading-tight max-w-[180px] lg:max-w-[200px]">{post.slides[0].title}</h4>
                         </div>
-                        <div className={`w-2 h-2 lg:w-3 lg:h-3 rounded-full ${selectedPost.id === post.id ? 'bg-[#ccff00]' : 'bg-black/5 border border-black/10'}`} />
+                        <div className="flex flex-col items-end gap-2">
+                           <div className={`w-2 h-2 lg:w-3 lg:h-3 rounded-full ${selectedPost.id === post.id ? 'bg-[#ccff00]' : 'bg-black/5 border border-black/10'}`} />
+                           <span className={`text-[6px] lg:text-[7px] font-black px-1.5 py-0.5 rounded-full ${post.status === 'READY' ? 'bg-[#ccff00] text-black' : post.status === 'PUBLISHED' ? 'bg-blue-600 text-white' : 'bg-black/10 text-black/40'}`}>
+                              {post.status || 'DRAFT'}
+                           </span>
+                        </div>
                       </div>
                    ))}
                 </div>
@@ -433,6 +465,41 @@ export default function SocialStudioV16() {
                  <button onClick={exportAsImage} className="flex-1 sm:flex-none px-4 lg:px-6 py-2.5 bg-black text-white rounded-xl font-black text-[9px] lg:text-[10px] uppercase flex items-center justify-center gap-2 hover:bg-[#ccff00] hover:text-black transition-all shadow-lg"><Download size={14}/> Export</button>
               </div>
            </header>
+
+           <div className="bg-white border-b border-black/5 px-6 py-3 flex items-center justify-between z-40 overflow-x-auto no-scrollbar">
+              <div className="flex items-center gap-6 shrink-0">
+                 <div className="flex flex-col">
+                    <span className="text-[8px] font-black opacity-30 uppercase tracking-widest leading-none mb-1">Layout Variant</span>
+                    <div className="flex gap-1.5">
+                       {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(v => (
+                          <button 
+                             key={v} 
+                             onClick={() => updateStyleVariant(v)}
+                             className={`w-6 h-6 rounded-lg text-[9px] font-black transition-all ${selectedPost.styleVariant === v ? 'bg-[#ccff00] text-black shadow-lg scale-110' : 'bg-black/5 text-black/40 hover:bg-black/10'}`}
+                          >
+                             {v}
+                          </button>
+                       ))}
+                    </div>
+                 </div>
+              </div>
+              <div className="flex items-center gap-4 shrink-0">
+                 <div className="flex flex-col items-end">
+                    <span className="text-[8px] font-black opacity-30 uppercase tracking-widest leading-none mb-1">Workflow Status</span>
+                    <div className="flex bg-black/5 p-1 rounded-xl">
+                       {(['DRAFT', 'READY', 'PUBLISHED'] as const).map(s => (
+                          <button 
+                             key={s} 
+                             onClick={() => updatePostStatus(s)}
+                             className={`px-3 py-1.5 rounded-lg text-[8px] font-black uppercase transition-all ${selectedPost.status === s ? (s === 'READY' ? 'bg-[#ccff00] text-black shadow-sm' : s === 'PUBLISHED' ? 'bg-blue-600 text-white shadow-sm' : 'bg-black text-white shadow-sm') : 'opacity-40'}`}
+                          >
+                             {s}
+                          </button>
+                       ))}
+                    </div>
+                 </div>
+              </div>
+           </div>
 
            <div data-lenis-prevent className="flex-1 overflow-y-auto bg-[#f0f2ef] flex flex-col items-center p-6 lg:p-12 pb-60">
               <div className="flex flex-col items-center gap-8 lg:gap-10 w-full max-w-[800px]">
