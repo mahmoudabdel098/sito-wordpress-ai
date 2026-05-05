@@ -4,8 +4,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Lock, Instagram, Layout, Sparkles, Download, Copy, ArrowRight, ChevronLeft, ChevronRight, Share2, Calendar, Search, Grid, Monitor, Smartphone, Edit3, Check, Maximize2, X, Target, Zap, ShieldCheck, TrendingUp, BookOpen, Layers, Users, AlertCircle, Menu } from 'lucide-react';
 import Header from '@/components/Header';
-import { generatePosts } from '@/data/socialContent';
-import type { Post, PostStatus } from '@/data/socialContent';
+import { industries, generatePosts } from "@/data/socialContent";
+import type { Post, Pillar, PostStatus } from "@/data/socialContent";
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
+import { toPng } from 'html-to-image';
 
 interface Slide {
   title: string;
@@ -59,6 +62,67 @@ export default function SocialStudioV16() {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [sidebarView, setSidebarView] = useState('list'); 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [exportProgress, setExportProgress] = useState<{ current: number, total: number } | null>(null);
+  const [batchPost, setBatchPost] = useState<{ post: Post, sIdx: number } | null>(null);
+
+  const batchRef = useRef<HTMLDivElement>(null);
+
+  const captureSlide = async (post: Post, sIdx: number): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      setBatchPost({ post, sIdx });
+      // Give React time to render
+      setTimeout(async () => {
+        if (batchRef.current) {
+          try {
+            const dataUrl = await toPng(batchRef.current, { cacheBust: true, pixelRatio: 2, quality: 0.95 });
+            resolve(dataUrl);
+          } catch (err) {
+            reject(err);
+          }
+        } else {
+          reject("No batch ref");
+        }
+      }, 100);
+    });
+  };
+
+  const exportBundle = async () => {
+    const readyPosts = posts.filter(p => p.status === 'READY' || p.status === 'PUBLISHED');
+    if (readyPosts.length === 0) {
+      alert("Nessun post marcato come 'READY' o 'PUBLISHED'.");
+      return;
+    }
+
+    setExportProgress({ current: 0, total: readyPosts.length });
+    const zip = new JSZip();
+
+    try {
+      for (let i = 0; i < readyPosts.length; i++) {
+        const post = readyPosts[i];
+        const postFolder = zip.folder(`Post_${post.id}_${post.pillarName}`);
+        
+        // Add caption as text file
+        postFolder?.file("caption.txt", post.caption);
+
+        // Generate images for each slide
+        for (let sIdx = 0; sIdx < post.slides.length; sIdx++) {
+           const dataUrl = await captureSlide(post, sIdx);
+           const base64Data = dataUrl.split(',')[1];
+           postFolder?.file(`slide_${sIdx + 1}.png`, base64Data, { base64: true });
+        }
+        setExportProgress(prev => prev ? { ...prev, current: i + 1 } : null);
+      }
+      
+      const content = await zip.generateAsync({ type: "blob" });
+      saveAs(content, `L2D_SOCIAL_BUNDLE_${new Date().toISOString().split('T')[0]}.zip`);
+    } catch (err) {
+      console.error(err);
+      alert("Errore durante l'esportazione del bundle.");
+    } finally {
+      setExportProgress(null);
+      setBatchPost(null);
+    }
+  };
 
   const selectedPost = posts[selectedPostIndex];
   const slideRef = useRef<HTMLDivElement>(null);
@@ -390,6 +454,12 @@ export default function SocialStudioV16() {
                      </span>
                   </div>
                </div>
+               <button 
+                 onClick={exportBundle}
+                 className="w-full mt-6 py-3 bg-black text-white rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-[#ccff00] hover:text-black transition-all flex items-center justify-center gap-2 shadow-lg"
+               >
+                 <Download size={14} /> Download Full Strategy Bundle
+               </button>
             </div>
            
            <div className="p-6 lg:p-8 border-b border-black/5 space-y-6">
@@ -569,6 +639,41 @@ export default function SocialStudioV16() {
               </div>
            </motion.div>
          )}
+      </AnimatePresence>
+
+      {/* Hidden Batch Renderer */}
+      <div className="fixed -left-[2000px] top-0 pointer-events-none">
+        <div ref={batchRef} className="w-[500px] h-[500px] bg-[#d1d9cf]">
+           {batchPost && renderSlideContent(batchPost.post, batchPost.sIdx)}
+        </div>
+      </div>
+
+      {/* Export Progress Modal */}
+      <AnimatePresence>
+        {exportProgress && (
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }} 
+            className="fixed inset-0 z-[100000] bg-black/90 backdrop-blur-2xl flex items-center justify-center p-6"
+          >
+             <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="bg-white rounded-[40px] p-10 lg:p-16 max-w-md w-full text-center shadow-2xl">
+                <div className="w-24 h-24 bg-[#ccff00] rounded-full flex items-center justify-center text-black mx-auto mb-8 shadow-2xl relative">
+                  <Download size={40} className="animate-bounce" />
+                  <div className="absolute inset-0 rounded-full border-4 border-black/10 border-t-black animate-spin" />
+                </div>
+                <h2 className="text-2xl lg:text-3xl font-syne font-black uppercase mb-4 tracking-tighter">Generazione Bundle</h2>
+                <p className="text-black/40 font-bold mb-10 text-sm leading-relaxed">Stiamo preparando il pacchetto completo dei tuoi post. Questo richiederà solo pochi istanti.</p>
+                <div className="w-full h-2 bg-black/5 rounded-full overflow-hidden mb-4">
+                   <div className="h-full bg-black transition-all duration-300" style={{ width: `${(exportProgress.current / exportProgress.total) * 100}%` }} />
+                </div>
+                <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest opacity-40">
+                   <span>Post {exportProgress.current} di {exportProgress.total}</span>
+                   <span>{Math.round((exportProgress.current / exportProgress.total) * 100)}%</span>
+                </div>
+             </motion.div>
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );
