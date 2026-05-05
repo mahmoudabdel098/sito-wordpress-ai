@@ -12,59 +12,52 @@ export const industries = [
 const industryData = {
   agency: {
     AUTHORITY: [
-      "Perché il 90% dei siti aziendali non converte clienti",
-      "Cosa succede in 3 secondi quando un utente entra nel tuo sito",
-      "Il sito non è grafica: è uno strumento di vendita",
-      "Le 5 cose che ogni sito aziendale deve avere nel 2026"
+      "Perché il 90% dei siti aziendali è solo un biglietto da visita costoso",
+      "Il segreto della velocità: come carichiamo i siti in meno di 1 secondo",
+      "Design d'impatto vs Design che converte: la differenza",
+      "Il valore reale di una SEO fatta bene (non solo parole chiave)"
     ],
     EDUCATIONAL: [
-      "Come un sito porta clienti (step by step)",
-      "Struttura perfetta di una homepage",
-      "I 7 errori che uccidono le conversioni"
+      "3 Errori da non fare se vuoi un sito che porti clienti",
+      "Come ottimizzare le tue immagini senza perdere qualità",
+      "La checklist definitiva per il lancio del tuo sito",
+      "Perché usiamo Next.js e perché dovrebbe interessarti"
     ],
     PROBLEM_SOLUTION: [
-      "Hai un sito ma non ricevi contatti?",
-      "Il tuo sito è online ma non serve a nulla",
-      "Stai perdendo clienti e non lo sai"
+      "Il tuo sito è lento? Ecco 3 motivi tecnici comuni",
+      "Hai traffico ma zero conversioni? Forse manca la chiarezza",
+      "Sito non mobile-friendly? Stai perdendo metà dei tuoi utenti",
+      "Come gestire le recensioni per aumentare la fiducia"
     ],
     VIRAL_HOOK: [
-      "Il tuo sito sta perdendo clienti ora",
-      "Questo errore ti costa soldi ogni giorno"
+      "Il sito web non è morto, è morto il modo in cui lo costruisci",
+      "Smetti di pagare per siti web che non puoi gestire",
+      "La verità scomoda sulla pubblicità senza un sito pronto"
     ]
   },
   immobiliare: {
     AUTHORITY: [
-      "Perché il 90% dei siti immobiliari non genera richieste",
-      "Il sito non vende case: vende fiducia",
-      "Come un portale immobiliare perde clienti ogni giorno",
-      "Errori nei siti delle agenzie immobiliari",
-      "Foto o esperienza? cosa vende davvero immobili online"
+      "Perché un sito immobiliare moderno deve caricare all'istante",
+      "Il valore della fotografia professionale nel real estate online",
+      "Come l'architettura tecnica del sito influenza la fiducia dell'acquirente",
+      "Perché i portali non bastano più per un'agenzia che vuole crescere"
     ],
     EDUCATIONAL: [
-      "Struttura perfetta di un sito immobiliare",
-      "Come trasformare visite in richieste visite immobili",
-      "Landing page per immobili: come deve essere",
-      "Scheda immobile perfetta",
-      "Come aumentare richieste per case in vendita",
-      "UX per immobili: guida semplice",
-      "Perché le foto fanno la differenza",
-      "SEO per immobili locali",
-      "Google Maps + immobili = clienti",
-      "Funnel immobiliare spiegato semplice"
+      "3 Consigli per schede immobili più coinvolgenti",
+      "Come usare le mappe interattive per valorizzare la zona",
+      "L'importanza di un design pulito per immobili di lusso",
+      "Come ottimizzare il tuo sito per le ricerche locali"
     ],
     PROBLEM_SOLUTION: [
-      "Hai immobili online ma zero contatti?",
-      "Il tuo sito immobiliare è invisibile",
-      "Stai perdendo acquirenti senza saperlo",
-      "Le tue schede immobili non convertono",
-      "Il problema non è il mercato, è il sito"
+      "Sito troppo lento? Ecco come velocizzarlo per non perdere visite",
+      "Poche richieste dal sito? Controlla la chiarezza dei contatti",
+      "Foto che caricano male? La soluzione tecnica è più semplice di quanto pensi",
+      "Come rendere il tuo sito navigabile da smartphone senza errori"
     ],
     VIRAL_HOOK: [
-      "Il tuo immobile potrebbe vendersi più velocemente",
-      "Ecco perché nessuno ti contatta",
-      "Il sito immobiliare che non vende è inutile",
-      "Questo dettaglio ti fa perdere vendite",
-      "Il 90% delle agenzie sbaglia questo"
+      "Il futuro del real estate è digitale: non farti trovare impreparato",
+      "Il tuo sito è lo showroom della tua agenzia, curalo come la tua sede",
+      "Il segreto per vendere casa online? L'esperienza dell'utente"
     ]
   },
   agenti: {
@@ -102,194 +95,157 @@ const industryData = {
   },
   fitness: {
     AUTHORITY: [
-      "Le palestre non perdono clienti per il prezzo",
-      "Il sito della palestra è sottovalutato",
-      "Social non basta per riempire una palestra",
-      "La vera arma è la conversione online",
-      "Fiducia nel fitness marketing"
+      "Perché la velocità del sito è cruciale per le iscrizioni in palestra",
+      "L'importanza di un sistema di prenotazione integrato",
+      "Come il design della tua palestra deve riflettersi online",
+      "Fiducia e sicurezza: cosa cercano gli utenti in un sito fitness"
     ],
     EDUCATIONAL: [
-      "Come riempire una palestra con il sito",
-      "Landing page per iscrizioni",
-      "Come vendere abbonamenti online",
-      "Offerta palestra perfetta",
-      "Funnel palestra: step by step",
-      "Come aumentare iscrizioni locali",
-      "Psicologia del cliente fitness",
-      "Come trasformare visite in iscrizioni",
-      "Come usare recensioni per vendere",
-      "Come creare urgenza nelle iscrizioni"
+      "Come mostrare i tuoi corsi in modo efficace sul sito",
+      "3 Elementi che non possono mancare nella tua home page",
+      "L'importanza delle testimonianze video caricate correttamente",
+      "Come usare il blog per attirare nuovi iscritti localmente"
     ],
     PROBLEM_SOLUTION: [
-      "Hai macchinari ma pochi iscritti",
-      "Il tuo sito non porta membri",
-      "Social attivi ma palestra vuota",
-      "Stai perdendo iscritti ogni mese",
-      "Il problema non è la concorrenza"
+      "Il modulo contatti non funziona? Potresti perdere decine di iscritti",
+      "Sito non leggibile da mobile? Il 70% degli utenti fitness naviga da lì",
+      "Poche iscrizioni online? Forse il processo è troppo complicato",
+      "Come gestire gli orari delle lezioni in modo dinamico sul web"
     ],
     VIRAL_HOOK: [
-      "Il 2026 cambierà il fitness locale",
-      "Smetti di regalare mesi di abbonamento",
-      "La tua palestra è invisibile su Google"
+      "La tua palestra inizia dal sito, non dalla reception",
+      "Fai sentire i tuoi membri a casa ancora prima che arrivino",
+      "Il digitale è il nuovo personal trainer del tuo business"
     ]
   },
   beauty: {
     AUTHORITY: [
-      "Il salone più bello non è quello che guadagna di più",
-      "La prenotazione online è tutto",
-      "Il cliente sceglie prima online",
-      "Fiducia estetica digitale",
-      "Beauty marketing moderno"
+      "Perché il tuo salone ha bisogno di un sistema di prenotazione online",
+      "Come l'estetica del sito influenza la percezione del tuo servizio",
+      "Il valore della velocità di caricamento per chi prenota da mobile",
+      "Fiducia e igiene digitale: come comunicarle attraverso il web"
     ],
     EDUCATIONAL: [
-      "Come riempire agenda parrucchiere",
-      "Sito perfetto per saloni",
-      "Prenotazioni automatiche",
-      "Instagram + sito: combo perfetta",
-      "Come aumentare clienti ricorrenti",
-      "Come vendere trattamenti premium",
-      "Come comunicare lusso nel beauty",
-      "Funnel salone estetico",
-      "Offerte che convertono clienti",
-      "Come differenziarsi nella città"
+      "3 Consigli per mostrare i tuoi lavori in modo professionale",
+      "Come ottimizzare il tuo profilo per le ricerche locali in città",
+      "L'importanza di una gallery curata e veloce da caricare",
+      "Come usare i form di contatto per gestire meglio l'agenda"
     ],
     PROBLEM_SOLUTION: [
-      "Agenda vuota nei giorni morti",
-      "Clienti che non tornano",
-      "Nessuna prenotazione online",
-      "Il tuo sito non convince",
-      "Stai perdendo clienti abituali"
+      "Agenda poco organizzata? Un sito ben fatto può automatizzare tutto",
+      "Clienti che non trovano i prezzi? La trasparenza online paga sempre",
+      "Sito che non carica le foto? Ecco come risolvere i problemi tecnici",
+      "Come rendere il tuo salone visibile su Google Maps"
     ],
     VIRAL_HOOK: [
-      "Smetti di rispondere ai DM per gli appuntamenti",
-      "Il segreto dei saloni che fatturano il triplo",
-      "Perché nessuno prenota dal tuo sito"
+      "Il tuo salone è bellissimo, ma online come appare?",
+      "La prima impressione del cliente avviene sul web, non in poltrona",
+      "Trasforma la tua passione in un brand digitale solido"
     ]
   },
   lusso: {
     AUTHORITY: [
-      "Il lusso non vende: si percepisce",
-      "Il sito è il vero flagship store",
-      "Minimalismo = conversione lusso",
-      "Perché il lusso online è diverso",
-      "Brand experience digitale"
+      "Perché il lusso richiede un'architettura web impeccabile",
+      "L'importanza del design invisibile nelle esperienze premium",
+      "Come la velocità del sito definisce l'esclusività del brand",
+      "Oltre l'estetica: la solidità tecnica nei siti high-end"
     ],
     EDUCATIONAL: [
-      "Come creare percezione lusso online",
-      "Design premium che vende",
-      "Storytelling per brand luxury",
-      "Sito emozionale vs informativo",
-      "Packaging digitale del lusso",
-      "UX per brand premium",
-      "Come vendere esclusività",
-      "Psicologia del lusso online",
-      "Come creare desiderio",
-      "Website come esperienza"
+      "3 Elementi chiave per un'esperienza utente d'élite",
+      "Come gestire contenuti video pesanti senza rallentare il sito",
+      "Il valore della tipografia digitale nel posizionamento premium",
+      "Come creare un percorso d'acquisto senza attriti per clienti high-ticket"
     ],
     PROBLEM_SOLUTION: [
-      "Il tuo sito non sembra premium",
-      "Perdi clienti high ticket",
-      "Non trasmetti valore",
-      "Design non coerente",
-      "Mancanza di identità"
+      "Il sito non trasmette il valore reale? Forse manca coerenza tecnica",
+      "Bassa conversione nel lusso? Analizziamo il percorso dell'utente",
+      "Design datato? È il momento di un refresh tecnologico",
+      "Come proteggere l'integrità del tuo brand nel mondo digitale"
     ],
     VIRAL_HOOK: [
-      "Il lusso online sta morendo?",
-      "L'errore che distrugge il tuo brand premium",
-      "Design invisibile: la chiave del lusso"
+      "L'esclusività online è una questione di dettagli tecnici",
+      "Il tuo sito è l'ambasciatore digitale del tuo brand di lusso",
+      "La perfezione nel web non è un optional per i brand premium"
     ]
   },
   gioielleria: {
     AUTHORITY: [
-      "Il gioiello si vende con emozione",
-      "Il sito è la vetrina principale",
-      "Fiducia nel settore gioielli",
-      "Perché Instagram non basta",
-      "Lusso + ecommerce = strategia"
+      "Sicurezza e fiducia: le basi di un ecommerce di gioielli",
+      "Come valorizzare i dettagli dei tuoi pezzi attraverso il web",
+      "L'importanza della velocità per chi acquista beni di valore",
+      "Perché un sito professionale è il miglior certificato di garanzia"
     ],
     EDUCATIONAL: [
-      "Come vendere gioielli online",
-      "Ecommerce gioielli perfetto",
-      "Come aumentare valore percepito",
-      "Storytelling gioielli",
-      "Fotografia che vende oro",
-      "UX per ecommerce luxury",
-      "Come creare desiderio",
-      "Come fidelizzare clienti luxury",
-      "Come vendere pezzi unici",
-      "Funnel gioielleria"
+      "3 Consigli per presentare i tuoi gioielli online",
+      "Come gestire le varianti di prodotto in modo intuitivo",
+      "L'importanza di una UX fluida per acquisti emozionali",
+      "Come ottimizzare il checkout per aumentare la fiducia"
     ],
     PROBLEM_SOLUTION: [
-      "Gioielli online ma zero vendite",
-      "Sito non trasmette valore",
-      "Clienti non si fidano",
-      "Foto non convincono",
-      "Nessun posizionamento premium"
+      "Poche vendite online? Controlla la chiarezza delle spedizioni",
+      "Sito lento nel caricare i diamanti? La soluzione è nel codice",
+      "Nessun contatto dal web? Forse il form è troppo complesso",
+      "Come rendere il tuo ecommerce sicuro e performante"
     ],
     VIRAL_HOOK: [
-      "Comprare gioielli online: il nuovo paradigma",
-      "Il tuo sito è vecchio come l'oro di famiglia",
-      "3 motivi per cui non vendi diamanti online"
+      "Un gioiello dura per sempre, il tuo sito dovrebbe fare lo stesso",
+      "Brilla online con una piattaforma degna delle tue creazioni",
+      "L'eleganza digitale è il nuovo standard per le gioiellerie"
     ]
   },
   pmi: {
     AUTHORITY: [
-      "Il sito è il tuo miglior commerciale",
-      "Le aziende sottovalutano il digitale",
-      "Perché perdi clienti senza sito ottimizzato",
-      "Marketing senza conversione è inutile",
-      "Il sito è il centro del business"
+      "Perché il sito web è il dipendente più importante per una PMI",
+      "Come competere con i grandi brand attraverso l'agilità digitale",
+      "Il valore della presenza locale online per le piccole imprese",
+      "Perché investire in un sito proprietario invece di soli social"
     ],
     EDUCATIONAL: [
-      "Come aumentare clienti con il web",
-      "Funnel per PMI",
-      "Come scalare servizi online",
-      "Branding digitale base",
-      "Come posizionarti online",
-      "Strategia digitale semplice",
-      "Come generare lead"
+      "3 Semplici modi per migliorare la tua visibilità locale",
+      "Come gestire i contatti che arrivano dal sito in modo efficace",
+      "L'importanza di avere orari e contatti sempre aggiornati sul web",
+      "Come presentare i tuoi servizi in modo chiaro e professionale"
     ],
     PROBLEM_SOLUTION: [
-      "Errori PMI online",
-      "Siti aziendali inefficaci",
-      "Perché il tuo competitor cresce",
-      "Hai visite ma zero contatti?"
+      "Pochi clienti nuovi? Forse il tuo sito non ti sta aiutando",
+      "Sito vecchio e non aggiornabile? Vediamo come renderlo moderno",
+      "Stanco di perdere tempo con contatti non qualificati? La soluzione è nel funnel",
+      "Come rendere la tua impresa visibile su Google senza sprechi"
     ],
     VIRAL_HOOK: [
-      "Il digitale non è opzionale per le PMI",
-      "Questo cambia tutto nel marketing locale",
-      "Se non sei online, il tuo business sta morendo"
+      "La digitalizzazione non è solo per i giganti, è per chi vuole crescere",
+      "Il tuo business merita una casa digitale solida e accogliente",
+      "Fai il primo passo verso la scalabilità con un sito professionale"
     ]
   }
 };
 
-// --- LOGIC TEMPLATES FOR SLIDES ---
+// --- LOGIC TEMPLATES FOR SLIDES (Value Pills) ---
 const slideLogic = {
   AUTHORITY: [
-    (title: string, ind: string) => ({ title, text: `Nel settore ${ind}, l'autorità non si dichiara, si dimostra. Link2Digital definisce nuovi standard.` }),
-    (title: string, ind: string) => ({ title: "L'ANALISI DEL PARADIGMA", text: "Molti brand ignorano che il mercato è cambiato. Il sito non è un costo, è l'asset principale del tuo business." }),
-    (title: string, ind: string) => ({ title: "LA VISIONE L2D", text: "Integriamo psicologia d'acquisto e design d'avanguardia per separarti definitivamente dalla concorrenza." }),
-    (title: string, ind: string) => ({ title: "RISULTATI TANGIBILI", text: "Meno rumore, più conversioni. Ecco come trasformiamo la tua presenza digitale in una macchina da vendita." }),
-    (title: string, ind: string) => ({ title: "DOMINA IL MERCATO", text: "Il futuro del tuo brand inizia da un'architettura digitale d'élite. Prenota ora la tua consulenza." })
+    (title: string) => ({ title, text: "Swipe per capire come trasformare la tua presenza digitale in un vantaggio competitivo reale." }),
+    (title: string) => ({ title: "L'ANALISI CRITICA", text: "Molte aziende hanno siti belli che però non vendono. La differenza sta nell'architettura tecnica e psicologica." }),
+    (title: string) => ({ title: "IL NOSTRO APPROCCIO", text: "Lavoriamo per rendere il tuo sito non solo esteticamente eccellente, ma uno strumento attivo di crescita." }),
+    (title: string) => ({ title: "DATA DRIVEN", text: "Ogni scelta di design è basata su come gli utenti interagiscono davvero con il web oggi." }),
+    (title: string) => ({ title: "PARLIAMO DI TE", text: "Non ci interessa essere i più bravi, ci interessa far crescere il tuo business. Contattaci per una consulenza." })
   ],
   EDUCATIONAL: [
-    (title: string, ind: string) => ({ title, text: "Swipe per scoprire il metodo definitivo che sta rivoluzionando il posizionamento online." }),
-    (title: string, ind: string) => ({ title: "STEP 01: FONDAMENTA", text: "Senza una strategia di base, ogni sforzo di design è vano. Analizziamo i touchpoint critici del tuo utente." }),
-    (title: string, ind: string) => ({ title: "STEP 02: ESPERIENZA", text: "La UX (User Experience) deve essere invisibile. L'utente deve arrivare alla conversione senza attriti." }),
-    (title: string, ind: string) => ({ title: "STEP 03: AUTORITÀ", text: "Inseriamo segnali di fiducia e storytelling che elevano il valore percepito del tuo servizio o prodotto." }),
-    (title: string, ind: string) => ({ title: "STEP 04: CONVERSIONE", text: "Ogni pixel deve avere un obiettivo. Trasformiamo l'attenzione in azione immediata e misurabile." }),
-    (title: string, ind: string) => ({ title: "IL RISULTATO FINALE", text: "Un ecosistema digitale pronto a scalare, ottimizzato per Google e per il cuore dei tuoi clienti." }),
-    (title: string, ind: string) => ({ title: "SEI PRONTO A SCALARE?", text: "Applica questo metodo al tuo business. Link2Digital è qui per guidare la tua trasformazione." })
+    (title: string) => ({ title, text: "Ecco una pillola veloce per migliorare i tuoi risultati online oggi stesso." }),
+    (title: string) => ({ title: "IL PUNTO DI PARTENZA", text: "Spesso la soluzione è più semplice di quanto pensi. Focalizzati sull'esperienza dell'utente." }),
+    (title: string) => ({ title: "AZIONI PRATICHE", text: "Controlla la velocità di caricamento e la chiarezza del messaggio principale sulla tua home page." }),
+    (title: string) => ({ title: "OTTIMIZZAZIONE", text: "Usa font leggibili, colori coerenti e pulsanti d'azione che siano impossibili da ignorare." }),
+    (title: string) => ({ title: "COSTRUIAMO INSIEME", text: "Se vuoi implementare queste soluzioni in modo professionale, siamo qui per aiutarti." }),
+    (title: string) => ({ title: "CONCLUSIONE", text: "Un piccolo cambiamento oggi può portare grandi risultati domani. Seguici per altri consigli." })
   ],
   PROBLEM_SOLUTION: [
-    (title: string, ind: string) => ({ title, text: "Hai la sensazione che il tuo sito stia lavorando contro di te? Ecco la verità che nessuno ti dice." }),
-    (title: string, ind: string) => ({ title: "IL PROBLEMA REALE", text: "Non è la mancanza di traffico. È la mancanza di una strategia di conversione che trasmetta il tuo vero valore." }),
-    (title: string, ind: string) => ({ title: "L'ERRORE COMUNE", text: "Continuare a investire in pubblicità su un sito che 'perde' clienti. È come versare acqua in un secchio bucato." }),
-    (title: string, ind: string) => ({ title: "LA SOLUZIONE L2D", text: "Ricostruiamo il tuo funnel partendo dai dati. Design, velocità e psicologia applicata per chiudere il cerchio." }),
-    (title: string, ind: string) => ({ title: "TORNA A CRESCERE", text: "Smetti di sprecare budget. Trasforma il tuo sito nel tuo miglior commerciale attivo 24/7." })
+    (title: string) => ({ title, text: "Ti senti bloccato con un sito che non porta risultati? Vediamo insieme come sbloccare la situazione." }),
+    (title: string) => ({ title: "INDIVIDUA IL BLOCCO", text: "Il problema è spesso invisibile ad occhio nudo: tempi di risposta del server o UX confusa." }),
+    (title: string) => ({ title: "LA SOLUZIONE", text: "Ripartiamo dalle basi. Struttura pulita, codice ottimizzato e un percorso utente senza ostacoli." }),
+    (title: string) => ({ title: "IL RISULTATO", text: "Un sito che carica all'istante e che trasmette fiducia immediata a chi lo visita." }),
+    (title: string) => ({ title: "FACCIAMO DUE CHIACCHIERE", text: "Raccontaci il tuo progetto. Analizzeremo insieme i punti di forza e di debolezza del tuo sito attuale." })
   ],
   VIRAL_HOOK: [
-    (title: string, ind: string) => ({ title, text: "Questa è la differenza tra chi sopravvive online e chi domina il settore. La scelta è tua. Link2Digital è la soluzione." })
+    (title: string) => ({ title, text: "Il web corre veloce. Non lasciare che il tuo brand resti indietro con tecnologie obsolete." })
   ]
 };
 
@@ -298,17 +254,17 @@ type Pillar = 'AUTHORITY' | 'EDUCATIONAL' | 'PROBLEM_SOLUTION' | 'PERSONAL_BRAND
 
 const generateCaption = (title: string, pillar: Pillar, ind: string) => {
   const hooks: Record<string, string> = {
-    AUTHORITY: `L'autorità nel settore ${ind} non è un'opzione, è una necessità. 🏛️`,
-    EDUCATIONAL: `Vuoi sapere come scalare il tuo business nel settore ${ind}? 📊`,
-    PROBLEM_SOLUTION: `Smetti di perdere clienti preziosi nel settore ${ind}. ⚠️`,
-    VIRAL_HOOK: `Il mercato del 2026 non aspetta chi resta indietro. ⚡`
+    AUTHORITY: `Consiglio digitale per il settore ${ind}: l'esperienza utente vince sempre. 🏛️`,
+    EDUCATIONAL: `Pillola del giorno per chi opera nel settore ${ind}. 📊`,
+    PROBLEM_SOLUTION: `Come risolvere i problemi comuni del web nel settore ${ind}. ⚠️`,
+    VIRAL_HOOK: `Il mondo digitale cambia, non restare indietro. ⚡`
   };
 
-  const body = `In Link2Digital non costruiamo solo siti web. Progettiamo architetture di vendita d'élite che trasformano l'identità del tuo brand in un asset finanziario. \n\n${title} è solo la punta dell'iceberg del nostro approccio strategico.`;
+  const body = `In Link2Digital ci piace risolvere problemi reali con soluzioni tecniche eleganti. Non creiamo solo siti, ma strumenti di lavoro che semplificano la tua vita e quella dei tuoi clienti. \n\n${title} è uno dei temi che affrontiamo ogni giorno con i nostri partner.`;
 
-  const cta = "👉 Clicca nel link in bio per una consulenza strategica esclusiva.";
+  const cta = "👉 Scrivici in DM se vuoi analizzare il tuo sito attuale.";
 
-  return `${hooks[pillar] || ''} \n\n ${body} \n\n ${cta} \n\n #Link2Digital #WebStrategy #BusinessOptimization #HighTicketMarketing #ConversionRate #${ind.replace(/\s+/g, '')}`;
+  return `${hooks[pillar] || ''} \n\n ${body} \n\n ${cta} \n\n #Link2Digital #WebDevelopment #UserExperience #SitoWeb #DigitalTips #${ind.replace(/\s+/g, '')}`;
 };
 
 export const generatePosts = (count: number) => {
