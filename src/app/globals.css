@@ -304,25 +304,7 @@ h1, h2, h3, .font-syne {
 body.loading {
   overflow: hidden !important;
 }
-/* Cinematic vertical line on the left side */
-.cinematic-container::before {
-  content: "";
-  position: fixed;
-  top: 5vh;
-  bottom: 5vh;
-  left: 32px;
-  width: 1px;
-  background: linear-gradient(to bottom, transparent, rgba(204, 255, 0, 0.2) 20%, rgba(204, 255, 0, 0.2) 80%, transparent);
-  z-index: 50;
-  pointer-events: none;
-}
 
-@media (max-width: 768px) {
-  .cinematic-container::before {
-    left: 16px;
-    opacity: 0.5;
-  }
-}
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;

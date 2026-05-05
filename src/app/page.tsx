@@ -40,7 +40,7 @@ export default function Home() {
              <div className="max-w-[320px]">
                 <span className="text-label !opacity-100 !text-black mb-4 block font-black text-xs">THE AGENCY</span>
                 <h2 className="text-lg lg:text-xl font-syne font-bold leading-tight opacity-50">
-                  Build better digital versions of your brand. We design high-performance experiences that scale globally.
+                   Build better digital versions of your brand. We design high-performance experiences that scale globally.
                 </h2>
              </div>
              

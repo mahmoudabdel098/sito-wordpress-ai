@@ -460,7 +460,7 @@ const slideLogic = {
 };
 
 // --- CAPTION GENERATOR ---
-type Pillar = 'AUTHORITY' | 'EDUCATIONAL' | 'PROBLEM_SOLUTION' | 'PERSONAL_BRAND' | 'VIRAL_HOOK';
+type Pillar = 'AUTHORITY' | 'EDUCATIONAL' | 'PROBLEM_SOLUTION' | 'VIRAL_HOOK';
 
 const generateCaption = (title: string, pillar: Pillar, ind: string, variant: number) => {
   const hooks: Record<string, string[]> = {
