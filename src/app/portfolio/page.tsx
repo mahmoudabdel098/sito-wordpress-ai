@@ -89,6 +89,7 @@ export default function Portfolio() {
   const x = useTransform(scrollYProgress, [0, 1], ["0%", isMobile ? "0%" : "-88%"]);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (isMobile) return;
     // Total items: Intro (1) + Projects (6) + Final (1) = 8
     const totalItems = projects.length + 2; 
     const step = Math.floor(latest * totalItems);
@@ -193,7 +194,7 @@ export default function Portfolio() {
       </section>
 
       {/* REFINED Progress Indicator */}
-      <div className="fixed bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-4 lg:gap-8 px-6 lg:px-10 py-3 lg:py-5 bg-black/80 backdrop-blur-2xl rounded-full border border-white/10 shadow-2xl w-auto max-w-[90vw] lg:min-w-[500px]">
+      <div className="fixed bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-[100] hidden lg:flex items-center gap-4 lg:gap-8 px-6 lg:px-10 py-3 lg:py-5 bg-black/80 backdrop-blur-2xl rounded-full border border-white/10 shadow-2xl w-auto max-w-[90vw] lg:min-w-[500px]">
          <div className="hidden sm:flex flex-col items-start min-w-[100px] lg:min-w-[120px]">
             <span className="text-[7px] lg:text-[10px] font-black text-white/20 uppercase tracking-[0.2em] mb-1">Current Section</span>
             <span className="text-[10px] lg:text-sm font-black text-accent-lime uppercase truncate max-w-[80px] lg:max-w-[150px]">
