@@ -114,7 +114,7 @@ export default function Portfolio() {
       <section ref={targetRef} className="relative bg-black h-auto pb-40 lg:h-[800vh]">
         <div className="relative pt-24 lg:sticky lg:top-0 lg:h-screen lg:flex lg:items-center lg:pt-20 lg:overflow-hidden">
           <motion.div 
-            style={{ x }} 
+            style={isMobile ? undefined : { x }} 
             className="flex flex-col items-center gap-5 lg:flex-row lg:items-stretch lg:gap-16 px-6 lg:px-16 max-lg:!transform-none"
           >
             {/* Intro Card */}
@@ -155,13 +155,18 @@ export default function Portfolio() {
                 </div>
 
                 <div className="flex items-center justify-center py-4 lg:py-6 relative z-10">
+                   {/* Zero-JS static icon for Mobile to prevent scroll stutter */}
+                   <div className="lg:hidden p-6 sm:p-8 bg-white/10 rounded-full border border-white/10 flex items-center justify-center">
+                      {React.cloneElement(project.icon as React.ReactElement, { className: 'w-8 h-8 text-current' })}
+                   </div>
+                   {/* Animated icon for Desktop */}
                    <motion.div 
                     initial={{ scale: 0.8, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     viewport={{ once: true, margin: "100px" }}
-                    className="p-6 sm:p-8 lg:p-16 bg-white/10 rounded-full border border-white/10 lg:backdrop-blur-xl"
+                    className="hidden lg:flex p-16 bg-white/10 rounded-full border border-white/10 backdrop-blur-xl"
                    >
-                      {React.cloneElement(project.icon as React.ReactElement, { className: 'w-6 h-6 sm:w-8 sm:h-8 lg:w-12 lg:h-12 text-current' })}
+                      {React.cloneElement(project.icon as React.ReactElement, { className: 'w-12 h-12 text-current' })}
                    </motion.div>
                 </div>
 
