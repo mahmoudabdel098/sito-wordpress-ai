@@ -14,6 +14,7 @@ const projects = [
     subtitle: "Real Estate Portal",
     category: "Web Development",
     color: "bg-blue-600",
+    darkText: false,
     icon: <Globe className="w-12 h-12 text-white" />,
     url: "https://ibossi.it/",
     description: "Online portal for Immobiliare Bossi, a historic real estate agency in Varese."
@@ -24,6 +25,7 @@ const projects = [
     subtitle: "Lifestyle Brand",
     category: "Design & Identity",
     color: "bg-[#d1d9cf]",
+    darkText: true,
     icon: <Layout className="w-12 h-12 text-black" />,
     url: "https://achromeofficial.com/",
     description: "Official portal of Achrome, promoting a minimalist lifestyle."
@@ -34,6 +36,7 @@ const projects = [
     subtitle: "Tigrato Fashion",
     category: "E-commerce",
     color: "bg-[#1a1a1a]",
+    darkText: false,
     icon: <ShoppingBag className="w-12 h-12 text-white" />,
     url: "https://gigliotigrato.com/",
     description: "A Milan-based upcycling fashion brand promoting unique clothing."
@@ -44,6 +47,7 @@ const projects = [
     subtitle: "Shotz Editing",
     category: "Platform Dev",
     color: "bg-white",
+    darkText: true,
     icon: <Video className="w-12 h-12 text-black" />,
     url: "https://zodashotz.com/",
     description: "Platform specializing in video editing resources."
@@ -54,6 +58,7 @@ const projects = [
     subtitle: "Architecture & Design",
     category: "Architecture",
     color: "bg-[#0f172a]",
+    darkText: false,
     icon: <ExternalLink className="w-12 h-12 text-white" />,
     url: "https://alessialazzaretto.com/",
     description: "High-end architecture and interior design for international elite clients."
@@ -64,6 +69,7 @@ const projects = [
     subtitle: "Videomaker & Motion Designer",
     category: "Motion Design",
     color: "bg-[#1a1a1b]",
+    darkText: false,
     icon: <Sparkles className="w-12 h-12 text-white" />,
     url: "https://giovanniarioni.com/",
     description: "End-to-end video production and high-end motion graphics for premium brands."
@@ -105,11 +111,11 @@ export default function Portfolio() {
         </div>
       </div>
 
-      <section ref={targetRef} className={`relative ${isMobile ? 'h-auto pb-40' : 'h-[800vh]'} bg-black`}>
-        <div className={`${isMobile ? 'relative pt-24' : 'sticky top-0 h-screen flex items-center pt-10 sm:pt-20 overflow-hidden'}`}>
+      <section ref={targetRef} className="relative bg-black h-auto pb-40 lg:h-[800vh]">
+        <div className="relative pt-24 lg:sticky lg:top-0 lg:h-screen lg:flex lg:items-center lg:pt-20 lg:overflow-hidden">
           <motion.div 
-            style={isMobile ? {} : { x }} 
-            className={`flex ${isMobile ? 'flex-col items-center gap-5' : 'gap-6 lg:gap-16'} px-6 lg:px-16`}
+            style={{ x }} 
+            className="flex flex-col items-center gap-5 lg:flex-row lg:items-stretch lg:gap-16 px-6 lg:px-16 max-lg:!transform-none"
           >
             {/* Intro Card */}
             <div className="w-[85vw] lg:w-[700px] h-[55vh] lg:h-[72vh] flex flex-col justify-center gap-6 lg:gap-8 p-8 lg:p-20 rounded-[40px] lg:rounded-[60px] bg-white/5 border border-white/10 shrink-0">
@@ -134,15 +140,15 @@ export default function Portfolio() {
               >
                 <div className="flex justify-between items-start relative z-10">
                    <div className="flex flex-col gap-2">
-                      <span className={`text-label ${project.color.includes('bg-white') ? 'text-black/40' : 'text-white/40'}`}>
+                      <span className={`text-label ${project.darkText ? 'text-black/40' : 'text-white/40'}`}>
                         {project.category}
                       </span>
-                      <h2 className={`text-3xl sm:text-4xl lg:text-7xl font-syne font-black tracking-tighter uppercase leading-tight lg:leading-none ${project.color.includes('bg-white') ? 'text-black' : 'text-white'} max-w-[80%]`}>
+                      <h2 className={`text-3xl sm:text-4xl lg:text-7xl font-syne font-black tracking-tighter uppercase leading-tight lg:leading-none ${project.darkText ? 'text-black' : 'text-white'} max-w-[80%]`}>
                         {project.title}
                       </h2>
                    </div>
                    <Magnetic>
-                     <Link href={project.url} target="_blank" className={`w-14 h-14 sm:w-16 lg:w-24 lg:h-24 rounded-full flex items-center justify-center border transition-all ${project.color.includes('bg-white') ? 'bg-black text-white border-black' : 'bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white hover:text-black'}`}>
+                     <Link href={project.url} target="_blank" className={`w-14 h-14 sm:w-16 lg:w-24 lg:h-24 rounded-full flex items-center justify-center border transition-all ${project.darkText ? 'bg-black text-white border-black' : 'bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white hover:text-black'}`}>
                         <ArrowUpRight className="w-6 h-6 sm:w-8 lg:w-10 lg:h-10" />
                      </Link>
                    </Magnetic>
@@ -152,7 +158,7 @@ export default function Portfolio() {
                    <motion.div 
                     initial={{ scale: 0.8, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true, margin: "-50px" }}
+                    viewport={{ once: true, margin: "100px" }}
                     className="p-6 sm:p-8 lg:p-16 bg-white/10 rounded-full border border-white/10 lg:backdrop-blur-xl"
                    >
                       {React.cloneElement(project.icon as React.ReactElement, { className: 'w-6 h-6 sm:w-8 sm:h-8 lg:w-12 lg:h-12 text-current' })}
@@ -161,18 +167,18 @@ export default function Portfolio() {
 
                 <div className="flex justify-between items-end border-t border-black/10 pt-4 lg:pt-8 relative z-10">
                    <div className="max-w-md lg:max-w-xl">
-                      <p className={`text-base sm:text-lg lg:text-2xl font-bold font-syne leading-tight ${project.color.includes('bg-white') ? 'text-black/60' : 'text-white/60'}`}>
+                      <p className={`text-base sm:text-lg lg:text-2xl font-bold font-syne leading-tight ${project.darkText ? 'text-black/60' : 'text-white/60'}`}>
                         {project.description}
                       </p>
                    </div>
                    <div className="flex flex-col items-end">
-                      <span className={`text-[8px] lg:text-[10px] font-black uppercase tracking-widest mb-1 ${project.color.includes('bg-white') ? 'text-black/20' : 'text-white/20'}`}>Case Study</span>
-                      <span className={`text-2xl sm:text-3xl lg:text-5xl font-black ${project.color.includes('bg-white') ? 'text-black' : 'text-white'}`}>NO.{project.id}</span>
+                      <span className={`text-[8px] lg:text-[10px] font-black uppercase tracking-widest mb-1 ${project.darkText ? 'text-black/20' : 'text-white/20'}`}>Case Study</span>
+                      <span className={`text-2xl sm:text-3xl lg:text-5xl font-black ${project.darkText ? 'text-black' : 'text-white'}`}>NO.{project.id}</span>
                    </div>
                 </div>
 
                 {/* Decorative background number */}
-                <div className={`absolute -bottom-10 -right-10 text-[20vw] font-black opacity-5 leading-none pointer-events-none ${project.color.includes('bg-white') ? 'text-black' : 'text-white'}`}>
+                <div className={`absolute -bottom-10 -right-10 text-[20vw] font-black opacity-5 leading-none pointer-events-none ${project.darkText ? 'text-black' : 'text-white'}`}>
                    {project.id}
                 </div>
               </div>
