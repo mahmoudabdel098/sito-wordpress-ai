@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import Lenis from 'lenis';
 
 export default function CinematicProvider({ children }: { children: React.ReactNode }) {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -12,23 +11,8 @@ export default function CinematicProvider({ children }: { children: React.ReactN
   const pathname = usePathname();
 
   useEffect(() => {
-    const checkTouch = () => {
-      setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
-    };
-    checkTouch();
-
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-    });
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    setIsTouchDevice(isTouch);
 
     const onMouseMove = (e: MouseEvent) => {
       if (cursorRef.current) {
@@ -57,14 +41,13 @@ export default function CinematicProvider({ children }: { children: React.ReactN
       setCursorType('default');
     };
 
-    if (!('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
+    if (!isTouch) {
       window.addEventListener('mousemove', onMouseMove);
       document.addEventListener('mouseover', onMouseEnter);
       document.addEventListener('mouseout', onMouseLeave);
     }
 
     return () => {
-      lenis.destroy();
       window.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseover', onMouseEnter);
       document.removeEventListener('mouseout', onMouseLeave);

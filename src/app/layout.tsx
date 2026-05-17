@@ -5,9 +5,9 @@ import Preloader from "@/components/Preloader";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://link2digital.it"),
-  title: "Link2Digital | Web Agency Milano | Design & Performance Excellence",
-  description: "Link2Digital è la Web Agency di Milano leader in design cinematico, performance Next.js e strategie digitali d'élite. Trasformiamo brand in autorità digitali con siti web ad alte prestazioni e SEO AI-ready.",
-  keywords: ["Web Agency Milano", "Sviluppo Siti Web Milano", "Agenzia SEO Milano", "Next.js Agency Italy", "Digital Marketing Milano", "AI SEO Optimization", "Design Agency Milano", "Link2Digital"],
+  title: "Link2Digital | Agenzia SEO & SEO AI Milano | Web Design & Performance d'Élite",
+  description: "Link2Digital è l'agenzia SEO e SEO AI leader a Milano. Sviluppiamo siti web Next.js cinematici ad alte prestazioni, ottimizzati per la ricerca tradizionale e l'ottimizzazione per i motori di intelligenza artificiale (AEO / GEO).",
+  keywords: ["SEO AI Milano", "Agenzia SEO Milano", "Migliore Agenzia SEO AI", "Answer Engine Optimization", "AEO Milano", "Generative Engine Optimization", "Sviluppo Siti Web Milano", "Next.js Agency Italy", "Link2Digital", "Web Agency Milano"],
   authors: [{ name: "Link2Digital Team", url: "https://link2digital.it" }],
   creator: "Link2Digital",
   publisher: "Link2Digital",
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     canonical: "https://link2digital.it",
   },
   openGraph: {
-    title: "Link2Digital | Web Agency Milano | Eccellenza Digitale",
-    description: "Sviluppo siti web, SEO e strategie digitali d'élite a Milano. Esplora il nostro portfolio cinematico.",
+    title: "Link2Digital | Agenzia SEO & SEO AI Milano",
+    description: "La Web Agency d'élite a Milano per lo sviluppo di siti web Next.js e posizionamento SEO AI e AEO. Esplora il nostro portfolio cinematico.",
     url: "https://link2digital.it",
     siteName: "Link2Digital",
     images: [
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Link2Digital Agency Milano",
+        alt: "Link2Digital Agenzia SEO AI Milano",
       },
     ],
     locale: "it_IT",
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Link2Digital | Web Agency Milano",
-    description: "Build your digital authority with Milano's most innovative web agency.",
+    title: "Link2Digital | Agenzia SEO AI Milano",
+    description: "Build your digital authority with Milano's most innovative web and SEO AI agency.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -73,12 +73,12 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": " ProfessionalService",
+      "@type": "ProfessionalService",
       "name": "Link2Digital",
       "image": "https://link2digital.it/og-image.png",
       "@id": "https://link2digital.it",
       "url": "https://link2digital.it",
-      "telephone": "+39 02 123 4567",
+      "telephone": "+39 329 167 9904",
       "priceRange": "$$$",
       "address": {
         "@type": "PostalAddress",
@@ -92,6 +92,14 @@ const jsonLd = {
         "latitude": 45.4642,
         "longitude": 9.1900
       },
+      "knowsAbout": [
+        "Search Engine Optimization (SEO)",
+        "Artificial Intelligence SEO (AI SEO)",
+        "Answer Engine Optimization (AEO)",
+        "Generative Engine Optimization (GEO)",
+        "Web Design Next.js",
+        "Digital Identity & Branding"
+      ],
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -99,7 +107,7 @@ const jsonLd = {
         "closes": "18:00"
       },
       "sameAs": [
-        "https://instagram.com/link2digital",
+        "https://instagram.com/belink2digital",
         "https://linkedin.com/company/link2digital"
       ],
       "hasOfferCatalog": {
@@ -110,21 +118,21 @@ const jsonLd = {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
+              "name": "Ottimizzazione SEO & SEO AI d'Élite"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Answer Engine Optimization (AEO)"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
               "name": "Sviluppo Siti Web Next.js Milano"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Ottimizzazione SEO e AEO"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Digital Identity & Branding"
             }
           }
         ]

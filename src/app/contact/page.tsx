@@ -1,26 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Instagram, Linkedin, Globe, MapPin, CheckCircle2, Mail, Phone, ExternalLink, ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Instagram, Globe, MapPin, Mail, Phone, ExternalLink, ArrowUpRight } from 'lucide-react';
 import Header from '@/components/Header';
 import Magnetic from '@/components/Magnetic';
 import TiltCard from '@/components/TiltCard';
 
 export default function Contact() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSent, setIsSent] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSent(true);
-    }, 1500);
-  };
-
   return (
     <div className="hero-wrapper">
       <motion.div 
@@ -34,53 +22,40 @@ export default function Contact() {
         {/* Contact Bento Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-5 lg:gap-12 !mt-4 lg:!mt-8 relative z-10">
           
-          {/* Left: Contact Form Card (Large Bento Item) */}
-          <TiltCard className="card card-light !bg-white !p-6 sm:!p-12 !rounded-[32px] sm:!rounded-[50px] shadow-2xl relative overflow-hidden flex flex-col justify-between">
-             <AnimatePresence mode="wait">
-                {!isSent ? (
-                  <motion.div
-                    key="form"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0, x: -20 }}
-                  >
-                    <div className="mb-6 lg:mb-10">
-                       <span className="text-label !text-black/30 mb-2 lg:mb-4 block">GET IN TOUCH</span>
-                       <h1 className="text-4xl sm:text-5xl lg:text-6xl font-syne font-black text-black leading-[0.9] tracking-tighter uppercase">
-                         Send a<br/>transmission.
-                       </h1>
-                    </div>
-                    
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-4 lg:gap-6">
-                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <input required type="text" placeholder="FULL NAME" className="w-full bg-black/5 border-none p-4 lg:p-6 rounded-2xl text-black font-black placeholder:text-black/20 outline-none focus:ring-2 ring-accent-lime transition-all" />
-                          <input required type="email" placeholder="EMAIL ADDRESS" className="w-full bg-black/5 border-none p-4 lg:p-6 rounded-2xl text-black font-black placeholder:text-black/20 outline-none focus:ring-2 ring-accent-lime transition-all" />
-                       </div>
-                       <textarea rows={4} placeholder="YOUR MESSAGE..." className="w-full bg-black/5 border-none p-4 lg:p-6 rounded-2xl text-black font-black placeholder:text-black/20 outline-none focus:ring-2 ring-accent-lime transition-all resize-none" />
-                       
-                       <Magnetic>
-                          <button type="submit" disabled={isSubmitting} className="action-pill !w-full justify-center !rounded-2xl !py-5 lg:!py-6 !bg-black !text-white hover:!bg-accent-lime hover:!text-black transition-colors">
-                             {isSubmitting ? 'PROCESSING...' : 'SEND MESSAGE'} <Send size={20} />
-                          </button>
-                       </Magnetic>
-                    </form>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="success"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="flex flex-col items-center justify-center py-12 lg:py-20 text-center gap-6"
-                  >
-                     <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-accent-lime flex items-center justify-center text-black">
-                        <CheckCircle2 size={32} className="lg:w-10 lg:h-10" />
-                     </div>
-                     <h2 className="text-3xl lg:text-4xl font-syne font-black text-black uppercase">Mission Success.</h2>
-                     <p className="text-black/40 font-bold max-w-xs text-sm">We have received your message. Expect a response within 24 hours.</p>
-                     <button onClick={() => setIsSent(false)} className="text-[10px] font-black uppercase tracking-widest hover:underline mt-4">New Message</button>
-                  </motion.div>
-                )}
-             </AnimatePresence>
+          {/* Left: Contact Form Card (Large Bento Item) -> Replaced with Direct Transmission Card */}
+          <TiltCard className="card card-light !bg-white !p-6 sm:!p-12 !rounded-[32px] sm:!rounded-[50px] shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[400px]">
+            <div>
+              <div className="mb-6 lg:mb-10">
+                <span className="text-label !text-black/30 mb-2 lg:mb-4 block">DIRECT CHANNEL</span>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-syne font-black text-black leading-[0.9] tracking-tighter uppercase">
+                  Start the<br/>transmission.
+                </h1>
+              </div>
+              
+              <p className="text-black/60 text-lg lg:text-xl font-bold leading-snug max-w-xl mb-8">
+                No complicated forms or automated pipelines. Connect directly with our team to align your digital vision and set new standards.
+              </p>
+
+              <div className="my-6 lg:my-8">
+                <Link href="mailto:info@link2digital.com?subject=Transmission%20from%20Link2Digital" className="group block">
+                  <span className="text-[9px] font-black text-black/30 block mb-1 tracking-widest uppercase">EMAIL DIRECTLY</span>
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-syne font-black text-black group-hover:text-accent-lime transition-colors block break-all tracking-tight leading-none">
+                    INFO@LINK2DIGITAL.COM
+                  </span>
+                </Link>
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <Magnetic>
+                <Link 
+                  href="mailto:info@link2digital.com?subject=Transmission%20from%20Link2Digital"
+                  className="action-pill !w-full justify-center !rounded-2xl !py-5 lg:!py-6 !bg-black !text-white hover:!bg-accent-lime hover:!text-black transition-colors shadow-xl text-md font-black tracking-wider uppercase inline-flex items-center gap-3"
+                >
+                  SEND DIRECT EMAIL <Mail size={20} />
+                </Link>
+              </Magnetic>
+            </div>
           </TiltCard>
 
           {/* Right: Info Stack (Bento Items) - Flattened on mobile with 'contents' */}
@@ -108,10 +83,13 @@ export default function Contact() {
                    <span className="text-label text-white/60">Email</span>
                 </div>
                 <div>
-                   <h3 className="text-xl lg:text-2xl font-syne font-black text-white uppercase tracking-tighter break-all">hello@link2digital.it</h3>
+                   <Link href="mailto:info@link2digital.com" className="hover:underline">
+                      <h3 className="text-xl lg:text-2xl font-syne font-black text-white uppercase tracking-tighter break-all">info@link2digital.com</h3>
+                   </Link>
                    <div className="flex gap-4 mt-4">
-                      <Instagram size={20} className="text-white/40 hover:text-white cursor-pointer transition-colors" />
-                      <Linkedin size={20} className="text-white/40 hover:text-white cursor-pointer transition-colors" />
+                      <Link href="https://www.instagram.com/belink2digital/" target="_blank">
+                         <Instagram size={20} className="text-white/40 hover:text-white cursor-pointer transition-colors" />
+                      </Link>
                    </div>
                 </div>
              </div>
@@ -120,36 +98,36 @@ export default function Contact() {
 
         {/* Bottom Bar Bento Items */}
         <div className="bottom-grid !grid-cols-1 lg:!grid-cols-3 !gap-5 lg:!gap-16 !h-auto !mt-5 lg:!mt-16 !pb-20 lg:!pb-0 relative z-10">
-           <div className="p-6 lg:p-8 bg-white rounded-[24px] lg:rounded-[30px] border border-black/5 flex items-center justify-between group cursor-pointer hover:bg-accent-lime transition-all">
+           <Link href="tel:3291679904" className="p-6 lg:p-8 bg-white rounded-[24px] lg:rounded-[30px] border border-black/5 flex items-center justify-between group hover:bg-accent-lime transition-all">
               <div className="flex items-center gap-4">
-                 <Phone size={20} className="opacity-40" />
-                 <span className="text-[10px] lg:text-[11px] font-black uppercase tracking-widest">+39 02 123 4567</span>
+                 <Phone size={20} className="opacity-40 text-black" />
+                 <span className="text-[10px] lg:text-[11px] font-black uppercase tracking-widest text-black">+39 329 167 9904</span>
               </div>
-              <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-           </div>
-           <div className="p-6 lg:p-8 bg-white rounded-[24px] lg:rounded-[30px] border border-black/5 flex items-center justify-between group cursor-pointer hover:bg-accent-lime transition-all">
+              <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity text-black" />
+           </Link>
+           <Link href="https://www.link2digital.com" target="_blank" className="p-6 lg:p-8 bg-white rounded-[24px] lg:rounded-[30px] border border-black/5 flex items-center justify-between group hover:bg-accent-lime transition-all">
               <div className="flex items-center gap-4">
-                 <Globe size={20} className="opacity-40" />
-                 <span className="text-[10px] lg:text-[11px] font-black uppercase tracking-widest">link2digital.it</span>
+                 <Globe size={20} className="opacity-40 text-black" />
+                 <span className="text-[10px] lg:text-[11px] font-black uppercase tracking-widest text-black">link2digital.com</span>
               </div>
-              <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-           </div>
-           <div className="p-6 lg:p-8 bg-black rounded-[24px] lg:rounded-[30px] flex items-center justify-between group cursor-pointer hover:bg-accent-lime transition-all">
+              <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity text-black" />
+           </Link>
+           <Link href="https://www.instagram.com/belink2digital/" target="_blank" className="p-6 lg:p-8 bg-black rounded-[24px] lg:rounded-[30px] flex items-center justify-between group hover:bg-accent-lime transition-all">
               <div className="flex items-center gap-4">
                  <Instagram size={20} className="text-white/40 group-hover:text-black transition-colors" />
                  <span className="text-[10px] lg:text-[11px] font-black uppercase tracking-widest text-white group-hover:text-black transition-colors">Instagram Feed</span>
               </div>
               <ArrowUpRight size={18} className="text-white/20 group-hover:text-black transition-colors" />
-           </div>
+           </Link>
         </div>
 
         {/* Local SEO & Contact Markers */}
         <section className="sr-only" aria-hidden="true">
           <h2>Contatta la nostra Web Agency a Milano</h2>
           <p>
-            Vieni a trovarci nel nostro studio a Milano in Via Montenapoleone 12, o scrivici a hello@link2digital.it 
-            per una consulenza su sviluppo web Next.js, strategie SEO e branding d'élite. Link2Digital è attiva su tutto 
-            il territorio milanese e lombardo.
+            Vieni a trovarci nel nostro studio a Milano in Via Montenapoleone 12, o scrivici a info@link2digital.com 
+            o chiamaci al +39 329 167 9904 per una consulenza su sviluppo web Next.js, strategie SEO e branding d'élite.
+            Link2Digital è attiva su tutto il territorio milanese e lombardo.
           </p>
         </section>
       </motion.div>
