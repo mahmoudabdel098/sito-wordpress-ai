@@ -76,13 +76,6 @@ const projects = [
   }
 ];
 
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
-import Header from '@/components/Header';
-import { ArrowUpRight, Sparkles } from 'lucide-react';
-import Magnetic from '@/components/Magnetic';
-import Link from 'next/link';
-import { projects } from './projects';
 
 export default function Portfolio() {
   const targetRef = useRef<HTMLDivElement>(null);
