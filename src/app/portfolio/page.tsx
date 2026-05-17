@@ -114,7 +114,7 @@ export default function Portfolio() {
            A selection of digital masterpieces crafted for the elite.
          </p>
          <div className="flex items-center gap-4 mt-4 lg:mt-8">
-            <div className="w-12 lg:w-16 h-[2px] bg-accent-lime shadow-[0_0_10px_rgba(204,255,0,0.5)]" />
+            <div className="w-12 lg:w-16 h-[2px] bg-accent-lime lg:shadow-[0_0_10px_rgba(204,255,0,0.5)]" />
             <span className="text-[9px] lg:text-[10px] font-black text-white uppercase tracking-[0.4em] lg:tracking-[0.5em]">Scroll to explore</span>
          </div>
       </div>
@@ -122,7 +122,7 @@ export default function Portfolio() {
       {projects.map((project) => (
         <div 
           key={project.id} 
-          className={`w-[85vw] lg:w-[75vw] h-[55vh] lg:h-[72vh] rounded-[40px] lg:rounded-[60px] overflow-hidden shrink-0 relative group p-6 sm:p-8 lg:p-16 flex flex-col justify-between ${project.color}`}
+          className={`w-[85vw] lg:w-[75vw] h-[55vh] lg:h-[72vh] rounded-[40px] lg:rounded-[60px] overflow-hidden shrink-0 relative transform-gpu group p-6 sm:p-8 lg:p-16 flex flex-col justify-between ${project.color}`}
         >
           <div className="flex justify-between items-start relative z-10">
              <div className="flex flex-col gap-2">
@@ -134,7 +134,7 @@ export default function Portfolio() {
                 </h2>
              </div>
              <Magnetic>
-               <Link href={project.url} target="_blank" className={`w-14 h-14 sm:w-16 lg:w-24 lg:h-24 rounded-full flex items-center justify-center border transition-all ${project.darkText ? 'bg-black text-white border-black' : 'bg-white/10 backdrop-blur-md text-white border-white/20 hover:bg-white hover:text-black'}`}>
+               <Link href={project.url} target="_blank" className={`w-14 h-14 sm:w-16 lg:w-24 lg:h-24 rounded-full flex items-center justify-center border transition-all ${project.darkText ? 'bg-black text-white border-black' : 'bg-white/10 lg:backdrop-blur-md text-white border-white/20 hover:bg-white hover:text-black'}`}>
                   <ArrowUpRight className="w-6 h-6 sm:w-8 lg:w-10 lg:h-10" />
                </Link>
              </Magnetic>
@@ -148,7 +148,7 @@ export default function Portfolio() {
               initial={{ scale: 0.8, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true, margin: "100px" }}
-              className="hidden lg:flex p-16 bg-white/10 rounded-full border border-white/10 backdrop-blur-xl"
+              className="hidden lg:flex p-16 bg-white/10 rounded-full border border-white/10 lg:backdrop-blur-xl"
              >
                 {React.cloneElement(project.icon as React.ReactElement, { className: 'w-12 h-12 text-current' })}
              </motion.div>
@@ -172,7 +172,7 @@ export default function Portfolio() {
         </div>
       ))}
 
-      <div className="w-[85vw] lg:w-[700px] h-[55vh] lg:h-[75vh] flex flex-col justify-center items-center gap-8 lg:gap-12 p-8 sm:p-10 lg:p-20 rounded-[40px] lg:rounded-[60px] bg-accent-lime shrink-0 text-center shadow-[0_0_100px_rgba(204,255,0,0.2)]">
+      <div className="w-[85vw] lg:w-[700px] h-[55vh] lg:h-[75vh] flex flex-col justify-center items-center gap-8 lg:gap-12 p-8 sm:p-10 lg:p-20 rounded-[40px] lg:rounded-[60px] bg-accent-lime shrink-0 text-center lg:shadow-[0_0_100px_rgba(204,255,0,0.2)]">
          <h2 className="text-3xl sm:text-4xl lg:text-6xl font-syne font-black text-black leading-[0.85] uppercase tracking-tighter">
            READY FOR<br/>THE NEXT<br/>LEVEL?
          </h2>
