@@ -151,7 +151,8 @@ export default function Portfolio() {
                    <motion.div 
                     initial={{ scale: 0.8, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
-                    className="p-6 sm:p-8 lg:p-16 bg-white/5 rounded-full border border-white/10 backdrop-blur-xl"
+                    viewport={{ once: true, margin: "-50px" }}
+                    className="p-6 sm:p-8 lg:p-16 bg-white/10 rounded-full border border-white/10 lg:backdrop-blur-xl"
                    >
                       {React.cloneElement(project.icon as React.ReactElement, { className: 'w-6 h-6 sm:w-8 sm:h-8 lg:w-12 lg:h-12 text-current' })}
                    </motion.div>
