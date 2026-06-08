@@ -177,14 +177,17 @@ export default function SocialStudio() {
       setTimeout(async () => {
         if (batchRef.current) {
           try {
+            if (typeof document !== 'undefined') {
+              await document.fonts.ready;
+            }
             const dataUrl = await toPng(batchRef.current, {
-              cacheBust: true, pixelRatio: 3, quality: 1,
+              cacheBust: true, pixelRatio: 4, quality: 1,
               style: { borderRadius: '0', transform: 'scale(1)' }
             });
             resolve(dataUrl);
           } catch (err) { reject(err); }
         } else reject('No batch ref');
-      }, 120);
+      }, 200);
     });
 
   const exportBundle = async () => {
@@ -222,8 +225,11 @@ export default function SocialStudio() {
   const exportSingleImage = async () => {
     if (!slideRef.current || !selectedPost) return;
     try {
+      if (typeof document !== 'undefined') {
+        await document.fonts.ready;
+      }
       const dataUrl = await toPng(slideRef.current, {
-        cacheBust: true, pixelRatio: 3, quality: 1,
+        cacheBust: true, pixelRatio: 4, quality: 1,
         style: { borderRadius: '0', transform: 'scale(1)' }
       });
       const link = document.createElement('a');
