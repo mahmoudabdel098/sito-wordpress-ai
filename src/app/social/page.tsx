@@ -53,6 +53,49 @@ const L2D_WORDMARK = ({ size = 'sm', inverted = false }: { size?: 'xs' | 'sm' | 
   );
 };
 
+const SlideEditContext = React.createContext<{
+  editing: boolean;
+  isStory: boolean;
+  updateSlide: (field: keyof Slide, val: string) => void;
+} | null>(null);
+
+const fitTitleClass = (text: string, className: string, isStory: boolean): string => {
+  const longestWord = text.split(/\s+/).reduce((m, w) => Math.max(m, w.length), 0);
+  const totalLen = text.length;
+  const stripped = className.replace(/text-\[[^\]]+\]|text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl)/g, '').trim();
+  let sizeClass: string;
+  if (longestWord >= 15 || totalLen >= 40) sizeClass = isStory ? 'text-[1.5rem]' : 'text-[1.4rem]';
+  else if (longestWord >= 12 || totalLen >= 30) sizeClass = isStory ? 'text-[1.85rem]' : 'text-[1.7rem]';
+  else if (longestWord >= 9 || totalLen >= 20) sizeClass = isStory ? 'text-[2.2rem]' : 'text-[2.05rem]';
+  else if (totalLen >= 12) sizeClass = isStory ? 'text-[2.6rem]' : 'text-[2.4rem]';
+  else sizeClass = isStory ? 'text-[3rem]' : 'text-[2.8rem]';
+  const tracking = stripped.replace(/tracking-tighter/g, 'tracking-tight');
+  return `${sizeClass} ${tracking} whitespace-normal hyphens-none max-w-full`;
+};
+
+const EditableTitle = React.memo(({ text, className }: { text: string; className: string }) => {
+  const ctx = React.useContext(SlideEditContext);
+  if (!ctx) return null;
+  const { editing, isStory, updateSlide } = ctx;
+  const finalClass = fitTitleClass(text, className, isStory);
+  return !editing ? <h3 className={finalClass}>{text}</h3> : (
+    <textarea value={text} onChange={(e) => updateSlide('title', e.target.value)}
+      className={`${finalClass} bg-white/10 border-b border-[#ccff00] outline-none resize-none w-full`} rows={2} />
+  );
+});
+EditableTitle.displayName = 'EditableTitle';
+
+const EditableText = React.memo(({ text, className }: { text: string; className: string }) => {
+  const ctx = React.useContext(SlideEditContext);
+  if (!ctx) return null;
+  const { editing, updateSlide } = ctx;
+  return !editing ? <p className={`${className} whitespace-normal max-w-full`}>{text}</p> : (
+    <textarea value={text} onChange={(e) => updateSlide('text', e.target.value)}
+      className={`${className} max-w-full bg-white/10 border-b border-[#ccff00] outline-none resize-none w-full`} rows={3} />
+  );
+});
+EditableText.displayName = 'EditableText';
+
 export default function SocialStudio() {
   // === AUTH ===
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -305,40 +348,8 @@ export default function SocialStudio() {
 
     const updateSlide = (field: keyof Slide, val: string) => updateSlideField(slideIdx, field, val);
 
-    // Auto-fit: replace any fixed text-[*] with a size derived from the
-    // longest word + total length, so long Italian words like "IDENTIFICAZIONE"
-    // shrink instead of overflowing — but break only on word boundaries (no mid-letter cuts).
-    const fitTitleClass = (text: string, className: string): string => {
-      const longestWord = text.split(/\s+/).reduce((m, w) => Math.max(m, w.length), 0);
-      const totalLen = text.length;
-      const stripped = className.replace(/text-\[[^\]]+\]|text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl)/g, '').trim();
-      let sizeClass: string;
-      // Thresholds tuned for a 500px slide with 40px padding (≈420px inner width)
-      if (longestWord >= 15 || totalLen >= 40) sizeClass = isStory ? 'text-[1.5rem]' : 'text-[1.4rem]';
-      else if (longestWord >= 12 || totalLen >= 30) sizeClass = isStory ? 'text-[1.85rem]' : 'text-[1.7rem]';
-      else if (longestWord >= 9 || totalLen >= 20) sizeClass = isStory ? 'text-[2.2rem]' : 'text-[2.05rem]';
-      else if (totalLen >= 12) sizeClass = isStory ? 'text-[2.6rem]' : 'text-[2.4rem]';
-      else sizeClass = isStory ? 'text-[3rem]' : 'text-[2.8rem]';
-      const tracking = stripped.replace(/tracking-tighter/g, 'tracking-tight');
-      // Word-boundary wrap only (no break-words/anywhere/balance that caused mid-letter cuts)
-      return `${sizeClass} ${tracking} whitespace-normal hyphens-none max-w-full`;
-    };
-
-    const EditableTitle = ({ text, className }: { text: string; className: string }) => {
-      const finalClass = fitTitleClass(text, className);
-      return !editing ? <h3 className={finalClass}>{text}</h3> : (
-        <textarea value={text} onChange={(e) => updateSlide('title', e.target.value)}
-          className={`${finalClass} bg-white/10 border-b border-[#ccff00] outline-none resize-none w-full`} rows={2} />
-      );
-    };
-
-    const EditableText = ({ text, className }: { text: string; className: string }) =>
-      !editing ? <p className={`${className} whitespace-normal max-w-full`}>{text}</p> : (
-        <textarea value={text} onChange={(e) => updateSlide('text', e.target.value)}
-          className={`${className} max-w-full bg-white/10 border-b border-[#ccff00] outline-none resize-none w-full`} rows={3} />
-      );
-
-    switch (variant) {
+    const slideElement = (() => {
+      switch (variant) {
       case 1: // Split sage / charcoal
         return (
           <div className="absolute inset-0 flex flex-col">
@@ -599,7 +610,14 @@ export default function SocialStudio() {
           </div>
         );
     }
-  };
+  })();
+
+  return (
+    <SlideEditContext.Provider value={{ editing, isStory, updateSlide }}>
+      {slideElement}
+    </SlideEditContext.Provider>
+  );
+};
 
   // ==========================================================================
   // LOGIN SCREEN
