@@ -399,7 +399,7 @@ export default function SocialStudio() {
       const logoText = slide.logoText ?? 'LINK2DIGITAL';
       return (
         <div
-          className={`inline-flex items-center bg-black text-white rounded-full shrink-0 ${
+          className={`inline-flex items-center bg-black text-white rounded-full shrink-0 w-fit ${
             isSmall ? 'gap-1 px-2 py-1' : 'gap-2 px-3 py-1.5'
           }`}
         >
