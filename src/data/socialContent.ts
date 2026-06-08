@@ -34,6 +34,13 @@ export const ANGLES: { id: Angle; label: string; emoji: string }[] = [
 export interface Slide {
   title: string;
   text: string;
+  cta?: string;
+  tag?: string;
+  tag2?: string;
+  subTitle?: string;
+  logoText?: string;
+  number?: string;
+  pageLabel?: string;
 }
 
 export interface Post {

@@ -96,6 +96,66 @@ const EditableText = React.memo(({ text, className }: { text: string; className:
 });
 EditableText.displayName = 'EditableText';
 
+const EditableTag = React.memo(({
+  text,
+  className,
+  field,
+  style
+}: {
+  text: string;
+  className: string;
+  field: keyof Slide;
+  style?: React.CSSProperties;
+}) => {
+  const ctx = React.useContext(SlideEditContext);
+  if (!ctx) return null;
+  const { editing, updateSlide } = ctx;
+  return !editing ? (
+    <span className={className} style={style}>{text}</span>
+  ) : (
+    <input
+      type="text"
+      value={text}
+      onChange={(e) => updateSlide(field, e.target.value)}
+      className={`${className} bg-white/10 border-b border-[#ccff00] outline-none max-w-[180px] inline-block`}
+      style={style}
+      onClick={(e) => e.stopPropagation()}
+    />
+  );
+});
+EditableTag.displayName = 'EditableTag';
+
+const EditableNumber = React.memo(({
+  text,
+  className,
+  field,
+  label = "BG NUMBER"
+}: {
+  text: string;
+  className: string;
+  field: keyof Slide;
+  label?: string;
+}) => {
+  const ctx = React.useContext(SlideEditContext);
+  if (!ctx) return null;
+  const { editing, updateSlide } = ctx;
+  return !editing ? (
+    <div className={className}>{text}</div>
+  ) : (
+    <div className="absolute top-2 right-12 bg-black/80 text-white p-2 rounded-lg border border-[#ccff00]/40 flex flex-col gap-1 z-50 text-[10px] opacity-100 select-all normal-case font-sans">
+      <span className="text-[9px] text-[#ccff00] font-bold">{label}:</span>
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => updateSlide(field, e.target.value)}
+        className="bg-white/10 border-b border-[#ccff00] outline-none text-sm p-1 font-bold text-center w-20 text-white"
+        onClick={(e) => e.stopPropagation()}
+      />
+    </div>
+  );
+});
+EditableNumber.displayName = 'EditableNumber';
+
 export default function SocialStudio() {
   // === AUTH ===
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -312,37 +372,47 @@ export default function SocialStudio() {
     const titleSize = isSmall ? 'text-2xl' : isStory ? 'text-[2.8rem]' : 'text-[2.6rem]';
     const bodySize = isSmall ? 'text-xs' : 'text-base';
 
-    const CTA = () => (
-      <div className={`px-5 py-2 bg-[#ccff00] text-black rounded-full font-black uppercase tracking-widest flex items-center gap-2 shadow-xl mt-4 self-start ${isSmall ? 'text-[7px]' : 'text-[9px]'}`}>
-        Get Started <ArrowRight size={isSmall ? 8 : 11} />
-      </div>
-    );
+    const CTA = () => {
+      const ctaText = slide.cta ?? 'GET STARTED';
+      return (
+        <div className={`px-5 py-2 bg-[#ccff00] text-black rounded-full font-black uppercase tracking-widest flex items-center gap-2 shadow-xl mt-4 self-start ${isSmall ? 'text-[7px]' : 'text-[9px]'}`}>
+          <EditableTag text={ctaText} className="" field="cta" /> <ArrowRight size={isSmall ? 8 : 11} />
+        </div>
+      );
+    };
 
-    const Branding = () => (
-      <div className="flex flex-col mb-4">
-        <span className="text-[9px] font-black tracking-[0.4em] uppercase opacity-40 leading-none">L2D STUDIO // LEAD GEN</span>
-        <span className="text-[7px] font-black uppercase opacity-20 mt-1 tracking-tight">{post.pillarName.replace('_', ' ')} Framework</span>
-      </div>
-    );
+    const Branding = () => {
+      const subText = slide.subTitle ?? 'L2D STUDIO // LEAD GEN';
+      const tagText = slide.tag ?? `${post.pillarName.replace('_', ' ')} FRAMEWORK`;
+      return (
+        <div className="flex flex-col mb-4">
+          <EditableTag text={subText} className="text-[9px] font-black tracking-[0.4em] uppercase opacity-40 leading-none" field="subTitle" />
+          <EditableTag text={tagText} className="text-[7px] font-black uppercase opacity-20 mt-1 tracking-tight" field="tag" />
+        </div>
+      );
+    };
 
     // LogoPill — IDENTICAL across every single post/story.
     // This is the brand anchor (mai cambiare): pillola nera, dot blu, testo Inter ExtraBold bianco.
     // Lo stesso pill che trovi nell'Header della homepage.
-    const LogoPill = () => (
-      <div
-        className={`inline-flex items-center bg-black text-white rounded-full shrink-0 ${
-          isSmall ? 'gap-1 px-2 py-1' : 'gap-2 px-3 py-1.5'
-        }`}
-      >
-        <span className={`${isSmall ? 'w-2 h-2' : 'w-3 h-3'} rounded-full bg-blue-500 shrink-0`} />
-        <span
-          className={`font-extrabold uppercase leading-none ${isSmall ? 'text-[7px]' : 'text-[11px]'}`}
-          style={{ letterSpacing: '0.02em' }}
+    const LogoPill = () => {
+      const logoText = slide.logoText ?? 'LINK2DIGITAL';
+      return (
+        <div
+          className={`inline-flex items-center bg-black text-white rounded-full shrink-0 ${
+            isSmall ? 'gap-1 px-2 py-1' : 'gap-2 px-3 py-1.5'
+          }`}
         >
-          LINK2DIGITAL
-        </span>
-      </div>
-    );
+          <span className={`${isSmall ? 'w-2 h-2' : 'w-3 h-3'} rounded-full bg-blue-500 shrink-0`} />
+          <EditableTag
+            text={logoText}
+            className={`font-extrabold uppercase leading-none ${isSmall ? 'text-[7px]' : 'text-[11px]'}`}
+            field="logoText"
+            style={{ letterSpacing: '0.02em' }}
+          />
+        </div>
+      );
+    };
     // Backward-compat alias so variant code can still call <Wordmark /> without rewriting all 16
     const Wordmark = ({ light = false }: { light?: boolean }) => <LogoPill />;
 
@@ -366,7 +436,7 @@ export default function SocialStudio() {
       case 2: // Big ghost number
         return (
           <div className="absolute inset-0 p-10 flex flex-col justify-between text-black bg-[#d1d9cf]">
-            <div className="absolute -top-10 -right-10 text-[20rem] font-syne font-black opacity-[0.05] leading-none select-none">0{slideIdx + 1}</div>
+            <EditableNumber text={slide.number ?? `0${slideIdx + 1}`} className="absolute -top-10 -right-10 text-[20rem] font-syne font-black opacity-[0.05] leading-none select-none" field="number" label="BG NUMBER" />
             <div className="z-10">
               <Branding />
               <EditableTitle text={slide.title} className={`${titleSize} font-syne font-black uppercase leading-none tracking-tighter mb-6`} />
@@ -419,7 +489,7 @@ export default function SocialStudio() {
       case 6: // Pill header
         return (
           <div className="absolute inset-0 p-10 bg-[#d1d9cf] flex flex-col gap-8">
-            <div className="flex items-center justify-between"><Wordmark /><span className="text-[9px] font-black opacity-30">0{slideIdx + 1}/{post.slides.length}</span></div>
+            <div className="flex items-center justify-between"><Wordmark /><EditableTag text={slide.pageLabel ?? `0${slideIdx + 1}/${post.slides.length}`} className="text-[9px] font-black opacity-30" field="pageLabel" /></div>
             <div className="bg-black text-white px-8 py-5 rounded-[25px] shadow-2xl">
               <EditableTitle text={slide.title} className="text-[1.8rem] font-syne font-black uppercase leading-tight tracking-tighter" />
             </div>
@@ -434,7 +504,7 @@ export default function SocialStudio() {
           <div className="absolute inset-0 p-10 bg-[#d1d9cf] flex flex-col justify-end">
             <Wordmark />
             <div className="flex flex-col gap-4 border-l-4 border-[#ccff00] pl-6 mt-auto">
-              <span className="text-[9px] font-black uppercase tracking-widest opacity-20">Performance Design</span>
+              <EditableTag text={slide.tag ?? 'Performance Design'} className="text-[9px] font-black uppercase tracking-widest opacity-20" field="tag" />
               <EditableTitle text={slide.title} className="text-[2.4rem] font-syne font-black uppercase leading-none tracking-tighter" />
               <EditableText text={slide.text} className="text-sm font-bold opacity-60 leading-tight max-w-[85%]" />
               <CTA />
@@ -449,7 +519,7 @@ export default function SocialStudio() {
               <div className="w-2 h-2 bg-black rounded-full" />
             </div>
             <div className="flex-1 bg-[#1a1a1a] rounded-[28px] p-7 flex flex-col justify-between text-white shadow-2xl border-2 border-[#ccff00]/20">
-              <span className="text-[8px] font-black tracking-widest opacity-40 uppercase text-[#ccff00]">{post.pillarName.replace('_', ' ')}</span>
+              <EditableTag text={slide.tag ?? post.pillarName.replace('_', ' ')} className="text-[8px] font-black tracking-widest opacity-40 uppercase text-[#ccff00]" field="tag" />
               <div>
                 <EditableTitle text={slide.title} className="font-syne uppercase leading-none mb-4" />
                 <EditableText text={slide.text} className="text-sm font-bold opacity-60 leading-snug" />
@@ -461,7 +531,7 @@ export default function SocialStudio() {
       case 9: // Big quote with marks
         return (
           <div className="absolute inset-0 p-10 bg-[#d1d9cf] flex flex-col justify-between">
-            <div className="flex justify-between"><Wordmark /><span className="text-[9px] font-black opacity-30">{post.angleLabel}</span></div>
+            <div className="flex justify-between"><Wordmark /><EditableTag text={slide.tag ?? post.angleLabel} className="text-[9px] font-black opacity-30" field="tag" /></div>
             <div className="relative">
               <span className="absolute -top-12 -left-2 text-[12rem] font-syne font-black opacity-10 leading-none select-none">"</span>
               <EditableTitle text={slide.title} className="text-[2.4rem] font-syne font-black uppercase leading-none tracking-tighter mb-6 relative z-10" />
@@ -469,7 +539,7 @@ export default function SocialStudio() {
             </div>
             <div className="flex justify-between items-end">
               <CTA />
-              <span className="text-[9px] font-black opacity-30">#{slideIdx + 1}</span>
+              <EditableTag text={slide.pageLabel ?? `#${slideIdx + 1}`} className="text-[9px] font-black opacity-30" field="pageLabel" />
             </div>
           </div>
         );
@@ -477,7 +547,9 @@ export default function SocialStudio() {
         return (
           <div className="absolute inset-0 p-10 bg-[#d1d9cf] flex flex-col justify-between border-[8px] border-black/10">
             <div className="flex justify-between items-start">
-              <div className="px-3 py-1 bg-black text-[#ccff00] rounded-full text-[8px] font-black uppercase tracking-widest">{post.pillarName.replace('_', ' ')}</div>
+              <div className="px-3 py-1 bg-black text-[#ccff00] rounded-full text-[8px] font-black uppercase tracking-widest">
+                <EditableTag text={slide.tag ?? post.pillarName.replace('_', ' ')} className="" field="tag" />
+              </div>
               <Wordmark />
             </div>
             <div>
@@ -486,7 +558,7 @@ export default function SocialStudio() {
             </div>
             <div className="flex justify-between items-end">
               <CTA />
-              <span className="text-[9px] font-black opacity-30">SLIDE {slideIdx + 1}</span>
+              <EditableTag text={slide.pageLabel ?? `SLIDE ${slideIdx + 1}`} className="text-[9px] font-black opacity-30" field="pageLabel" />
             </div>
           </div>
         );
@@ -511,7 +583,7 @@ export default function SocialStudio() {
             </div>
             <div className="flex-1 px-10 pb-10 pt-5 bg-[#1a1a1a] text-white flex flex-col justify-between">
               <div>
-                <div className="text-[6rem] font-syne text-[#ccff00] leading-none tracking-tight mb-2">0{slideIdx + 1}</div>
+                <EditableNumber text={slide.number ?? `0${slideIdx + 1}`} className="text-[6rem] font-syne text-[#ccff00] leading-none tracking-tight mb-2" field="number" label="STAT" />
                 <EditableTitle text={slide.title} className="font-syne uppercase leading-none mb-3" />
                 <EditableText text={slide.text} className="text-sm font-bold opacity-60 leading-snug max-w-[90%]" />
               </div>
@@ -524,15 +596,15 @@ export default function SocialStudio() {
           <div className="absolute inset-0 bg-[#d1d9cf] p-6 flex flex-col gap-3">
             <div className="bg-white rounded-[24px] p-5 flex justify-between items-center shadow-sm">
               <Wordmark />
-              <span className="text-[9px] font-black uppercase tracking-widest opacity-40">{post.angleLabel}</span>
+              <EditableTag text={slide.tag ?? post.angleLabel} className="text-[9px] font-black uppercase tracking-widest opacity-40" field="tag" />
             </div>
             <div className="flex-1 bg-black rounded-[28px] p-7 flex flex-col justify-between text-white">
-              <span className="text-[9px] font-black uppercase tracking-widest text-[#ccff00]">{post.pillarName.replace('_', ' ')}</span>
+              <EditableTag text={slide.tag2 ?? post.pillarName.replace('_', ' ')} className="text-[9px] font-black uppercase tracking-widest text-[#ccff00]" field="tag2" />
               <EditableTitle text={slide.title} className="text-[2.2rem] font-syne font-black uppercase leading-none tracking-tighter" />
               <EditableText text={slide.text} className="text-sm font-bold opacity-60 leading-snug max-w-[90%]" />
             </div>
             <div className="bg-[#ccff00] rounded-[20px] p-4 flex justify-between items-center text-black">
-              <span className="text-[10px] font-black uppercase tracking-widest">Get Started</span>
+              <EditableTag text={slide.cta ?? 'GET STARTED'} className="text-[10px] font-black uppercase tracking-widest" field="cta" />
               <ArrowRight size={16} />
             </div>
           </div>
@@ -542,10 +614,10 @@ export default function SocialStudio() {
           <div className="absolute inset-0 bg-[#d1d9cf] p-10 flex flex-col justify-between">
             <div className="flex justify-between items-start">
               <Wordmark />
-              <span className="text-[9px] font-black uppercase opacity-30">0{slideIdx + 1}</span>
+              <EditableTag text={slide.pageLabel ?? `0${slideIdx + 1}`} className="text-[9px] font-black uppercase opacity-30" field="pageLabel" />
             </div>
             <div>
-              <span className="text-[9px] font-black uppercase tracking-[0.4em] opacity-40 block mb-4">{post.pillarName.replace('_', ' ')}</span>
+              <EditableTag text={slide.tag ?? post.pillarName.replace('_', ' ')} className="text-[9px] font-black uppercase tracking-[0.4em] opacity-40 block mb-4" field="tag" />
               <EditableTitle text={slide.title} className="text-[3.6rem] font-syne font-black uppercase leading-none tracking-tighter mb-6" />
               <EditableText text={slide.text} className="text-lg font-bold opacity-60 leading-snug max-w-[90%]" />
             </div>
@@ -560,7 +632,7 @@ export default function SocialStudio() {
           <div className="absolute inset-0 flex flex-col">
             <div className="bg-[#d1d9cf] px-10 pt-8 pb-5 flex justify-between items-center">
               <Wordmark />
-              <span className="text-[9px] font-black uppercase tracking-widest text-black/40">LIVE</span>
+              <EditableTag text={slide.tag ?? 'LIVE'} className="text-[9px] font-black uppercase tracking-widest text-black/40" field="tag" />
             </div>
             <div className="flex-1 bg-[#1a1a1a] px-10 pt-6 pb-10 text-white flex flex-col justify-between">
               <div>
@@ -570,7 +642,7 @@ export default function SocialStudio() {
               </div>
               <div className="flex items-end justify-between">
                 <CTA />
-                <span className="text-[8px] font-black uppercase tracking-widest opacity-40">SLIDE {slideIdx + 1} / {post.slides.length}</span>
+                <EditableTag text={slide.pageLabel ?? `SLIDE ${slideIdx + 1} / ${post.slides.length}`} className="text-[8px] font-black uppercase tracking-widest opacity-40" field="pageLabel" />
               </div>
             </div>
           </div>
@@ -580,7 +652,7 @@ export default function SocialStudio() {
           <div className="absolute inset-0 p-10 flex flex-col justify-between text-black bg-[#d1d9cf]">
             <div className="flex justify-between items-start z-20">
               <Branding />
-              <span className="font-black text-[10px] opacity-40">0{slideIdx + 1}</span>
+              <EditableTag text={slide.pageLabel ?? `0${slideIdx + 1}`} className="font-black text-[10px] opacity-40" field="pageLabel" />
             </div>
             <div className="flex flex-col flex-1 justify-center gap-0 mt-4 mb-4 relative">
               <div className="relative z-10">
