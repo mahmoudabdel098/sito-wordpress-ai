@@ -18,8 +18,8 @@ import { saveAs } from 'file-saver';
 import { toPng } from 'html-to-image';
 
 const INITIAL_COUNT = 320;
-const LS_KEY = 'l2d_social_posts_v5';
-const LS_SEED = 'l2d_social_seed_v5';
+const LS_KEY = 'l2d_social_posts_v6';
+const LS_SEED = 'l2d_social_seed_v6';
 
 const getPillarIcon = (pillar: string, sizeOverride?: number) => {
   const size = sizeOverride ?? 14;
@@ -830,6 +830,244 @@ export default function SocialStudio() {
             </div>
           </div>
         );
+      case 25: // Monospaced Spec Grid
+        return (
+          <div className="absolute inset-0 bg-[#d1d9cf] p-10 flex flex-col justify-between text-black">
+            <div className="flex justify-between items-center">
+              {Wordmark()}
+              <EditableTag text={slide.pageLabel ?? `SPEC 0${slideIdx + 1}`} className="text-[9px] font-mono font-bold opacity-40 uppercase" field="pageLabel" />
+            </div>
+            <div className="my-auto">
+              <EditableTitle text={slide.title} className="text-[2.2rem] font-syne font-black uppercase leading-none tracking-tighter mb-4" />
+              <div className="border-t border-black/20 my-4" />
+              <div className="grid grid-cols-2 gap-4 text-[10px] font-mono">
+                <div>
+                  <span className="opacity-40 block mb-1">FIELD // METADATA</span>
+                  <EditableTag text={slide.tag ?? 'L2D LABS'} className="font-bold uppercase" field="tag" />
+                </div>
+                <div>
+                  <span className="opacity-40 block mb-1">ANGLE // ANGLE</span>
+                  <EditableTag text={slide.tag2 ?? post.angleLabel} className="font-bold uppercase" field="tag2" />
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-between items-end">
+              <EditableText text={slide.text} className="text-xs font-mono opacity-60 leading-normal max-w-[75%]" />
+              {CTA()}
+            </div>
+          </div>
+        );
+      case 26: // Left Bracket Frame
+        return (
+          <div className="absolute inset-0 bg-[#d1d9cf] p-10 flex flex-col justify-between text-black">
+            <div className="flex justify-between items-center">
+              {Wordmark()}
+              <EditableTag text={slide.pageLabel ?? `#0${slideIdx + 1}`} className="text-[9px] font-black opacity-30" field="pageLabel" />
+            </div>
+            <div className="flex-1 my-6 flex flex-col justify-center relative pl-6">
+              <div className="absolute left-0 top-0 bottom-0 w-1.5 border-l-2 border-t-2 border-b-2 border-black" />
+              <EditableTitle text={slide.title} className="text-[2.2rem] font-syne font-black uppercase leading-none tracking-tighter mb-3" />
+              <EditableTag text={slide.tag ?? post.pillarName.replace('_', ' ')} className="text-[8px] font-black uppercase tracking-widest text-black/40 mb-2" field="tag" />
+              <EditableText text={slide.text} className="text-sm font-bold opacity-60 leading-snug" />
+            </div>
+            <div>
+              {CTA()}
+            </div>
+          </div>
+        );
+      case 27: // Highlighted Step Card
+        return (
+          <div className="absolute inset-0 bg-[#d1d9cf] p-10 flex flex-col justify-between text-black">
+            <div className="flex justify-between items-center">
+              {Wordmark()}
+              <div className="px-3 py-1 bg-black text-[#ccff00] text-[8px] font-black tracking-widest uppercase rounded-full">
+                <EditableTag text={slide.pageLabel ?? `STEP 0${slideIdx + 1}`} className="" field="pageLabel" />
+              </div>
+            </div>
+            <div className="grid grid-cols-5 gap-6 my-auto items-center">
+              <div className="col-span-3">
+                <EditableTitle text={slide.title} className="text-[2rem] font-syne font-black uppercase leading-none tracking-tighter" />
+              </div>
+              <div className="col-span-2 border-l border-black/10 pl-4">
+                <EditableText text={slide.text} className="text-xs font-bold opacity-60 leading-snug" />
+              </div>
+            </div>
+            <div className="flex justify-between items-center">
+              <EditableTag text={slide.tag ?? 'L2D STRATEGY'} className="text-[8px] font-black tracking-widest opacity-30 uppercase" field="tag" />
+              {CTA()}
+            </div>
+          </div>
+        );
+      case 28: // Minimalist Quotation Accent
+        return (
+          <div className="absolute inset-0 bg-[#d1d9cf] p-10 flex flex-col justify-between text-black">
+            <div className="flex justify-between items-center">
+              {Wordmark()}
+              <EditableTag text={slide.tag ?? 'EDITORIAL'} className="text-[9px] font-black tracking-widest opacity-30 uppercase" field="tag" />
+            </div>
+            <div className="my-auto flex flex-col items-start relative pl-8 border-b-4 border-black pb-8">
+              <span className="absolute left-0 -top-6 text-[6rem] font-syne font-black opacity-10 select-none">“</span>
+              <EditableTitle text={slide.title} className="text-[2.2rem] font-syne font-black uppercase leading-none tracking-tighter mb-4" />
+              <EditableText text={slide.text} className="text-sm font-bold opacity-60 leading-snug max-w-[90%]" />
+            </div>
+            <div className="flex justify-between items-center">
+              {CTA()}
+              <EditableTag text={slide.pageLabel ?? `0${slideIdx + 1}/${post.slides.length}`} className="text-[9px] font-black opacity-30" field="pageLabel" />
+            </div>
+          </div>
+        );
+      case 29: // Duotone Split Column
+        return (
+          <div className="absolute inset-0 flex">
+            <div className="w-[45%] bg-[#1a1a1a] text-white p-10 flex flex-col justify-between">
+              {Wordmark()}
+              <div>
+                <EditableTag text={slide.tag ?? post.pillarName.replace('_', ' ')} className="text-[8px] font-black tracking-widest opacity-40 uppercase text-[#ccff00] block mb-2" field="tag" />
+                <EditableTitle text={slide.title} className="text-[2rem] font-syne font-black uppercase leading-none tracking-tighter" />
+              </div>
+              <EditableTag text={slide.pageLabel ?? `0${slideIdx + 1}`} className="text-[10px] font-black opacity-30" field="pageLabel" />
+            </div>
+            <div className="flex-1 bg-[#d1d9cf] text-black p-10 flex flex-col justify-between">
+              <EditableTag text={slide.tag2 ?? 'LEAD GEN'} className="text-[8px] font-black tracking-widest opacity-30 uppercase self-end" field="tag2" />
+              <div className="my-auto">
+                <EditableText text={slide.text} className="text-sm font-bold opacity-60 leading-snug max-w-[90%] mb-4" />
+                {CTA()}
+              </div>
+              <div className="w-4 h-4 rounded-full bg-black/10 self-end" />
+            </div>
+          </div>
+        );
+      case 30: // Terminal Console Mock
+        return (
+          <div className="absolute inset-0 bg-[#1a1a1a] text-white p-10 flex flex-col justify-between border-[8px] border-white/5">
+            <div className="flex justify-between items-center border-b border-white/10 pb-4">
+              <div className="flex gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+              </div>
+              <span className="text-[9px] font-mono opacity-40">l2d-terminal // sh</span>
+            </div>
+            <div className="my-auto font-mono text-[11px] space-y-3">
+              <div>
+                <span className="text-[#ccff00] font-bold">&gt;&gt; const</span> <span className="text-white font-bold">title</span> = <span className="text-white/70">"</span>
+                <EditableTag text={slide.title} className="text-[#ccff00] font-black uppercase tracking-tight bg-white/5 px-1 inline-block" field="title" />
+                <span className="text-white/70">";</span>
+              </div>
+              <div>
+                <span className="text-[#ccff00] font-bold">&gt;&gt; const</span> <span className="text-white font-bold">description</span> = <span className="text-white/70">"</span>
+                <EditableTag text={slide.text} className="text-white/80 bg-white/5 px-1 inline-block whitespace-normal max-w-full" field="text" />
+                <span className="text-white/70">";</span>
+              </div>
+            </div>
+            <div className="flex justify-between items-end border-t border-white/10 pt-4">
+              {Wordmark()}
+              <EditableTag text={slide.pageLabel ?? `RUN v0.${slideIdx + 1}`} className="text-[9px] font-mono text-[#ccff00]" field="pageLabel" />
+            </div>
+          </div>
+        );
+      case 31: // Floating Glass Panel Overlay
+        return (
+          <div className="absolute inset-0 bg-[#141414] p-8 flex flex-col justify-between text-white overflow-hidden relative">
+            {/* Background Grid Overlay */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none" />
+            <div className="z-10 flex justify-between items-center">
+              {Wordmark()}
+              <EditableTag text={slide.tag ?? 'SYSTEM'} className="text-[8px] font-black tracking-widest opacity-40 uppercase text-[#ccff00]" field="tag" />
+            </div>
+            <div className="z-10 bg-white/5 backdrop-blur-md rounded-[24px] border border-white/10 p-6 my-auto shadow-2xl relative">
+              <div className="absolute -top-3 -left-3 w-6 h-6 border-l-2 border-t-2 border-[#ccff00]" />
+              <div className="absolute -bottom-3 -right-3 w-6 h-6 border-r-2 border-b-2 border-[#ccff00]" />
+              <EditableTitle text={slide.title} className="text-[1.8rem] font-syne font-black uppercase leading-none tracking-tighter mb-4" />
+              <EditableText text={slide.text} className="text-xs font-bold opacity-60 leading-snug" />
+            </div>
+            <div className="z-10 flex justify-between items-end">
+              {CTA()}
+              <EditableTag text={slide.pageLabel ?? `0${slideIdx + 1}`} className="text-[9px] font-black opacity-30" field="pageLabel" />
+            </div>
+          </div>
+        );
+      case 32: // Asymmetrical Bold Sidebar
+        return (
+          <div className="absolute inset-0 bg-[#d1d9cf] p-10 flex justify-between text-black">
+            {/* Left sidebar with rotated text */}
+            <div className="w-12 border-r border-black/20 flex flex-col justify-between items-center pb-4 pr-4">
+              <span className="w-2.5 h-2.5 rounded-full bg-black shrink-0" />
+              <div className="-rotate-90 origin-center my-auto whitespace-nowrap text-[9px] font-black uppercase tracking-[0.4em] opacity-40 translate-y-4">
+                <EditableTag text={slide.tag ?? post.pillarName.replace('_', ' ')} className="" field="tag" />
+              </div>
+              <EditableTag text={slide.pageLabel ?? `P.0${slideIdx + 1}`} className="text-[9px] font-mono font-bold opacity-30" field="pageLabel" />
+            </div>
+            {/* Right stack */}
+            <div className="flex-1 pl-8 flex flex-col justify-between">
+              <div>
+                {Wordmark()}
+              </div>
+              <div className="my-auto">
+                <EditableTitle text={slide.title} className="text-[2.2rem] font-syne font-black uppercase leading-none tracking-tighter mb-4" />
+                <EditableText text={slide.text} className="text-sm font-bold opacity-60 leading-snug" />
+              </div>
+              <div>
+                {CTA()}
+              </div>
+            </div>
+          </div>
+        );
+      case 33: // Diagonal Chevron Split
+        return (
+          <div className="absolute inset-0 bg-[#1a1a1a] flex flex-col justify-between text-white overflow-hidden p-10">
+            {/* Chevron split background */}
+            <div className="absolute inset-0 z-0 pointer-events-none opacity-15">
+              <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <polygon points="0,0 100,0 80,100 0,100" fill="#ccff00" />
+              </svg>
+            </div>
+            <div className="z-10 flex justify-between items-center">
+              {Wordmark()}
+              <EditableTag text={slide.tag ?? 'L2D ANGLE'} className="text-[8px] font-black tracking-widest opacity-40 uppercase text-[#ccff00]" field="tag" />
+            </div>
+            <div className="z-10 my-auto">
+              <EditableTitle text={slide.title} className="text-[2.6rem] font-syne font-black uppercase leading-[0.95] tracking-tighter mb-6" />
+              <div className="bg-white/5 border border-white/10 p-5 rounded-2xl backdrop-blur-sm">
+                <EditableText text={slide.text} className="text-sm font-bold opacity-60 leading-snug" />
+              </div>
+            </div>
+            <div className="z-10 flex justify-between items-end">
+              {CTA()}
+              <EditableTag text={slide.pageLabel ?? `SLIDE 0${slideIdx + 1}`} className="text-[9px] font-black opacity-30" field="pageLabel" />
+            </div>
+          </div>
+        );
+      case 34: // Clean Outlined Grid Cards
+        return (
+          <div className="absolute inset-0 bg-[#d1d9cf] p-10 flex flex-col justify-between text-black">
+            <div className="flex justify-between items-center">
+              {Wordmark()}
+              <EditableTag text={slide.pageLabel ?? `0${slideIdx + 1}`} className="text-[9px] font-black opacity-30" field="pageLabel" />
+            </div>
+            <div className="my-auto">
+              <EditableTitle text={slide.title} className="text-[1.8rem] font-syne font-black uppercase leading-none tracking-tighter mb-4 text-center" />
+              <div className="grid grid-cols-3 gap-2">
+                <div className="border border-black/10 rounded-xl p-3 bg-white/20">
+                  <span className="text-[8px] font-black block opacity-40 mb-1">01 / CONCEPT</span>
+                  <EditableTag text={slide.tag ?? 'RESEARCH'} className="text-[9px] font-black uppercase" field="tag" />
+                </div>
+                <div className="border border-black/10 rounded-xl p-3 bg-white/20">
+                  <span className="text-[8px] font-black block opacity-40 mb-1">02 / PILLAR</span>
+                  <EditableTag text={slide.tag2 ?? post.pillarName.replace('_', ' ')} className="text-[9px] font-black uppercase" field="tag2" />
+                </div>
+                <div className="border border-black/10 rounded-xl p-3 bg-[#ccff00]/10 border-[#ccff00]/30">
+                  <span className="text-[8px] font-black block opacity-60 mb-1 text-black/70">03 / GOAL</span>
+                  <EditableTag text={slide.cta ?? 'CONVERT'} className="text-[9px] font-black uppercase text-black" field="cta" />
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-between items-end mt-4">
+              <EditableText text={slide.text} className="text-xs font-bold opacity-60 leading-tight max-w-[80%]" />
+              {CTA()}
+            </div>
+          </div>
+        );
       default: // 0 — flagship Cinematic look
         return (
           <div className="absolute inset-0 p-10 flex flex-col justify-between text-black bg-[#d1d9cf]">
@@ -1256,9 +1494,9 @@ export default function SocialStudio() {
           <div className="bg-white border-b border-black/5 px-6 py-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 z-40 overflow-x-auto no-scrollbar">
             <div className="flex items-center gap-4 shrink-0">
               <div className="flex flex-col">
-                <span className="text-[8px] font-black opacity-30 uppercase tracking-widest leading-none mb-1.5">Layout Variant ({selectedPost.styleVariant + 1}/25)</span>
+                <span className="text-[8px] font-black opacity-30 uppercase tracking-widest leading-none mb-1.5">Layout Variant ({selectedPost.styleVariant + 1}/35)</span>
                 <div className="flex gap-1.5 flex-wrap">
-                  {Array.from({ length: 25 }, (_, v) => (
+                  {Array.from({ length: 35 }, (_, v) => (
                     <button
                       key={v}
                       onClick={() => updateStyleVariant(v)}
