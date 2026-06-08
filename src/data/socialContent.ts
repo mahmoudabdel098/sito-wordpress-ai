@@ -620,6 +620,209 @@ function mulberry32(seed: number): () => number {
   };
 }
 
+const customSource = [
+  {
+    category: "Problemi comuni dei siti web",
+    tag: "PROBLEMI SITO",
+    angle: "NO_CONVERSION" as Angle,
+    pillar: "PROBLEM_SOLUTION" as Pillar,
+    text: "Molti siti web sono obsoleti o lenti, allontanando potenziali clienti ogni giorno.",
+    cta: "SCOPRI COME",
+    phrases: [
+      "Il tuo sito è fermo al 2018? Probabilmente stai perdendo clienti ogni giorno.",
+      "Un sito lento può far scappare oltre la metà dei visitatori.",
+      "Se il tuo sito non funziona bene da smartphone, stai perdendo opportunità.",
+      "Un design datato trasmette poca fiducia ai nuovi clienti.",
+      "Quanti clienti ti contattano realmente dal tuo sito?",
+      "Il tuo sito è bello ma non genera richieste? C'è qualcosa da migliorare.",
+      "Un sito web dovrebbe lavorare per te 24 ore su 24.",
+      "Se il tuo concorrente ha un sito migliore, parte già avvantaggiato.",
+      "Hai un sito ma non lo aggiorni da anni?",
+      "Un sito web non è una spesa: è un investimento."
+    ]
+  },
+  {
+    category: "Restyling sito web",
+    tag: "RESTYLING SITO",
+    angle: "OLD_SITE" as Angle,
+    pillar: "HOW_TO" as Pillar,
+    text: "Un restyling completo migliora la velocità, il design e la capacità di convertire visite in clienti.",
+    cta: "RESTYLING",
+    phrases: [
+      "Prima e dopo: ecco cosa può fare un restyling professionale.",
+      "Quando è il momento giusto per rifare un sito web?",
+      "5 segnali che indicano che il tuo sito ha bisogno di un restyling.",
+      "Un nuovo design può aumentare le richieste di contatto.",
+      "Restyling non significa solo grafica: significa risultati.",
+      "Il tuo sito rappresenta davvero la tua azienda?",
+      "Un layout moderno aumenta la credibilità del tuo brand.",
+      "Aggiornare il sito può migliorare l'esperienza utente.",
+      "Hai cambiato servizi ma il sito è rimasto uguale?",
+      "Un sito aggiornato trasmette professionalità."
+    ]
+  },
+  {
+    category: "Nuovo sito web",
+    tag: "NUOVO SITO",
+    angle: "NO_SITE" as Angle,
+    pillar: "AUTHORITY" as Pillar,
+    text: "Portiamo la tua attività online con un sito veloce, sicuro e pronto a farti trovare su Google.",
+    cta: "INIZIA ORA",
+    phrases: [
+      "Non hai ancora un sito? I tuoi clienti ti stanno cercando online.",
+      "Essere presenti sui social non basta.",
+      "Il tuo sito è la tua sede digitale.",
+      "Un sito professionale aumenta la fiducia dei clienti.",
+      "Ogni attività dovrebbe avere un sito web dedicato.",
+      "Un sito web ti rende indipendente dai social.",
+      "Costruisci una presenza online che lavori per te.",
+      "Il primo posto dove un cliente ti cerca è Google.",
+      "Un sito web professionale può fare la differenza.",
+      "La tua attività merita una vetrina online efficace."
+    ]
+  },
+  {
+    category: "Domande che generano engagement",
+    tag: "ENGAGEMENT",
+    angle: "BRAND_PERCEPTION" as Angle,
+    pillar: "VIRAL_HOOK" as Pillar,
+    text: "Fai un check-up del tuo sito rispondendo a queste domande chiave sul rendimento.",
+    cta: "FARES CHECK",
+    phrases: [
+      "Quando hai aggiornato il tuo sito per l'ultima volta?",
+      "Il tuo sito genera contatti ogni mese?",
+      "Sei soddisfatto del design del tuo sito attuale?",
+      "Quanto tempo impiega il tuo sito a caricarsi?",
+      "Da smartphone il tuo sito è davvero navigabile?",
+      "Se fossi un cliente, compreresti dal tuo sito?",
+      "Il tuo sito comunica chiaramente cosa fai?",
+      "I tuoi concorrenti hanno una presenza online migliore?",
+      "Hai mai analizzato le prestazioni del tuo sito?",
+      "Cosa vorresti migliorare del tuo sito web?"
+    ]
+  },
+  {
+    category: "Educativi",
+    tag: "EDUCATION",
+    angle: "SLOW_SITE" as Angle,
+    pillar: "EDUCATIONAL" as Pillar,
+    text: "Scopri le regole tecniche e le best practice per ottimizzare l'acquisizione di lead online.",
+    cta: "LEGGI DI PIÙ",
+    phrases: [
+      "Perché un sito veloce converte di più.",
+      "L'importanza della versione mobile.",
+      "Cos'è una landing page e perché serve.",
+      "Perché il design influenza le vendite.",
+      "Le 3 pagine che ogni sito dovrebbe avere.",
+      "Come trasformare visitatori in clienti.",
+      "Perché la SEO è importante.",
+      "Differenza tra un sito vetrina e un e-commerce.",
+      "Perché il modulo contatti è fondamentale.",
+      "Gli errori più comuni nei siti aziendali."
+    ]
+  },
+  {
+    category: "Social proof e fiducia",
+    tag: "RISULTATI & FIDUCIA",
+    angle: "BRAND_PERCEPTION" as Angle,
+    pillar: "TESTIMONIAL" as Pillar,
+    text: "Il nostro metodo mette al centro i tuoi obiettivi di crescita e il valore del tuo brand.",
+    cta: "I NOSTRI SITI",
+    phrases: [
+      "Ogni progetto nasce dalle esigenze del cliente.",
+      "Il nostro obiettivo? Portarti risultati concreti.",
+      "Realizziamo siti pensati per convertire.",
+      "Un buon sito deve essere semplice da usare.",
+      "Ogni attività ha bisogno di una presenza online efficace.",
+      "Progettiamo siti moderni e professionali.",
+      "L'utente è sempre al centro del progetto.",
+      "Creiamo siti che valorizzano il tuo lavoro.",
+      "Design, velocità e semplicità in un unico progetto.",
+      "Un sito professionale migliora la percezione del tuo brand."
+    ]
+  },
+  {
+    category: "Focus attività locali",
+    tag: "BUSINESS LOCALE",
+    angle: "NO_SITE" as Angle,
+    pillar: "EDUCATIONAL" as Pillar,
+    text: "Le ricerche locali su Google guidano oltre l'80% delle visite nei negozi fisici o studi.",
+    cta: "ATTIVITÀ LOCALE",
+    phrases: [
+      "Sei un ristorante? I clienti ti cercano online.",
+      "Sei un idraulico? Un sito può portarti nuovi contatti.",
+      "Sei un elettricista? Mostra i tuoi lavori online.",
+      "Sei un avvocato? Rafforza la tua immagine professionale.",
+      "Sei un architetto? Mostra il tuo portfolio.",
+      "Sei un medico? Facilita i contatti dei pazienti.",
+      "Hai un negozio? Porta i clienti dal web al punto vendita.",
+      "Sei un artigiano? Mostra la qualità del tuo lavoro.",
+      "Hai una palestra? Attira nuovi iscritti online.",
+      "Sei un consulente? Costruisci autorevolezza online."
+    ]
+  },
+  {
+    category: "CTA dirette",
+    tag: "CONSULENZA",
+    angle: "OLD_SITE" as Angle,
+    pillar: "OFFER" as Pillar,
+    text: "Mettiamo alla prova le performance del tuo sito attuale e definiamo un piano d'azione gratuito.",
+    cta: "CONTATTACI",
+    phrases: [
+      "Vuoi sapere se il tuo sito può essere migliorato? Contattaci.",
+      "Richiedi una valutazione gratuita del tuo sito.",
+      "Scopri come possiamo rinnovare la tua presenza online.",
+      "Prenota una consulenza gratuita.",
+      "Richiedi una demo senza impegno.",
+      "Vuoi un sito moderno e professionale?",
+      "Facciamo crescere la tua presenza online.",
+      "Hai un progetto in mente? Parliamone.",
+      "Il tuo prossimo cliente potrebbe cercarti oggi.",
+      "Inizia oggi il tuo nuovo progetto web."
+    ]
+  },
+  {
+    category: "Post impattanti",
+    tag: "CRESCITA WEB",
+    angle: "BRAND_PERCEPTION" as Angle,
+    pillar: "VIRAL_HOOK" as Pillar,
+    text: "Il web è la prima porta d'accesso al tuo business. Non lasciare che i dettagli frenino la crescita.",
+    cta: "VALUTA ORA",
+    phrases: [
+      "Il tuo sito lavora per te o contro di te?",
+      "Non perdere clienti per colpa di un sito obsoleto.",
+      "La prima impressione online conta.",
+      "Un sito professionale può fare la differenza tra un contatto e una visita persa.",
+      "I clienti giudicano la tua azienda in pochi secondi.",
+      "Un sito moderno aumenta la fiducia.",
+      "Non lasciare che siano i concorrenti a distinguersi.",
+      "La tua attività merita una presenza online all'altezza.",
+      "Un sito web efficace è il miglior venditore della tua azienda.",
+      "Investire nel web significa investire nel futuro."
+    ]
+  },
+  {
+    category: "Offerte e lead generation",
+    tag: "LEAD GEN",
+    angle: "NO_CONVERSION" as Angle,
+    pillar: "OFFER" as Pillar,
+    text: "Richiedi un check gratuito o una proposta di restyling senza impegno per valutare i margini di crescita.",
+    cta: "AUDIT GRATUITO",
+    phrases: [
+      "Analisi gratuita del tuo sito web.",
+      "Demo gratuita di restyling del tuo sito.",
+      "Scopri come potrebbe apparire il tuo nuovo sito.",
+      "Consulenza gratuita per la tua presenza online.",
+      "Ricevi suggerimenti personalizzati per il tuo sito.",
+      "Valutiamo insieme le opportunità di miglioramento.",
+      "Richiedi una proposta senza impegno.",
+      "Mostriamo gratuitamente alcune idee per il tuo sito.",
+      "Trasforma il tuo sito in uno strumento di acquisizione clienti.",
+      "Contattaci e scopri come migliorare la tua presenza online."
+    ]
+  }
+];
+
 export const generatePosts = (countOrOpts: number | GenerateOptions = 300): Post[] => {
   const opts: GenerateOptions = typeof countOrOpts === 'number' ? { count: countOrOpts } : countOrOpts;
   const count = opts.count ?? 300;
@@ -628,15 +831,57 @@ export const generatePosts = (countOrOpts: number | GenerateOptions = 300): Post
   const formatPref = opts.format;
   const rng = mulberry32(seed);
 
+  // 1. Build the 100 custom posts
+  const customPosts: Post[] = [];
+  let customId = 1;
+  for (const group of customSource) {
+    const angleLabel = ANGLES.find((a) => a.id === group.angle)?.label ?? group.category;
+    for (const phrase of group.phrases) {
+      const styleVariant = (customId - 1) % 16;
+      const format: PostFormat = formatPref ?? 'POST';
+      
+      const slide: Slide = {
+        title: phrase,
+        text: group.text,
+        cta: group.cta,
+        tag: group.tag,
+        subTitle: 'L2D STUDIO // LEAD GEN',
+        logoText: 'LINK2DIGITAL'
+      };
+
+      customPosts.push({
+        id: customId,
+        day: `Post ${customId}`,
+        angle: group.angle,
+        angleLabel,
+        pillarName: group.pillar,
+        styleVariant,
+        format,
+        slides: [slide],
+        caption: `${phrase}\n\n${group.text}\n\n👉 Scrivimi in DM per maggiori dettagli.\n\n#Link2Digital #WebDesign #SitiWeb #Restyling`,
+        hashtags: '#Link2Digital #WebDesign #SitiWeb #Restyling',
+        status: 'READY'
+      });
+      customId += 1;
+    }
+  }
+
+  // Filter custom posts by UI parameters
+  const allPosts: Post[] = customPosts.filter((p) => {
+    if (angleFilter && p.angle !== angleFilter) return false;
+    if (formatPref && p.format !== formatPref) return false;
+    return true;
+  });
+
+  // 2. Generate the dynamic posts up to count
   const angleEntries = (Object.keys(content) as Angle[])
     .filter((a) => !angleFilter || a === angleFilter)
     .map((a) => ({ angle: a, pool: content[a] }));
 
-  const allPosts: Post[] = [];
-  let id = 1;
-
+  let nextId = 101;
   while (allPosts.length < count) {
     const angleEntry = angleEntries[allPosts.length % angleEntries.length];
+    if (!angleEntry) break;
     const { angle, pool } = angleEntry;
     const angleLabel = ANGLES.find((a) => a.id === angle)?.label ?? angle;
 
@@ -657,8 +902,8 @@ export const generatePosts = (countOrOpts: number | GenerateOptions = 300): Post
     const slides = logicTemplates.map((template) => template(title));
 
     allPosts.push({
-      id,
-      day: `Post ${id}`,
+      id: nextId,
+      day: `Post ${nextId}`,
       angle,
       angleLabel,
       pillarName: pillar,
@@ -669,7 +914,7 @@ export const generatePosts = (countOrOpts: number | GenerateOptions = 300): Post
       hashtags: '#Link2Digital #WebDesign #SitiWeb #Restyling',
       status: 'DRAFT'
     });
-    id += 1;
+    nextId += 1;
   }
 
   return allPosts;

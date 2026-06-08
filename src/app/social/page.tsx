@@ -18,8 +18,8 @@ import { saveAs } from 'file-saver';
 import { toPng } from 'html-to-image';
 
 const INITIAL_COUNT = 320;
-const LS_KEY = 'l2d_social_posts_v3';
-const LS_SEED = 'l2d_social_seed_v3';
+const LS_KEY = 'l2d_social_posts_v4';
+const LS_SEED = 'l2d_social_seed_v4';
 
 const getPillarIcon = (pillar: string, sizeOverride?: number) => {
   const size = sizeOverride ?? 14;
