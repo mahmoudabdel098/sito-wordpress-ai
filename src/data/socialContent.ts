@@ -1,579 +1,675 @@
-export const industries = [
-  { id: 'agency', title: 'Link2Digital Agency', tag: 'Web & Growth' },
-  { id: 'immobiliare', title: 'Immobiliare & Real Estate', tag: 'Luxury Homes' },
-  { id: 'agenti', title: 'Agenti Immobiliari', tag: 'Personal Brand' },
-  { id: 'fitness', title: 'Palestre & Fitness', tag: 'Fitness Club' },
-  { id: 'beauty', title: 'Parrucchieri & Beauty', tag: 'Salon & Spa' },
-  { id: 'lusso', title: 'Brand di Lusso', tag: 'Elite Brands' },
-  { id: 'gioielleria', title: 'Gioiellerie', tag: 'Fine Jewelry' },
-  { id: 'pmi', title: 'Brand Generali / PMI', tag: 'Business' }
-];
+// ============================================================================
+// LINK2DIGITAL — Social Studio content engine (v18 — lead-gen first)
+// Goal: acquire clients who want a NEW website, a REDESIGN, or their FIRST site.
+// All content is category-agnostic on purpose.
+// ============================================================================
 
 export type PostStatus = 'DRAFT' | 'READY' | 'PUBLISHED';
+export type PostFormat = 'POST' | 'STORY' | 'REEL_COVER';
 
-export type Pillar = 'PROBLEM_SOLUTION' | 'AUTHORITY' | 'HOW_TO' | 'MISTAKE' | 'CASE_STUDY' | 'EDUCATIONAL' | 'VIRAL_HOOK';
+export type Pillar =
+  | 'PROBLEM_SOLUTION'
+  | 'AUTHORITY'
+  | 'HOW_TO'
+  | 'MISTAKE'
+  | 'CASE_STUDY'
+  | 'EDUCATIONAL'
+  | 'VIRAL_HOOK'
+  | 'TESTIMONIAL'
+  | 'OFFER';
+
+// Editorial angle — the "hook" of the post. Used as a soft filter in the UI.
+export type Angle = 'NO_SITE' | 'OLD_SITE' | 'SLOW_SITE' | 'NO_CONVERSION' | 'BRAND_PERCEPTION' | 'INVISIBLE' | 'DIY_BUILDER';
+
+export const ANGLES: { id: Angle; label: string; emoji: string }[] = [
+  { id: 'NO_SITE',          label: 'Non hai un sito',           emoji: '🚫' },
+  { id: 'OLD_SITE',         label: 'Sito vecchio / da rifare',  emoji: '🪦' },
+  { id: 'SLOW_SITE',        label: 'Sito lento',                emoji: '🐢' },
+  { id: 'NO_CONVERSION',    label: 'Sito che non converte',     emoji: '📉' },
+  { id: 'BRAND_PERCEPTION', label: 'Brand percepito male',      emoji: '😬' },
+  { id: 'INVISIBLE',        label: 'Invisibile online',         emoji: '👻' },
+  { id: 'DIY_BUILDER',      label: 'Wix / Weebly / fai-da-te',  emoji: '🧱' },
+];
+
+export interface Slide {
+  title: string;
+  text: string;
+}
 
 export interface Post {
   id: number;
   day: string;
-  industryId: string;
-  industryTitle: string;
-  industryTag: string;
+  angle: Angle;
+  angleLabel: string;
   pillarName: Pillar;
   styleVariant: number;
-  slides: { title: string; text: string }[];
+  format: PostFormat;
+  slides: Slide[];
   caption: string;
+  hashtags: string;
   status: PostStatus;
 }
 
-// --- HIGH CONVERSION CONTENT (7-SLIDE STRUCTURE) ---
-const highConversionPosts = [
-  {
-    id: "hc-1",
-    pillar: "PROBLEM_SOLUTION",
-    slides: [
-      { title: "Il tuo sito non porta clienti?", text: "Ecco il vero motivo" },
-      { title: "IDENTIFICAZIONE", text: "Hai traffico... ma nessuno ti scrive mai." },
-      { title: "SPIEGAZIONE", text: "Non è un problema di marketing, è un problema di conversione." },
-      { title: "L'ERRORE", text: "Il tuo sito probabilmente non è chiaro, non guida l'utente e non ha CTA." },
-      { title: "LA SOLUZIONE", text: "Un sito deve accompagnare il cliente, non lasciarlo da solo." },
-      { title: "RISULTATO", text: "Trasforma le visite in conversazioni reali." },
-      { title: "SITO", text: "Se vuoi capire cosa non funziona nel tuo sito, scrivimi 'SITO'" }
-    ]
-  },
-  {
-    id: "hc-2",
-    pillar: "AUTHORITY",
-    slides: [
-      { title: "Instagram non basta", text: "Hai Instagram attivo ma pochi clienti?" },
-      { title: "POST, REEL, STORIE...", text: "Molto impegno, ma zero risultati concreti." },
-      { title: "LA VERITÀ", text: "Instagram porta attenzione, ma non conversione." },
-      { title: "L'ERRORE", text: "Senza un sito dietro perdi contatti, fiducia e clienti." },
-      { title: "SOLUZIONE", text: "Serve un punto dove trasformare l'interesse in azione." },
-      { title: "IL SITO", text: "È lì che i follower diventano clienti." },
-      { title: "SCRIVIMI", text: "Vuoi trasformare i follower in clienti? Scrivimi." }
-    ]
-  },
-  {
-    id: "hc-3",
-    pillar: "PROBLEM_SOLUTION",
-    slides: [
-      { title: "Il tuo sito è lento?", text: "Hai già perso il cliente." },
-      { title: "L'IMPATTO", text: "Oggi le persone non aspettano: decidono in pochi secondi." },
-      { title: "IL PROBLEMA", text: "Se il sito non carica subito, escono e non tornano." },
-      { title: "ERRORE", text: "E vanno dritti dal tuo competitor." },
-      { title: "SOLUZIONE", text: "Ottimizzazione tecnica per velocità istantanea." },
-      { title: "RISULTATO", text: "Velocità = Fiducia + Conversione." },
-      { title: "SCRIVIMI", text: "Vuoi sapere se il tuo sito è lento? Scrivimi." }
-    ]
-  },
-  {
-    id: "hc-4",
-    pillar: "AUTHORITY",
-    slides: [
-      { title: "Il sito è il tuo commerciale", text: "Lavora 24 ore su 24 senza pause." },
-      { title: "IDENTIFICAZIONE", text: "Ma solo se è fatto bene e con strategia." },
-      { title: "SPIEGAZIONE", text: "Un buon sito: guida → convince → converte." },
-      { title: "ERRORE", text: "Trattarlo come una semplice vetrina statica." },
-      { title: "SOLUZIONE", text: "Trasformalo in un sistema di vendita attivo." },
-      { title: "RISULTATO", text: "Un dipendente che non dorme mai." },
-      { title: "SCRIVIMI", text: "Vuoi trasformarlo in un commerciale vero? Scrivimi." }
-    ]
-  },
-  {
-    id: "hc-5",
-    pillar: "EDUCATIONAL",
-    slides: [
-      { title: "L'errore nel 90% dei siti", text: "Parlano dell'azienda, non del cliente." },
-      { title: "IDENTIFICAZIONE", text: "'Chi siamo, cosa facciamo'... ma al cliente non interessa." },
-      { title: "SPIEGAZIONE", text: "Il cliente vuole solo sapere: 'Cosa risolvi per me?'." },
-      { title: "ERRORE", text: "Mettere il proprio ego prima dei bisogni dell'utente." },
-      { title: "SOLUZIONE", text: "Riscrivi il sito focalizzandoti sui problemi del cliente." },
-      { title: "RISULTATO", text: "Più chiarezza, più conversioni." },
-      { title: "SCRIVIMI", text: "Vuoi riscrivere il tuo sito in modo efficace? Scrivimi." }
-    ]
-  },
-  {
-    id: "hc-6",
-    pillar: "PROBLEM_SOLUTION",
-    slides: [
-      { title: "Il tuo sito confonde?", text: "Allora non vende." },
-      { title: "IDENTIFICAZIONE", text: "Troppi elementi, troppe informazioni, troppa scelta." },
-      { title: "SPIEGAZIONE", text: "Il cervello si blocca davanti alla complessità e non decide." },
-      { title: "ERRORE", text: "Pensare che 'più roba' significhi 'più valore'." },
-      { title: "SOLUZIONE", text: "Semplifica: 1 obiettivo → 1 azione." },
-      { title: "RISULTATO", text: "Percorso utente pulito e immediato." },
-      { title: "SCRIVIMI", text: "Vuoi semplificare il tuo sito? Scrivimi." }
-    ]
-  },
-  {
-    id: "hc-7",
-    pillar: "AUTHORITY",
-    slides: [
-      { title: "Senza fiducia non vendi", text: "E il tuo sito è il primo test." },
-      { title: "IDENTIFICAZIONE", text: "Le persone giudicano la tua professionalità in 3 secondi." },
-      { title: "SPIEGAZIONE", text: "Se non sembri professionale online, sei fuori dal mercato." },
-      { title: "ERRORE", text: "Design datato o poco curato che trasmette trascuratezza." },
-      { title: "SOLUZIONE", text: "Design pulito, recensioni e messaggi chiari." },
-      { title: "RISULTATO", text: "La fiducia è l'unico acceleratore della conversione." },
-      { title: "SCRIVIMI", text: "Vuoi aumentare la fiducia del tuo sito? Scrivimi." }
-    ]
-  },
-  {
-    id: "hc-8",
-    pillar: "PROBLEM_SOLUTION",
-    slides: [
-      { title: "Traffico inutile", text: "Traffico senza conversione = zero." },
-      { title: "IDENTIFICAZIONE", text: "Puoi avere 1000 visite, ma se nessuno scrive è inutile." },
-      { title: "SPIEGAZIONE", text: "Il problema non è portare gente, ma convertirla." },
-      { title: "ERRORE", text: "Cercare solo visibilità senza avere una strategia dietro." },
-      { title: "SOLUZIONE", text: "Strategia di conversione batte puro traffico." },
-      { title: "RISULTATO", text: "Meno click, più fatturato." },
-      { title: "SCRIVIMI", text: "Vuoi migliorare le conversioni? Scrivimi." }
-    ]
-  },
-  {
-    id: "hc-9",
-    pillar: "EDUCATIONAL",
-    slides: [
-      { title: "Hai solo 3 secondi", text: "Per convincere un nuovo cliente online." },
-      { title: "IDENTIFICAZIONE", text: "Se non capisce subito cosa fai, se ne va per sempre." },
-      { title: "SPIEGAZIONE", text: "La chiarezza immediata è il primo passo della vendita." },
-      { title: "ERRORE", text: "Usare titoli creativi ma vaghi che confondono l'utente." },
-      { title: "SOLUZIONE", text: "Titolo forte + messaggio chiaro + azione immediata." },
-      { title: "RISULTATO", text: "Abbassamento drastico del bounce rate." },
-      { title: "SCRIVIMI", text: "Vuoi migliorare la tua homepage? Scrivimi." }
-    ]
-  },
-  {
-    id: "hc-10",
-    pillar: "PROBLEM_SOLUTION",
-    slides: [
-      { title: "Senza CTA perdi clienti", text: "Se non dici cosa fare, l'utente non lo farà." },
-      { title: "IDENTIFICAZIONE", text: "Moltissimi siti bellissimi non guidano l'azione." },
-      { title: "SPIEGAZIONE", text: "Un sito deve dire: contattami, prenota o richiedi." },
-      { title: "ERRORE", text: "Lasciare che l'utente debba 'indovinare' il prossimo passo." },
-      { title: "SOLUZIONE", text: "Call To Action (CTA) chiare, visibili e strategiche." },
-      { title: "RISULTATO", text: "Guidare = Convertire." },
-      { title: "SCRIVIMI", text: "Vuoi CTA che funzionano davvero? Scrivimi." }
-    ]
-  },
-  {
-    id: "hc-11",
-    pillar: "AUTHORITY",
-    slides: [
-      { title: "Il tuo sito sembra vecchio?", text: "Anche il tuo brand lo sembrerà." },
-      { title: "IDENTIFICAZIONE", text: "Le persone associano il design alla qualità del servizio." },
-      { title: "SPIEGAZIONE", text: "Sito vecchio = azienda vecchia nella mente del cliente." },
-      { title: "ERRORE", text: "Risparmiare sull'immagine digitale danneggiando il brand." },
-      { title: "SOLUZIONE", text: "Aggiornare il design per aggiornare la percezione di valore." },
-      { title: "RISULTATO", text: "Più autorità, prezzi più alti, più fiducia." },
-      { title: "SCRIVIMI", text: "Vuoi un restyling efficace? Scrivimi." }
-    ]
-  },
-  {
-    id: "hc-12",
-    pillar: "EDUCATIONAL",
-    slides: [
-      { title: "Il cliente decide subito", text: "Non legge tutto, scansiona i contenuti." },
-      { title: "IDENTIFICAZIONE", text: "Cerca segnali: fiducia, chiarezza, velocità." },
-      { title: "SPIEGAZIONE", text: "Se non trova questi segnali in 2 secondi, esce." },
-      { title: "ERRORE", text: "Riempire le pagine di testi lunghi e complessi." },
-      { title: "SOLUZIONE", text: "Essere immediati, visivi e diretti al punto." },
-      { title: "RISULTATO", text: "Migliore impatto iniziale e più engagement." },
-      { title: "SCRIVIMI", text: "Vuoi migliorare l'impatto del tuo sito? Scrivimi." }
-    ]
-  },
-  {
-    id: "hc-13",
-    pillar: "AUTHORITY",
-    slides: [
-      { title: "Il sito non è una vetrina", text: "È un sistema di business." },
-      { title: "IDENTIFICAZIONE", text: "Attira → Convince → Converte. Ecco il flusso." },
-      { title: "SPIEGAZIONE", text: "Se manca uno di questi step, l'intero sistema fallisce." },
-      { title: "ERRORE", text: "Focalizzarsi solo sull'estetica ignorando la struttura." },
-      { title: "SOLUZIONE", text: "Costruire un sito strutturato per obiettivi concreti." },
-      { title: "RISULTATO", text: "Un asset digitale che genera profitto costante." },
-      { title: "SCRIVIMI", text: "Vuoi un sito strutturato? Scrivimi." }
-    ]
-  },
-  {
-    id: "hc-14",
-    pillar: "PROBLEM_SOLUTION",
-    slides: [
-      { title: "Il tuo competitor non è migliore", text: "Ha solo un sito migliore di te." },
-      { title: "IDENTIFICAZIONE", text: "Comunica meglio, guida meglio, converte meglio." },
-      { title: "SPIEGAZIONE", text: "Il web premia chi rende la vita facile al cliente." },
-      { title: "ERRORE", text: "Lasciare che la concorrenza prenda i tuoi lead per pigrizia tecnica." },
-      { title: "SOLUZIONE", text: "Superare i competitor con una piattaforma d'élite." },
-      { title: "RISULTATO", text: "Riprenditi la tua quota di mercato." },
-      { title: "SCRIVIMI", text: "Vuoi superare la concorrenza? Scrivimi." }
-    ]
-  },
-  {
-    id: "hc-15",
-    pillar: "VIRAL_HOOK",
-    slides: [
-      { title: "Il sito può farti guadagnare", text: "O farti perdere molti clienti." },
-      { title: "IDENTIFICAZIONE", text: "Dipende tutto da come è stato progettato." },
-      { title: "SPIEGAZIONE", text: "Non è una questione di estetica, è pura strategia." },
-      { title: "ERRORE", text: "Trattare il sito come un costo e non come un investimento." },
-      { title: "SOLUZIONE", text: "Puntare su conversione e velocità tecnica." },
-      { title: "RISULTATO", text: "Un sito che lavora davvero per il tuo successo." },
-      { title: "SCRIVIMI", text: "Se vuoi un sito che lavora davvero, scrivimi." }
-    ]
-  }
-];
+// ============================================================================
+// CONTENT POOL — universal lead-gen titles grouped by angle + pillar
+// ============================================================================
+type AngleContent = Partial<Record<Pillar, string[]>>;
 
-const industryData = {
-  agency: {
+const content: Record<Angle, AngleContent> = {
+  // ----- NON HA ANCORA UN SITO ------------------------------------------------
+  NO_SITE: {
+    PROBLEM_SOLUTION: [
+      'Non hai un sito? Perdi clienti ogni giorno',
+      'Senza sito sei invisibile su Google',
+      'Il passaparola da solo non basta più',
+      'I clienti ti cercano online, ma non ti trovano',
+      'Hai un Instagram ma nessun sito? Errore'
+    ],
     AUTHORITY: [
-      "Il tuo sito non porta clienti? Ecco perché",
-      "Perché il design d'élite non basta più",
-      "Il segreto dei siti che caricano in 1 secondo",
-      "Trasforma il tuo sito nel tuo miglior commerciale"
+      'Un sito è il commerciale che lavora 24/7',
+      'Il sito è il biglietto da visita del 2026',
+      'Avere solo i social è come affittare casa',
+      'Possedere un sito = possedere il tuo brand',
+      'Senza sito non hai un brand digitale'
     ],
     EDUCATIONAL: [
-      "3 Errori che uccidono le tue vendite online",
-      "La guida per una homepage che converte",
-      "Come ottimizzare le immagini per la velocità",
-      "Perché il tuo sito deve parlare al cliente"
-    ],
-    PROBLEM_SOLUTION: [
-      "Sito lento? Stai regalando clienti ai competitor",
-      "Traffico ma zero contatti? C'è un problema di UX",
-      "Il tuo sito sembra vecchio? Ecco come rinnovarlo",
-      "Troppa confusione in home page? Semplifica così"
+      '5 motivi per cui ti serve un sito (anche se piccolo)',
+      'Cosa succede quando un cliente non ti trova online',
+      'Sito vs profili social: la differenza che cambia tutto',
+      'Quanto vale un cliente perso per mancanza di sito?',
+      'Il sito non è un costo, è un asset'
     ],
     VIRAL_HOOK: [
-      "Il web corre, il tuo sito sta ancora camminando?",
-      "Smetti di pagare per siti che non vendono",
-      "La verità sulla SEO che nessuno ti dice"
+      'Sei nel 2026 senza un sito. Davvero?',
+      'Tuo cugino ha un sito. Tu no. Riflettiamoci',
+      'I tuoi competitor hanno tutti un sito. Tu cosa aspetti?',
+      'Non avere un sito oggi è come non avere un numero di telefono'
+    ],
+    CASE_STUDY: [
+      'Da zero sito a 25 lead/mese: storia vera',
+      'Imprenditore senza sito → +40k €/mese in 6 mesi',
+      'Il sito che gli ha cambiato il business in 90 giorni'
+    ],
+    HOW_TO: [
+      'Come partire con un sito senza spendere una follia',
+      'Il primo sito: cosa serve davvero',
+      'Sito da zero in 30 giorni: il piano'
+    ],
+    OFFER: [
+      'Audit gratuito: il sito che ti serve davvero',
+      'Pacchetto Starter: il tuo primo sito professionale',
+      'Sito da zero senza pensieri: parliamone'
     ]
   },
-  immobiliare: {
+
+  // ----- SITO VECCHIO / DA RIFARE --------------------------------------------
+  OLD_SITE: {
+    PROBLEM_SOLUTION: [
+      'Il tuo sito è fermo al 2018?',
+      'Sito vecchio = brand percepito vecchio',
+      'Se il tuo sito sembra datato, perdi credibilità',
+      'Un design vecchio ti costa migliaia di euro l\'anno',
+      'Il tuo sito è una brochure morta?'
+    ],
     AUTHORITY: [
-      "Perché un sito immobiliare moderno deve caricare all'istante",
-      "Il valore della fotografia professionale nel real estate online",
-      "Come l'architettura tecnica del sito influenza la fiducia dell'acquirente",
-      "Perché i portali non bastano più per un'agenzia che vuole crescere"
+      'Un brand serio merita un sito moderno',
+      'Il design del tuo sito parla di te prima di te',
+      'Modernizzare il sito = alzare la percezione del brand',
+      'Il restyling che ti riposiziona nel mercato'
     ],
     EDUCATIONAL: [
-      "3 Consigli per schede immobili più coinvolgenti",
-      "Come usare le mappe interattive per valorizzare la zona",
-      "L'importanza di un design pulito per immobili di lusso",
-      "Come ottimizzare il tuo sito per le ricerche locali"
+      '5 segnali che il tuo sito è da rifare',
+      'Quando rifare il sito da zero invece di toccarlo',
+      'Refresh vs Redesign: cosa scegliere',
+      'Cosa rende un sito moderno nel 2026',
+      'Le tendenze sito 2026 (e quelle da evitare)'
     ],
-    PROBLEM_SOLUTION: [
-      "Sito troppo lento? Ecco come velocizzarlo per non perdere visite",
-      "Poche richieste dal sito? Controlla la chiarezza dei contatti",
-      "Foto che caricano male? La soluzione tecnica è più semplice di quanto pensi",
-      "Come rendere il tuo sito navigabile da smartphone senza errori"
+    MISTAKE: [
+      'Aggiornare il sito a pezzi è uno spreco',
+      "Mettere 'pezze' invece di rifarlo: errore grave",
+      "Pensare che basti cambiare i colori per modernizzarlo"
     ],
     VIRAL_HOOK: [
-      "Il futuro del real estate è digitale: non farti trovare impreparato",
-      "Il tuo sito è lo showroom della tua agenzia, curalo come la tua sede",
-      "Il segreto per vendere casa online? L'esperienza dell'utente"
+      "Il tuo sito sembra di 8 anni fa. E tu?",
+      'Il sito vecchio è un parafulmine di clienti persi',
+      'Quanto tempo ancora aspetterai prima di rifarlo?',
+      'Stai pagando hosting per un sito morto'
+    ],
+    CASE_STUDY: [
+      'Restyling totale: +260% richieste in 90 giorni',
+      'Da sito-museo a sito-macchina di lead',
+      'Brand storico modernizzato: numeri da capogiro'
+    ],
+    OFFER: [
+      'Audit del tuo sito attuale: cosa salvare e cosa rifare',
+      'Restyling completo a prezzo dedicato',
+      'Check-up gratuito + proposta di redesign'
     ]
   },
-  agenti: {
-    AUTHORITY: [
-      "L’agente immobiliare moderno è digitale",
-      "Social + sito = clienti",
-      "Perché senza sito perdi incarichi",
-      "Il personal brand dell’agente immobiliare",
-      "Fiducia online nel real estate"
+
+  // ----- SITO LENTO -----------------------------------------------------------
+  SLOW_SITE: {
+    PROBLEM_SOLUTION: [
+      'Sito lento? Hai già perso il cliente',
+      '3 secondi e il visitatore se ne va',
+      'Velocità sito = fatturato',
+      'Il tuo sito perde la metà del traffico per la velocità',
+      'Caricamento lento = Google ti penalizza'
     ],
     EDUCATIONAL: [
-      "Come un agente può generare contatti online",
-      "Funnel per agenti immobiliari",
-      "Instagram + sito: strategia perfetta",
-      "Landing page personale per agenti",
-      "Come presentarsi online per vendere più case",
-      "Portfolio immobili intelligente",
-      "Come diventare agente “top of mind”",
-      "Come automatizzare richieste clienti",
-      "Strategia contenuti immobiliari",
-      "Come posizionarti nella tua città"
+      'Cosa misura davvero la velocità di un sito',
+      'I 4 killer della velocità (immagini, plugin, hosting, codice)',
+      'PageSpeed: come leggere il punteggio',
+      "L'impatto reale di 1 secondo in più sul fatturato"
     ],
-    PROBLEM_SOLUTION: [
-      "Nessuno ti trova online",
-      "I tuoi clienti non ti ricordano",
-      "Stai lavorando ma non scalando",
-      "Il tuo profilo non converte",
-      "Il problema è la presenza digitale"
+    AUTHORITY: [
+      'I migliori siti del mondo caricano sotto 1 secondo',
+      'Performance non è tecnica: è marketing',
+      'La velocità è il primo segnale di qualità che il cliente nota'
+    ],
+    MISTAKE: [
+      'Pensare che la velocità sia "questione di hosting"',
+      'Caricare immagini da 5 MB nella home',
+      "Installare 27 plugin 'per sicurezza'"
     ],
     VIRAL_HOOK: [
-      "Nessuno te lo dice, ma sei invisibile",
-      "Il tuo concorrente sta prendendo i tuoi incarichi",
-      "Smetti di postare case senza una strategia"
+      'Il tuo sito impiega 6 secondi a caricare. Bye bye clienti',
+      'Mentre il tuo sito carica, il cliente è già dal competitor',
+      'La velocità del tuo sito è il tuo primo commerciale'
+    ],
+    CASE_STUDY: [
+      'Da 7s a 0.9s: cosa è successo al fatturato',
+      '+180% conversioni solo con un fix di velocità',
+      'Il caso del sito che ha dimezzato il tempo di caricamento'
     ]
   },
-  fitness: {
-    AUTHORITY: [
-      "Perché la velocità del sito è cruciale per le iscrizioni in palestra",
-      "L'importanza di un sistema di prenotazione integrato",
-      "Come il design della tua palestra deve riflettersi online",
-      "Fiducia e sicurezza: cosa cercano gli utenti in un sito fitness"
+
+  // ----- NON CONVERTE ---------------------------------------------------------
+  NO_CONVERSION: {
+    PROBLEM_SOLUTION: [
+      'Tanto traffico, zero contatti?',
+      'Il sito attira ma non vende',
+      'Visite alte, ricavi bassi: ecco perché',
+      'Non manca il marketing, manca la conversione',
+      'Il tuo sito porta gente, ma non clienti'
     ],
     EDUCATIONAL: [
-      "Come mostrare i tuoi corsi in modo efficace sul sito",
-      "3 Elementi che non possono mancare nella tua home page",
-      "L'importanza delle testimonianze video caricate correttamente",
-      "Come usare il blog per attirare nuovi iscritti localmente"
+      'Cos\'è davvero un sito che converte',
+      'Il funnel di conversione spiegato in 1 minuto',
+      '3 elementi che fanno o distruggono la conversione',
+      'La differenza tra una vetrina e una macchina di vendita',
+      'Le CTA che funzionano (e quelle che fanno scappare)'
     ],
-    PROBLEM_SOLUTION: [
-      "Il modulo contatti non funziona? Potresti perdere decine di iscritti",
-      "Sito non leggibile da mobile? Il 70% degli utenti fitness naviga da lì",
-      "Poche iscrizioni online? Forse il processo è troppo complicato",
-      "Come gestire gli orari delle lezioni in modo dinamico sul web"
+    MISTAKE: [
+      'Mettere "Contattaci" come unica CTA',
+      "Nascondere il modulo contatti nel footer",
+      'Avere un menù con 12 voci. Caos.',
+      'Non avere mai testato la pagina prodotto/servizio'
     ],
     VIRAL_HOOK: [
-      "La tua palestra inizia dal sito, non dalla reception",
-      "Fai sentire i tuoi membri a casa ancora prima che arrivino",
-      "Il digitale è il nuovo personal trainer del tuo business"
+      'Il sito non è una vetrina. È un sistema di vendita',
+      'Conversione > Estetica. Sempre.',
+      'Stai pagando un sito-poster ma volevi un sito-commerciale'
+    ],
+    CASE_STUDY: [
+      '+340% conversioni con un solo refactor della home',
+      'Lo stesso traffico, 4x le richieste: come abbiamo fatto',
+      'Il cliente che ha smesso di sprecare ADS grazie al sito nuovo'
+    ],
+    HOW_TO: [
+      'Come strutturare una home page che converte',
+      'Come scrivere una CTA che fa cliccare',
+      'Come costruire una pagina contatti che chiude'
     ]
   },
-  beauty: {
+
+  // ----- BRAND PERCEPITO MALE -------------------------------------------------
+  BRAND_PERCEPTION: {
+    PROBLEM_SOLUTION: [
+      'Sei più bravo di quanto sembri online',
+      'Il tuo sito ti fa sembrare amatoriale',
+      'Brand premium con sito da garage: la dissonanza che ti costa',
+      'I tuoi clienti pensano che tu sia "piccolo" per colpa del sito',
+      'Online non si capisce quanto vali davvero'
+    ],
     AUTHORITY: [
-      "Perché il tuo salone ha bisogno di un sistema di prenotazione online",
-      "Come l'estetica del sito influenza la percezione del tuo servizio",
-      "Il valore della velocità di caricamento per chi prenota da mobile",
-      "Fiducia e igiene digitale: come comunicarle attraverso il web"
+      'Il sito decide il prezzo che il cliente è disposto a pagare',
+      'Un sito d\'élite alza tutto il posizionamento',
+      'I brand premium investono prima sul sito poi sui prodotti'
     ],
     EDUCATIONAL: [
-      "3 Consigli per mostrare i tuoi lavori in modo professionale",
-      "Come ottimizzare il tuo profilo per le ricerche locali in città",
-      "L'importanza di una gallery curata e veloce da caricare",
-      "Come usare i form di contatto per gestire meglio l'agenda"
+      'Come un sito alza (o abbassa) le tariffe che puoi chiedere',
+      "L'importanza della prima impressione digitale",
+      'Brand identity online: 5 elementi non negoziabili'
     ],
-    PROBLEM_SOLUTION: [
-      "Agenda poco organizzata? Un sito ben fatto può automatizzare tutto",
-      "Clienti che non trovano i prezzi? La trasparenza online paga sempre",
-      "Sito che non carica le foto? Ecco come risolvere i problemi tecnici",
-      "Come rendere il tuo salone visibile su Google Maps"
+    MISTAKE: [
+      'Spendere su pubblicità e foto, ma non sul sito',
+      'Avere logo e biglietti da visita curatissimi e sito amatoriale',
+      "Sottovalutare la coerenza visiva tra sito e brand offline"
     ],
     VIRAL_HOOK: [
-      "Il tuo salone è bellissimo, ma online come appare?",
-      "La prima impressione del cliente avviene sul web, non in poltrona",
-      "Trasforma la tua passione in un brand digitale solido"
+      'Il tuo sito comunica fiducia. O sfiducia. Mai vie di mezzo',
+      'Sei tu, in 3 secondi. Cosa stai dicendo al cliente?',
+      'Vuoi vendere a prezzi alti? Inizia dal sito.'
+    ],
+    TESTIMONIAL: [
+      '"Finalmente il sito rispecchia chi sono davvero"',
+      '"Da quando abbiamo rifatto il sito, prezzi più alti e zero obiezioni"',
+      '"Era un brand bellissimo che online sembrava economico. Ora no"'
     ]
   },
-  lusso: {
-    AUTHORITY: [
-      "Perché il lusso richiede un'architettura web impeccabile",
-      "L'importanza del design invisibile nelle esperienze premium",
-      "Come la velocità del sito definisce l'esclusività del brand",
-      "Oltre l'estetica: la solidità tecnica nei siti high-end"
+
+  // ----- INVISIBILE ONLINE ----------------------------------------------------
+  INVISIBLE: {
+    PROBLEM_SOLUTION: [
+      "Nessuno ti trova su Google. Ecco perché",
+      "Sei l'unico che sa che esisti",
+      "Stai aspettando i clienti, ma loro non sanno dove sei",
+      'Hai un sito, ma è come fosse offline'
     ],
     EDUCATIONAL: [
-      "3 Elementi chiave per un'esperienza utente d'élite",
-      "Come gestire contenuti video pesanti senza rallentare il sito",
-      "Il valore della tipografia digitale nel posizionamento premium",
-      "Come creare un percorso d'acquisto senza attriti per clienti high-ticket"
+      'SEO base: cosa NON deve mancare nel tuo sito',
+      'Local SEO: come essere trovato dai clienti vicino a te',
+      'Cosa cerca davvero un cliente prima di contattarti',
+      "L'AEO (Answer Engine Optimization) spiegata semplice"
     ],
-    PROBLEM_SOLUTION: [
-      "Il sito non trasmette il valore reale? Forse manca coerenza tecnica",
-      "Bassa conversione nel lusso? Analizziamo il percorso dell'utente",
-      "Design datato? È il momento di un refresh tecnologico",
-      "Come proteggere l'integrità del tuo brand nel mondo digitale"
+    AUTHORITY: [
+      'Essere su Google è un investimento, non un costo',
+      'I brand seri non aspettano i clienti: li intercettano',
+      'Senza posizionamento, lavori sempre per chi capita'
     ],
     VIRAL_HOOK: [
-      "L'esclusività online è una questione di dettagli tecnici",
-      "Il tuo sito è l'ambasciatore digitale del tuo brand di lusso",
-      "La perfezione nel web non è un optional per i brand premium"
+      'Sei online ma nessuno ti vede. Sei davvero online?',
+      'Il tuo competitor è in prima pagina. E tu?',
+      "Se Google non ti trova, sei un fantasma digitale"
+    ],
+    HOW_TO: [
+      'Come finire nella prima pagina di Google (passi reali)',
+      'Come ottimizzare la tua Google Business Profile',
+      'Come trasformare il sito in un magnete di lead locali'
+    ],
+    CASE_STUDY: [
+      'Da pagina 7 a pagina 1: come ci siamo riusciti',
+      '+520% traffico organico in 4 mesi: il caso reale'
     ]
   },
-  gioielleria: {
-    AUTHORITY: [
-      "Sicurezza e fiducia: le basi di un ecommerce di gioielli",
-      "Come valorizzare i dettagli dei tuoi pezzi attraverso il web",
-      "L'importanza della velocità per chi acquista beni di valore",
-      "Perché un sito professionale è il miglior certificato di garanzia"
+
+  // ----- WIX / WEEBLY / FAI-DA-TE --------------------------------------------
+  DIY_BUILDER: {
+    PROBLEM_SOLUTION: [
+      'Hai fatto il sito su Wix? Ecco perché perdi clienti',
+      'I template tutti uguali non vendono',
+      'Il fai-da-te ti costa più di un sito professionale',
+      'Il tuo sito sembra fatto in 10 minuti perché è così'
     ],
     EDUCATIONAL: [
-      "3 Consigli per presentare i tuoi gioielli online",
-      "Come gestire le varianti di prodotto in modo intuitivo",
-      "L'importanza di una UX fluida per acquisti emozionali",
-      "Come ottimizzare il checkout per aumentare la fiducia"
+      'Wix, Weebly, Squarespace: quando bastano e quando no',
+      'Sito custom vs template: i veri pro e contro',
+      "Costo reale di un sito 'gratuito'",
+      'Performance dei template builder: i numeri veri'
     ],
-    PROBLEM_SOLUTION: [
-      "Poche vendite online? Controlla la chiarezza delle spedizioni",
-      "Sito lento nel caricare i diamanti? La soluzione è nel codice",
-      "Nessun contatto dal web? Forse il form è troppo complesso",
-      "Come rendere il tuo ecommerce sicuro e performante"
-    ],
-    VIRAL_HOOK: [
-      "Un gioiello dura per sempre, il tuo sito dovrebbe fare lo stesso",
-      "Brilla online con una piattaforma degna delle tue creazioni",
-      "L'eleganza digitale è il nuovo standard per le gioiellerie"
-    ]
-  },
-  pmi: {
     AUTHORITY: [
-      "Il sito web è il tuo dipendente più instancabile",
-      "Come le PMI possono battere i giganti con la velocità",
-      "Perché il posizionamento locale è la tua miniera d'oro",
-      "L'importanza di possedere la propria piattaforma"
+      'Il sito è il tuo asset più importante. Non delegarlo a un template',
+      'I brand premium non vivono su Wix. Per un motivo',
+      'Un sito custom è un investimento, un template è un compromesso'
     ],
-    EDUCATIONAL: [
-      "Checklist per la tua presenza locale online",
-      "Gestione dei lead: come rispondere in tempo reale",
-      "L'impatto di un sito professionale sulla fiducia",
-      "Semplificare i servizi per vendere di più"
-    ],
-    PROBLEM_SOLUTION: [
-      "Sito che non converte? Analizziamo i motivi",
-      "Dallo statico al dinamico: l'evoluzione della PMI",
-      "Funnel di acquisizione contatti per il business locale",
-      "Google Business Profile + Sito: la combo perfetta"
+    MISTAKE: [
+      'Pensare che "tanto basta avere un sito"',
+      'Risparmiare sul sito per poi spendere in ADS che non convertono',
+      'Confondere "facile da fare" con "facile da vendere"'
     ],
     VIRAL_HOOK: [
-      "Il digitale è l'alleato numero uno della tua impresa",
-      "Non lasciare che la tecnologia sia un ostacolo",
-      "La tua azienda merita una vetrina all'altezza"
+      'Il template del tuo sito lo usano in 30.000. Differenziati.',
+      'Smetti di farti il sito da solo nei ritagli di tempo',
+      'Il tuo brand merita più di Wix'
+    ],
+    CASE_STUDY: [
+      'Da Wix a sito custom: +210% lead in 60 giorni',
+      "Il cliente che ha mollato il template ed è cresciuto del 4x",
+      'Migrazione da Squarespace a Next.js: cosa è cambiato'
     ]
   }
 };
 
-// --- 7-SLIDE PSYCHOLOGICAL STRUCTURE LOGIC ---
-const slideLogic = {
+// ============================================================================
+// SLIDE NARRATIVE BUILDERS — 7-slide psychological flow per pillar (POST format)
+// ============================================================================
+type SlideTemplate = (title: string) => Slide;
+
+const slideLogic: Record<Pillar, SlideTemplate[]> = {
+  PROBLEM_SOLUTION: [
+    (title) => ({ title, text: 'Swipe — ti dico cosa sta succedendo davvero.' }),
+    () => ({ title: 'IL SINTOMO', text: 'Pochi contatti, traffico che non si trasforma in clienti.' }),
+    () => ({ title: 'LA CAUSA VERA', text: 'Non è il marketing, è il sito. Manca chiarezza, velocità, struttura.' }),
+    () => ({ title: "L'ERRORE", text: 'Continuare ad aggiungere ADS sopra un sito che non converte.' }),
+    () => ({ title: 'LA SOLUZIONE', text: 'Un sito pensato per guidare, convincere, far agire.' }),
+    () => ({ title: 'IL RISULTATO', text: 'Lead qualificati ogni settimana, senza inseguire nessuno.' }),
+    () => ({ title: 'PARLIAMONE', text: 'Scrivimi "SITO" in DM. Ti dico in 24h cosa cambierei.' })
+  ],
   AUTHORITY: [
-    (title: string, ind: string) => ({ title, text: "Swipe per capire come dominare la tua presenza digitale." }),
-    (title: string, ind: string) => ({ title: "IDENTIFICAZIONE", text: `Nel settore ${ind}, l'attenzione è tutto. Se non colpisci subito, sei invisibile.` }),
-    (title: string, ind: string) => ({ title: "SPIEGAZIONE", text: "La maggior parte dei siti sono vetrine morte. Il mercato oggi chiede sistemi attivi." }),
-    (title: string, ind: string) => ({ title: "L'ERRORE", text: "Continuare a usare metodi del passato sperando in risultati futuri." }),
-    (title: string, ind: string) => ({ title: "LA SOLUZIONE", text: "Un'architettura tecnica solida unita a una psicologia di vendita efficace." }),
-    (title: string, ind: string) => ({ title: "RISULTATO", text: "Un posizionamento d'élite che converte follower in clienti reali." }),
-    (title: string, ind: string) => ({ title: "SCRIVIMI", text: "Se vuoi scalare davvero il tuo business, scrivimi in DM." })
+    (title) => ({ title, text: 'Swipe — la verità che il mercato non vuole sentirsi dire.' }),
+    () => ({ title: 'CONTESTO', text: 'I clienti decidono in 3 secondi se sei serio.' }),
+    () => ({ title: 'COSA CAMBIA', text: 'Il sito non è una vetrina. È il primo commerciale del tuo brand.' }),
+    () => ({ title: 'OBIEZIONE COMUNE', text: '"Il passaparola mi basta". Spoiler: non scala. Mai.' }),
+    () => ({ title: 'IL CAMBIO DI VISIONE', text: 'Trattare il sito come asset di business, non come spesa.' }),
+    () => ({ title: 'COSA OTTIENI', text: 'Posizionamento, lead, prezzi più alti, clienti migliori.' }),
+    () => ({ title: 'SCRIVIMI', text: 'Pronto a fare il passo? DM aperti.' })
   ],
   EDUCATIONAL: [
-    (title: string, ind: string) => ({ title, text: "Ecco alcuni spunti tecnici per migliorare la tua presenza online." }),
-    (title: string, ind: string) => ({ title: "IDENTIFICAZIONE", text: `Molti operatori nel settore ${ind} trascurano questi dettagli fondamentali.` }),
-    (title: string, ind: string) => ({ title: "SPIEGAZIONE", text: "La velocità e la chiarezza non sono optional, sono i pilastri del tuo fatturato." }),
-    (title: string, ind: string) => ({ title: "L'ERRORE", text: "Pensare che basti essere online per ricevere richieste automatiche." }),
-    (title: string, ind: string) => ({ title: "LA SOLUZIONE", text: "Ottimizzare ogni touchpoint del cliente per eliminare ogni frizione." }),
-    (title: string, ind: string) => ({ title: "RISULTATO", text: "Un flusso costante di utenti pronti ad agire." }),
-    (title: string, ind: string) => ({ title: "CONSULENZA", text: "Vuoi applicare questo al tuo sito? Contattaci ora." })
-  ],
-  PROBLEM_SOLUTION: [
-    (title: string, ind: string) => ({ title, text: "Senti che il tuo sito non sta rendendo quanto dovrebbe? Vediamo perché." }),
-    (title: string, ind: string) => ({ title: "IDENTIFICAZIONE", text: `Il problema tipico del settore ${ind} è la mancanza di un percorso chiaro.` }),
-    (title: string, ind: string) => ({ title: "SPIEGAZIONE", text: "L'utente confuso non compra mai. Serve una guida verso l'azione." }),
-    (title: string, ind: string) => ({ title: "L'ERRORE", text: "Mettere troppa carne al fuoco e distrarre l'utente dall'obiettivo principale." }),
-    (title: string, ind: string) => ({ title: "LA SOLUZIONE", text: "Semplificazione estrema e Call to Action (CTA) posizionate strategicamente." }),
-    (title: string, ind: string) => ({ title: "RISULTATO", text: "Un sito che lavora per te 24/7 portandoti lead qualificati." }),
-    (title: string, ind: string) => ({ title: "SITO", text: "Scrivimi 'SITO' per un'analisi gratuita della tua situazione." })
+    (title) => ({ title, text: 'Salva il post 💾 — punto per punto.' }),
+    () => ({ title: 'PUNTO 1', text: 'Chiarezza: in 3 secondi il visitatore deve capire cosa fai.' }),
+    () => ({ title: 'PUNTO 2', text: 'Velocità: sotto i 2 secondi di caricamento, sempre.' }),
+    () => ({ title: 'PUNTO 3', text: 'CTA: ogni sezione deve guidare a un\'azione specifica.' }),
+    () => ({ title: 'PUNTO 4', text: 'Prova sociale: case study, recensioni, brand serviti.' }),
+    () => ({ title: 'PUNTO 5', text: 'Mobile-first: il 70% dei visitatori arriva da smartphone.' }),
+    () => ({ title: 'COSA FARE ORA', text: 'Vuoi un check del tuo sito? DM e ti rispondo io.' })
   ],
   VIRAL_HOOK: [
-    (title: string, ind: string) => ({ title, text: `Non farti superare dai competitor. Il settore ${ind} sta cambiando.` }),
-    (title: string, ind: string) => ({ title: "IDENTIFICAZIONE", text: "Chi si ferma oggi, sparisce dal mercato domani." }),
-    (title: string, ind: string) => ({ title: "SPIEGAZIONE", text: "Il web non aspetta. O sei veloce o sei fuori." }),
-    (title: string, ind: string) => ({ title: "L'ERRORE", text: "Aspettare 'il momento giusto' per aggiornare la propria immagine digitale." }),
-    (title: string, ind: string) => ({ title: "LA SOLUZIONE", text: "Azione immediata con una piattaforma pronta a scalare." }),
-    (title: string, ind: string) => ({ title: "RISULTATO", text: "Essere sempre un passo avanti alla concorrenza." }),
-    (title: string, ind: string) => ({ title: "SCRIVIMI", text: "Se vuoi dominare il tuo settore, partiamo oggi." })
+    (title) => ({ title, text: 'Sì, l\'ho detto. Swipe e ti spiego perché.' }),
+    () => ({ title: 'COMINCIA QUI', text: 'Il web non aspetta nessuno. Né te, né il tuo brand.' }),
+    () => ({ title: 'LA SCOMODA VERITÀ', text: 'Senza un sito moderno, sei invisibile per i clienti migliori.' }),
+    () => ({ title: 'IL COSTO DI ASPETTARE', text: 'Ogni mese che passa, lasci soldi sul tavolo.' }),
+    () => ({ title: 'LA MOSSA GIUSTA', text: 'Investire ORA in un sito che lavora per te 24/7.' }),
+    () => ({ title: 'IL RISULTATO', text: 'Brand percepito alto, clienti che ti scelgono prima del prezzo.' }),
+    () => ({ title: 'AZIONE', text: 'Scrivimi in DM. Senza impegno, ti dico cosa farei al tuo posto.' })
+  ],
+  CASE_STUDY: [
+    (title) => ({ title, text: 'Storia vera. Numeri reali. Swipe.' }),
+    () => ({ title: 'IL CLIENTE', text: 'Un imprenditore italiano, brand solido, sito fermo al 2017.' }),
+    () => ({ title: 'IL PROBLEMA', text: 'Poche richieste, marketing che non scalava, ADS che bruciavano budget.' }),
+    () => ({ title: 'COSA ABBIAMO FATTO', text: 'Nuovo sito Next.js, percorso utente riscritto, performance al 100/100.' }),
+    () => ({ title: 'IL RISULTATO', text: '+340% lead qualificati in 90 giorni. Stesso budget marketing.' }),
+    () => ({ title: 'IL LEARNING', text: 'Il vero ROI di un sito non è il design: è la conversione.' }),
+    () => ({ title: 'VUOI ESSERE TU?', text: 'Posti limitati questo mese. DM "CASE" per parlarne.' })
+  ],
+  HOW_TO: [
+    (title) => ({ title, text: 'Step-by-step. Salva il post per non perderlo.' }),
+    () => ({ title: 'STEP 1', text: 'Misura il tuo sito attuale: PageSpeed, percorso utente, CTA.' }),
+    () => ({ title: 'STEP 2', text: 'Identifica le sezioni che confondono o rallentano il visitatore.' }),
+    () => ({ title: 'STEP 3', text: 'Riscrivi i contenuti pensando al cliente, non a te stesso.' }),
+    () => ({ title: 'STEP 4', text: 'Inserisci una CTA chiara e visibile in ogni sezione.' }),
+    () => ({ title: 'STEP 5', text: 'Migra a una tecnologia veloce (Next.js, headless). Il resto è dettaglio.' }),
+    () => ({ title: 'BONUS', text: 'Vuoi che lo facciamo noi al posto tuo? DM aperti.' })
+  ],
+  MISTAKE: [
+    (title) => ({ title, text: 'Gli errori che vedo ogni settimana. Evitali.' }),
+    () => ({ title: 'ERRORE 1', text: 'Parlare dell\'azienda invece che del cliente.' }),
+    () => ({ title: 'ERRORE 2', text: 'CTA assenti, generiche o nascoste nel footer.' }),
+    () => ({ title: 'ERRORE 3', text: 'Sito non ottimizzato per mobile (perdi il 70% del traffico).' }),
+    () => ({ title: 'ERRORE 4', text: 'Velocità lenta. 3 secondi e il cliente è già dal competitor.' }),
+    () => ({ title: 'ERRORE 5', text: 'Nessuna prova sociale: niente recensioni, case study, brand serviti.' }),
+    () => ({ title: 'COSA FARE', text: 'Quanti di questi errori ha il tuo sito? Scrivimi e ti aiuto.' })
+  ],
+  TESTIMONIAL: [
+    () => ({ title: 'COSA DICONO DI NOI', text: 'Le parole dei nostri clienti. Senza filtri.' }),
+    () => ({ title: '"+200% LEAD"', text: 'Cliente B2B, 60 giorni dopo il lancio del nuovo sito.' }),
+    () => ({ title: '"PERFORMANCE TOP"', text: 'Score 100/100 su Lighthouse. Sito che vola.' }),
+    () => ({ title: '"TEAM PRESENTE"', text: 'Comunicazione costante, ascolto del brief reale.' }),
+    () => ({ title: '"BRAND VERO"', text: 'Finalmente il sito rispecchia il valore reale del business.' }),
+    () => ({ title: '"INVESTIMENTO RIPAGATO"', text: 'In 4 mesi rientrati e iniziato a guadagnare.' }),
+    () => ({ title: 'PROVALO ANCHE TU', text: 'Vuoi una call gratuita? DM "CHIAMATA".' })
+  ],
+  OFFER: [
+    (title) => ({ title, text: 'Proposta concreta. Pochi posti.' }),
+    () => ({ title: 'COSA OTTIENI', text: 'Audit completo del tuo sito + strategia di conversione personalizzata.' }),
+    () => ({ title: 'COSA INCLUDE', text: 'Velocità, UX, copy, CTA, SEO tecnica, posizionamento di brand.' }),
+    () => ({ title: 'A CHI SERVE', text: "A chi vuole più lead qualificati senza alzare il budget ADS." }),
+    () => ({ title: 'DURATA', text: 'Sessione di 45 minuti, deliverable consegnato in 48 ore.' }),
+    () => ({ title: 'COSTO', text: 'Gratuito per i primi 5 brand di questo mese.' }),
+    () => ({ title: 'PRENOTA', text: 'Scrivimi "AUDIT" in DM per riservare il tuo slot.' })
   ]
 };
 
-// --- CAPTION GENERATOR ---
+// ============================================================================
+// STORY NARRATIVE — 3-slide flow (POST → STORY adaptation)
+// ============================================================================
+const storyLogic: Record<Pillar, SlideTemplate[]> = {
+  PROBLEM_SOLUTION: [
+    (title) => ({ title, text: 'Riconosci il problema?' }),
+    () => ({ title: 'C\'è una via', text: 'E parte da un sito strutturato per vendere.' }),
+    () => ({ title: 'DM aperti', text: 'Scrivimi "SITO" e ne parliamo.' })
+  ],
+  AUTHORITY: [
+    (title) => ({ title, text: 'Swipe →' }),
+    () => ({ title: 'Le regole', text: 'Sono cambiate. Il sito decide tutto.' }),
+    () => ({ title: 'Pronto?', text: 'DM aperti.' })
+  ],
+  EDUCATIONAL: [
+    (title) => ({ title, text: 'Salva la storia 💾' }),
+    () => ({ title: 'Lo sapevi?', text: 'Velocità e chiarezza fanno il 90% della conversione.' }),
+    () => ({ title: 'Vuoi di più?', text: 'Tap sul link in bio.' })
+  ],
+  VIRAL_HOOK: [
+    (title) => ({ title, text: 'Sì, ho detto questo.' }),
+    () => ({ title: 'Verità', text: 'Senza un sito serio, sei invisibile.' }),
+    () => ({ title: 'Pronto?', text: 'Tap sul link e parliamone.' })
+  ],
+  CASE_STUDY: [
+    (title) => ({ title, text: 'Storia vera. Numeri reali.' }),
+    () => ({ title: '+340%', text: 'Lead qualificati in 90 giorni.' }),
+    () => ({ title: 'Tu sei il prossimo?', text: 'DM aperti.' })
+  ],
+  HOW_TO: [
+    (title) => ({ title, text: 'Mini-tutorial. Salvalo.' }),
+    () => ({ title: '3 mosse', text: 'Velocità, chiarezza, CTA. Punto.' }),
+    () => ({ title: 'Vuoi aiuto?', text: 'Scrivimi.' })
+  ],
+  MISTAKE: [
+    (title) => ({ title, text: 'Stop a questo errore.' }),
+    () => ({ title: 'Conseguenza', text: 'Perdi clienti ogni giorno.' }),
+    () => ({ title: 'Sistemalo', text: 'Iniziamo? DM.' })
+  ],
+  TESTIMONIAL: [
+    () => ({ title: 'Lo dicono loro', text: 'Non noi.' }),
+    () => ({ title: '"Top scelta"', text: 'Cliente Link2Digital.' }),
+    () => ({ title: 'Vuoi unirti?', text: 'DM aperti.' })
+  ],
+  OFFER: [
+    (title) => ({ title, text: 'Solo per pochi.' }),
+    () => ({ title: 'Audit gratuito', text: 'Sessione di 45 min.' }),
+    () => ({ title: 'Prenota ora', text: 'Scrivimi "AUDIT".' })
+  ]
+};
 
-const generateCaption = (title: string, pillar: Pillar, ind: string, variant: number) => {
-  const hooks: Record<string, string[]> = {
+// ============================================================================
+// CAPTION — lead-gen first, no industry context
+// ============================================================================
+function generateCaption(title: string, pillar: Pillar, angle: Angle, variant: number): string {
+  const hooks: Record<Pillar, string[]> = {
     AUTHORITY: [
-      `Consiglio digitale per il settore ${ind}: l'esperienza utente vince sempre. 🏛️`,
-      `Ecco perché la solidità tecnica è fondamentale nel settore ${ind}. 💎`,
-      `Leadership digitale: come distinguersi nel settore ${ind}. 🚀`
+      'Il sito non è una vetrina. È il tuo primo commerciale. 🏛️',
+      'Brand serio = sito serio. Punto. 💎',
+      'Vuoi clienti migliori? Inizia dal sito. 🚀',
+      'Il posizionamento di brand passa dal web. Sempre. ⚡'
     ],
     EDUCATIONAL: [
-      `Pillola del giorno per chi opera nel settore ${ind}. 📊`,
-      `Mini-guida: ottimizzare la tua presenza nel settore ${ind}. 💡`,
-      `3 Cose da sapere subito sul web per il settore ${ind}. 📝`
+      'Salvati il post — sono i pilastri di un sito che vende. 📊',
+      'Mini-lezione su come trasformare un sito in un asset. 💡',
+      'Tre cose da capire prima di rifare (o fare) un sito. 📝',
+      'Se vuoi un sito che ti porti clienti, parti da qui. 📚'
     ],
     PROBLEM_SOLUTION: [
-      `Come risolvere i problemi comuni del web nel settore ${ind}. ⚠️`,
-      `Basta sprecare budget nel settore ${ind}. Ecco la soluzione. 🛠️`,
-      `Il tuo sito nel settore ${ind} non funziona? Leggi qui. 🔍`
+      'Se il tuo sito non porta clienti, leggi qui. ⚠️',
+      'Stop ai siti che bruciano budget. Soluzione dentro. 🛠️',
+      'Il sito non converte? Questa è la diagnosi. 🔍',
+      'Le frizioni nascoste che ti costano lead ogni giorno. 🚦'
     ],
     VIRAL_HOOK: [
-      `Il mondo digitale cambia, non restare indietro nel settore ${ind}. ⚡`,
-      `La verità scomoda sul web nel settore ${ind}. 🤐`,
-      `Stai ancora usando metodi del 2010 per il settore ${ind}? 🕒`
+      'Il mondo digitale cambia. Tu hai cambiato il sito? ⚡',
+      'Una scomoda verità sul web nel 2026. 🤐',
+      'Stai usando metodi del 2010 per acquisire clienti? 🕒',
+      'Pronto a sentire come la pensa Link2Digital? 👀'
+    ],
+    CASE_STUDY: [
+      'Storia vera di un cliente Link2Digital. 📈',
+      'Numeri alla mano: cosa cambia con un sito fatto bene. 💼',
+      'Da idea a fatturato: il viaggio di un brand cliente. 🚀',
+      'Cosa succede davvero quando il sito è fatto per convertire. 📊'
+    ],
+    HOW_TO: [
+      'Tutorial pratico. Salvalo. 📌',
+      'Step-by-step: come avere un sito che lavora per te. 🪜',
+      'Workflow vincente per il tuo prossimo sito. 🔧',
+      'Da zero a strategia in 5 step. 🎯'
+    ],
+    MISTAKE: [
+      'Gli errori che vediamo ogni giorno nei siti italiani. ❌',
+      'Smetti di sbagliare proprio queste cose. 🛑',
+      "Cose da non fare mai sul proprio sito. ⚠️",
+      'Errori comuni che ti costano clienti veri. 💸'
+    ],
+    TESTIMONIAL: [
+      'Le parole di un nostro cliente. ❤️',
+      "Cosa cambia con un sito vero — parlano i nostri clienti. 🗣️",
+      'Quando il cliente diventa ambassador. 🤝',
+      'Voci dal nostro studio. 💬'
+    ],
+    OFFER: [
+      'La nostra proposta del mese. Pochi posti. 🎁',
+      'Operazione speciale per chi vuole rifare (o fare) il sito. ⏳',
+      'Offerta esclusiva, posti contingentati. 💎',
+      'Audit gratuito: pochi slot questo mese. 🆓'
     ]
   };
 
-  const bodies = [
-    `In Link2Digital risolviamo problemi reali con soluzioni tecniche eleganti. Non creiamo solo siti, ma strumenti di lavoro che semplificano la tua vita.`,
-    `Il nostro approccio è basato sui dati e sull'esperienza dell'utente. Vogliamo che il tuo business cresca in modo sano e costante.`,
-    `Crediamo che la tecnologia debba essere un supporto, non un ostacolo. Ecco come vediamo l'evoluzione del web per il tuo settore.`
-  ];
+  const bodies: Record<Angle, string[]> = {
+    NO_SITE: [
+      'Senza sito sei un brand a metà. I tuoi clienti decidono online, e se non ti trovano si rivolgono al competitor.',
+      'Non avere un sito nel 2026 non è "risparmiare", è regalare clienti a chi un sito ce l\'ha.',
+      'Il sito è la base. Senza, qualunque investimento in marketing è solo un cerotto.'
+    ],
+    OLD_SITE: [
+      'Un sito vecchio non è solo "datato": comunica al cliente che il brand è fermo. E i clienti si rivolgono altrove.',
+      'Rifare il sito non è un costo: è il modo più veloce per riposizionarsi sul mercato.',
+      "Tutti i brand che oggi crescono hanno una cosa in comune: un sito moderno, veloce, pensato per convertire."
+    ],
+    SLOW_SITE: [
+      'La velocità non è un dettaglio tecnico: è il primo segnale di qualità che il cliente percepisce. E Google la usa per il ranking.',
+      "Se il tuo sito carica in più di 3 secondi, stai perdendo metà del traffico ogni giorno. Tutti i giorni.",
+      'Performance = conversione. Non è opinione, è matematica.'
+    ],
+    NO_CONVERSION: [
+      "Un sito che attira ma non converte è il peggior investimento: bruci traffico, brand e fiducia tutto insieme.",
+      "Il problema non è quasi mai il marketing. È il sito che non guida il visitatore verso l'azione.",
+      'Conversione > Estetica. Sempre. Un sito bellissimo che non vende è solo una galleria d\'arte.'
+    ],
+    BRAND_PERCEPTION: [
+      "Il sito decide quanto vali nella testa del cliente prima ancora che lui ti contatti. Vale di più di mille biglietti da visita.",
+      "Vuoi alzare le tariffe? Devi prima alzare la percezione. E la percezione parte dal sito.",
+      'Brand premium con sito mediocre: la dissonanza più costosa che puoi avere.'
+    ],
+    INVISIBLE: [
+      "Essere online senza essere trovato è come avere un negozio in mezzo al deserto. Il sito da solo non basta: deve essere pensato per essere visto.",
+      'Posizionamento organico = lead a costo zero ogni mese. Per sempre. Senza ricaricare il budget ADS.',
+      "Se il tuo competitor è in prima pagina e tu no, ogni giorno stai perdendo soldi reali."
+    ],
+    DIY_BUILDER: [
+      "Wix e simili fanno una cosa bene: ti danno un sito velocemente. Ma quel sito non scala, non posiziona, non converte come dovrebbe.",
+      "Il template è una scorciatoia. La scorciatoia ti costa più del sito custom in 12 mesi.",
+      "Possedere il proprio sito (codice, dominio, dati) significa possedere il proprio business digitale. Su Wix sei in affitto."
+    ]
+  };
 
   const ctas = [
-    "👉 Scrivici in DM se vuoi analizzare il tuo sito attuale.",
-    "👉 Clicca sul link in bio per scoprire come lavoriamo.",
-    "👉 Prenota un check gratuito della tua presenza online."
+    '👉 Scrivimi "AUDIT" in DM e analizzo gratis il tuo sito attuale.',
+    '👉 DM aperti: dimmi com\'è oggi il tuo sito, ti dico cosa cambierei.',
+    '👉 Vuoi una call senza impegno? Scrivimi "CALL".',
+    '👉 Pronto a rifare (o fare) il sito che meriti? Scrivimi.',
+    '👉 Posti questo mese: 5. Scrivimi "POSTO" per prenotare il tuo.'
   ];
 
-  const hookPool = hooks[pillar] || hooks.AUTHORITY;
+  const hookPool = hooks[pillar] ?? hooks.AUTHORITY;
+  const bodyPool = bodies[angle] ?? bodies.OLD_SITE;
   const hook = hookPool[variant % hookPool.length];
-  const body = bodies[variant % bodies.length];
+  const body = bodyPool[variant % bodyPool.length];
   const cta = ctas[variant % ctas.length];
 
-  return `${hook} \n\n ${body} \n\n ${title} è un tema centrale oggi. \n\n ${cta} \n\n #Link2Digital #WebDevelopment #UX #DigitalStrategy #${ind.replace(/\s+/g, '')}`;
-};
+  const hashtags = [
+    '#Link2Digital', '#WebDesign', '#SitiWeb', '#Restyling',
+    '#WebAgency', '#DigitalStrategy', '#Conversione', '#Milano',
+    '#NuovoSito', '#Imprenditori', '#PMI'
+  ].join(' ');
 
-export const generatePosts = (count: number = 300): Post[] => {
+  return `${hook}\n\n${body}\n\n${title}\n\n${cta}\n\n${hashtags}`;
+}
+
+// ============================================================================
+// GENERATOR
+// ============================================================================
+interface GenerateOptions {
+  count?: number;
+  seed?: number;
+  angleFilter?: Angle | 'all';
+  format?: PostFormat;
+}
+
+function mulberry32(seed: number): () => number {
+  let a = seed >>> 0;
+  return () => {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+export const generatePosts = (countOrOpts: number | GenerateOptions = 300): Post[] => {
+  const opts: GenerateOptions = typeof countOrOpts === 'number' ? { count: countOrOpts } : countOrOpts;
+  const count = opts.count ?? 300;
+  const seed = opts.seed ?? 42;
+  const angleFilter = opts.angleFilter && opts.angleFilter !== 'all' ? opts.angleFilter : null;
+  const formatPref = opts.format;
+  const rng = mulberry32(seed);
+
+  const angleEntries = (Object.keys(content) as Angle[])
+    .filter((a) => !angleFilter || a === angleFilter)
+    .map((a) => ({ angle: a, pool: content[a] }));
+
   const allPosts: Post[] = [];
-  
-  // 1. Add all 15 high-conversion posts first
-  highConversionPosts.forEach((hcPost, i) => {
-    allPosts.push({
-      id: i + 1,
-      day: `Post ${i + 1}`,
-      industryId: 'digital',
-      industryTitle: 'Digital Strategy',
-      industryTag: 'Conversion',
-      pillarName: hcPost.pillar as Pillar,
-      styleVariant: i % 10,
-      slides: hcPost.slides,
-      caption: generateCaption(hcPost.slides[0].title, hcPost.pillar as Pillar, "Digital", i),
-      status: 'DRAFT'
-    });
-  });
+  let id = 1;
 
-  // 2. Add industry-specific posts for the rest of the count
-  for (let i = highConversionPosts.length; i < count; i++) {
-    const indIndex = (i - highConversionPosts.length) % industries.length;
-    const industry = industries[indIndex];
-    const pool = industryData[industry.id as keyof typeof industryData] || industryData.agency;
-    
-    const pillars: Pillar[] = ['PROBLEM_SOLUTION', 'EDUCATIONAL', 'AUTHORITY', 'VIRAL_HOOK'];
-    const pillarIndex = Math.floor((i - highConversionPosts.length) / industries.length) % pillars.length;
-    const pillar = pillars[pillarIndex];
-    
-    const titles = (pool as any)[pillar] || pool['AUTHORITY'];
-    const titleIndex = Math.floor((i - highConversionPosts.length) / (industries.length * pillars.length)) % titles.length;
-    const title = titles[titleIndex];
-    
-    const day = i + 1;
-    const styleVariant = i % 10;
-    
-    const logicTemplates = (slideLogic as any)[pillar] || slideLogic.AUTHORITY;
-    const slides = logicTemplates.map((template: any) => template(title, industry.title));
+  while (allPosts.length < count) {
+    const angleEntry = angleEntries[allPosts.length % angleEntries.length];
+    const { angle, pool } = angleEntry;
+    const angleLabel = ANGLES.find((a) => a.id === angle)?.label ?? angle;
+
+    const availablePillars = (Object.keys(pool) as Pillar[]).filter((p) => (pool[p] ?? []).length > 0);
+    if (availablePillars.length === 0) break;
+
+    const pillar = availablePillars[Math.floor(rng() * availablePillars.length)];
+    const titles = pool[pillar] ?? [];
+    const title = titles[Math.floor(rng() * titles.length)] ?? 'Strategia Digitale';
+
+    const styleVariant = Math.floor(rng() * 16);
+    const format: PostFormat = formatPref ?? (rng() < 0.18 ? 'STORY' : 'POST');
+
+    const logicTemplates = format === 'STORY'
+      ? (storyLogic[pillar] ?? storyLogic.AUTHORITY)
+      : (slideLogic[pillar] ?? slideLogic.AUTHORITY);
+
+    const slides = logicTemplates.map((template) => template(title));
 
     allPosts.push({
-      id: day,
-      day: `Post ${day}`,
-      industryId: industry.id,
-      industryTitle: industry.title,
-      industryTag: industry.tag,
+      id,
+      day: `Post ${id}`,
+      angle,
+      angleLabel,
       pillarName: pillar,
-      styleVariant: styleVariant,
-      slides: slides,
-      caption: generateCaption(title, pillar, industry.title, styleVariant),
+      styleVariant,
+      format,
+      slides,
+      caption: generateCaption(title, pillar, angle, styleVariant),
+      hashtags: '#Link2Digital #WebDesign #SitiWeb #Restyling',
       status: 'DRAFT'
     });
+    id += 1;
   }
-  
+
   return allPosts;
 };
+
+// Re-export pillar list for the UI
+export const ALL_PILLAR_NAMES: Pillar[] = [
+  'AUTHORITY','EDUCATIONAL','PROBLEM_SOLUTION','VIRAL_HOOK',
+  'CASE_STUDY','HOW_TO','MISTAKE','TESTIMONIAL','OFFER'
+];

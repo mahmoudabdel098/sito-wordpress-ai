@@ -107,7 +107,7 @@ export default function Portfolio() {
     <>
       <div className="w-[85vw] lg:w-[700px] h-[55vh] lg:h-[72vh] flex flex-col justify-center gap-6 lg:gap-8 p-8 lg:p-20 rounded-[40px] lg:rounded-[60px] bg-white/5 border border-white/10 shrink-0">
          <span className="text-label text-accent-lime">OUR WORK</span>
-         <h1 className="text-4xl sm:text-5xl lg:text-8xl font-syne font-black text-white leading-[0.85] uppercase tracking-tighter">
+         <h1 className="text-4xl sm:text-5xl lg:text-8xl font-syne font-black text-white leading-[1.0] uppercase tracking-tighter">
            THE<br/>GALLERY.
          </h1>
          <p className="text-white/40 max-w-[280px] lg:max-w-sm text-lg lg:text-xl font-bold leading-tight">
@@ -173,7 +173,7 @@ export default function Portfolio() {
       ))}
 
       <div className="w-[85vw] lg:w-[700px] h-[55vh] lg:h-[75vh] flex flex-col justify-center items-center gap-8 lg:gap-12 p-8 sm:p-10 lg:p-20 rounded-[40px] lg:rounded-[60px] bg-accent-lime shrink-0 text-center lg:shadow-[0_0_100px_rgba(204,255,0,0.2)]">
-         <h2 className="text-3xl sm:text-4xl lg:text-6xl font-syne font-black text-black leading-[0.85] uppercase tracking-tighter">
+         <h2 className="text-3xl sm:text-4xl lg:text-6xl font-syne font-black text-black leading-[1.0] uppercase tracking-tighter">
            READY FOR<br/>THE NEXT<br/>LEVEL?
          </h2>
          <Magnetic>

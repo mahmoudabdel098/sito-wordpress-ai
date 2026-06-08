@@ -10,6 +10,7 @@
   --text-gray: #666666;
   --radius-xl: 40px;
   --radius-lg: 24px;
+  --font-syne: var(--font-inter);
 }
 
 * {
@@ -30,7 +31,10 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background-color: #000;
   color: var(--text-dark);
   overflow-x: clip;
@@ -52,7 +56,14 @@ body::before {
 
 
 h1, h2, h3, .font-syne {
-  font-family: 'Syne', sans-serif;
+  font-family: var(--font-inter), 'Inter', system-ui, -apple-system, sans-serif;
+  font-synthesis-weight: none;
+}
+
+.font-syne,
+h1.font-syne, h2.font-syne, h3.font-syne,
+.hero-title {
+  font-weight: 900;
 }
 
 /* Layout Containers */
@@ -115,19 +126,19 @@ h1, h2, h3, .font-syne {
 /* Typography */
 .hero-title {
   font-size: clamp(40px, 10vw, 110px);
-  line-height: 0.82;
+  line-height: 1.0;
   font-weight: 900;
   color: #1a1a1a;
   display: flex;
   flex-direction: column;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.025em;
 }
 
 @media (max-width: 768px) {
   .hero-title {
     font-size: clamp(36px, 11vw, 64px);
-    line-height: 0.85;
-    letter-spacing: -0.05em;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
   }
 }
 

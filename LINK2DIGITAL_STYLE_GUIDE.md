@@ -12,8 +12,10 @@ This document serves as the canonical reference for the Link2Digital agency plat
 - **STRICT RULE**: No other colors (Blue, Red, etc.) are allowed in the brand identity.
 
 ### Typography & Layout
-- **Headings**: `Syne` (Uppercase, Extra-bold). Tight tracking (`-0.08em`).
-- **Subtitles**: `Inter` (Medium/Bold). Clean and readable.
+- **Headings**: `Inter` (Uppercase, Extra-bold/Black `font-weight: 900`). Standard tall proportions ("alto normale") instead of squashed/wide cuts.
+- **Subtitles & Body**: `Inter` (Medium/Bold). Clean and readable.
+- **Spacing**: Use standard line-heights (`leading-none`, `leading-tight`, or `line-height: 1.0` to `1.05`) to prevent vertical collisions for tall headings. Avoid letter-spacing tighter than `-0.03em`.
+- **Branding Rule**: No wide/squashed fonts (like `Syne`) are allowed, to prevent text overflowing containers and ensure design consistency.
 - **Ghost Text**: Use large outlined or semi-transparent headings for depth.
 - **Buttons**: Pill-shaped, Lime background, Black text, uppercase.
 

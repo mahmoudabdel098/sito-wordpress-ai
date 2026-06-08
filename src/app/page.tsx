@@ -23,7 +23,7 @@ export default function Home() {
 
         <div className="main-grid !grid !grid-cols-1 lg:!grid-cols-[1.2fr_0.8fr] !items-center !gap-8 lg:!gap-12 !mt-4 lg:!mt-8 relative z-10">
           <div className="flex flex-col gap-6">
-            <h1 className="hero-title !tracking-[-0.06em] !leading-[0.8] mb-4">
+            <h1 className="hero-title !tracking-[-0.03em] !leading-[1.0] mb-4">
               <motion.span initial={{ x: -50, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.2 }}>
                 CRAFTING
               </motion.span>
