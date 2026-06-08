@@ -18,8 +18,8 @@ import { saveAs } from 'file-saver';
 import { toPng } from 'html-to-image';
 
 const INITIAL_COUNT = 320;
-const LS_KEY = 'l2d_social_posts_v4';
-const LS_SEED = 'l2d_social_seed_v4';
+const LS_KEY = 'l2d_social_posts_v5';
+const LS_SEED = 'l2d_social_seed_v5';
 
 const getPillarIcon = (pillar: string, sizeOverride?: number) => {
   const size = sizeOverride ?? 14;
@@ -647,6 +647,189 @@ export default function SocialStudio() {
             </div>
           </div>
         );
+      case 16: // Neon Accent Corner (Dark charcoal background)
+        return (
+          <div className="absolute inset-0 bg-[#1a1a1a] text-white p-10 flex flex-col justify-between">
+            <div className="flex justify-between items-start">
+              {Wordmark()}
+              <div className="px-3 py-1 bg-[#ccff00] text-black font-black uppercase text-[8px] tracking-widest rounded-md">
+                <EditableTag text={slide.tag ?? 'NEON FEATURE'} className="" field="tag" />
+              </div>
+            </div>
+            <div className="flex-1 flex flex-col justify-center border-r-4 border-[#ccff00] pr-6 my-4">
+              <EditableTitle text={slide.title} className={`${titleSize} font-syne font-black uppercase leading-none tracking-tighter text-left`} />
+              <EditableText text={slide.text} className="text-sm font-bold opacity-60 leading-snug mt-4 max-w-[85%]" />
+            </div>
+            <div className="flex justify-between items-end">
+              {CTA()}
+              <EditableTag text={slide.pageLabel ?? `0${slideIdx + 1}`} className="text-[10px] font-black opacity-30" field="pageLabel" />
+            </div>
+          </div>
+        );
+      case 17: // Split Diagonal Split-Screen
+        return (
+          <div className="absolute inset-0 bg-[#d1d9cf] overflow-hidden flex flex-col justify-between p-10">
+            <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
+              <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <polygon points="0,0 100,0 100,60 0,100" fill="#ccff00" />
+              </svg>
+            </div>
+            <div className="z-10 flex justify-between items-start">
+              {Wordmark()}
+              <EditableTag text={slide.tag ?? 'INSIGHT'} className="text-[8px] font-black tracking-widest opacity-40 uppercase" field="tag" />
+            </div>
+            <div className="z-10 my-auto">
+              <EditableTitle text={slide.title} className={`${titleSize} font-syne font-black uppercase leading-none tracking-tighter mb-4`} />
+              <EditableText text={slide.text} className="text-sm font-bold opacity-60 leading-snug max-w-[90%]" />
+            </div>
+            <div className="z-10 flex justify-between items-end">
+              {CTA()}
+              <EditableTag text={slide.pageLabel ?? `SLIDE ${slideIdx + 1}`} className="text-[9px] font-black opacity-30" field="pageLabel" />
+            </div>
+          </div>
+        );
+      case 18: // Magazine Header Look (White background)
+        return (
+          <div className="absolute inset-0 bg-white text-black p-10 flex flex-col justify-between">
+            <div>
+              <div className="flex justify-between items-center mb-6">
+                {Wordmark()}
+                <EditableTag text={slide.tag ?? 'MAGAZINE'} className="text-[8px] font-black tracking-widest opacity-40 uppercase" field="tag" />
+              </div>
+              <EditableTitle text={slide.title} className="text-[3rem] font-syne font-black uppercase leading-[0.9] tracking-tighter mb-4" />
+            </div>
+            <div className="bg-[#f0f2ef] rounded-[24px] p-6 border border-black/5">
+              <EditableText text={slide.text} className="text-sm font-bold opacity-60 leading-snug mb-4" />
+              {CTA()}
+            </div>
+            <div className="flex justify-between items-end text-[9px] font-black opacity-30">
+              <span>EDITION 2026</span>
+              <EditableTag text={slide.pageLabel ?? `0${slideIdx + 1}`} className="" field="pageLabel" />
+            </div>
+          </div>
+        );
+      case 19: // High-Contrast Duotone
+        return (
+          <div className="absolute inset-0 flex flex-col">
+            <div className="h-[60%] bg-[#1a1a1a] text-white p-10 flex flex-col justify-between">
+              <div className="flex justify-between items-center">
+                {Wordmark()}
+                <EditableTag text={slide.tag ?? 'DUOTONE'} className="text-[8px] font-black tracking-widest opacity-40 uppercase text-[#ccff00]" field="tag" />
+              </div>
+              <EditableTitle text={slide.title} className={`${titleSize} font-syne font-black uppercase leading-none tracking-tighter`} />
+            </div>
+            <div className="flex-1 bg-[#ccff00] text-black p-10 flex flex-col justify-between relative">
+              <EditableText text={slide.text} className="text-sm font-black leading-snug max-w-[85%]" />
+              <div className="flex justify-between items-end mt-4">
+                {CTA()}
+                <EditableTag text={slide.pageLabel ?? `#${slideIdx + 1}`} className="text-[10px] font-black opacity-40" field="pageLabel" />
+              </div>
+            </div>
+          </div>
+        );
+      case 20: // Minimal Grid Focus
+        return (
+          <div className="absolute inset-0 bg-[#d1d9cf] p-10 flex flex-col justify-between border-l-2 border-t-2 border-black/20">
+            <div className="flex justify-between items-start">
+              <div>
+                <EditableTag text={slide.subTitle ?? 'L2D SYSTEM'} className="text-[8px] font-black tracking-[0.3em] opacity-40 uppercase block mb-1" field="subTitle" />
+                <EditableTag text={slide.tag ?? 'GRID'} className="text-[7px] font-black opacity-20 uppercase" field="tag" />
+              </div>
+              {Wordmark()}
+            </div>
+            <div className="my-6">
+              <EditableTitle text={slide.title} className="text-[2.2rem] font-syne font-black uppercase leading-none tracking-tighter mb-4" />
+            </div>
+            <div className="flex flex-col items-end text-right">
+              <EditableText text={slide.text} className="text-sm font-bold opacity-60 leading-snug max-w-[80%] mb-4" />
+              {CTA()}
+            </div>
+            <div className="flex justify-between items-end border-t border-black/10 pt-4 mt-2">
+              <span className="text-[8px] font-black opacity-30">© 2026</span>
+              <EditableTag text={slide.pageLabel ?? `SLIDE 0${slideIdx + 1}`} className="text-[8px] font-black opacity-30" field="pageLabel" />
+            </div>
+          </div>
+        );
+      case 21: // Floating Glass Card
+        return (
+          <div className="absolute inset-0 bg-[#1a1a1a] p-6 flex flex-col justify-between">
+            <div className="flex justify-between items-center text-white">
+              {Wordmark()}
+              <EditableTag text={slide.tag ?? 'PREMIUM'} className="text-[8px] font-black tracking-widest opacity-40 uppercase text-[#ccff00]" field="tag" />
+            </div>
+            <div className="flex-1 bg-white/5 backdrop-blur-md rounded-[32px] border border-white/10 p-8 my-4 flex flex-col justify-between text-white shadow-2xl">
+              <div>
+                <EditableTitle text={slide.title} className="font-syne font-black uppercase leading-none tracking-tighter mb-4 text-[2rem] text-[#ccff00]" />
+                <EditableText text={slide.text} className="text-sm font-bold opacity-70 leading-snug" />
+              </div>
+              {CTA()}
+            </div>
+            <div className="flex justify-between items-end text-white/40 text-[9px] font-black">
+              <span>L2D FRAMEWORK</span>
+              <EditableTag text={slide.pageLabel ?? `0${slideIdx + 1}`} className="" field="pageLabel" />
+            </div>
+          </div>
+        );
+      case 22: // Stat Callout Split
+        return (
+          <div className="absolute inset-0 bg-[#d1d9cf] p-10 flex flex-col justify-between">
+            <div className="flex justify-between items-center">
+              {Wordmark()}
+              <EditableTag text={slide.tag ?? 'STATISTICS'} className="text-[8px] font-black tracking-widest opacity-40 uppercase" field="tag" />
+            </div>
+            <div className="grid grid-cols-3 gap-4 my-auto items-center">
+              <div className="col-span-1">
+                <EditableNumber text={slide.number ?? `95%`} className="text-[4.5rem] font-syne font-black text-[#ccff00] bg-black text-center py-4 rounded-3xl leading-none tracking-tighter" field="number" label="STAT" />
+              </div>
+              <div className="col-span-2 pl-2">
+                <EditableTitle text={slide.title} className="text-[1.8rem] font-syne font-black uppercase leading-none tracking-tighter mb-2" />
+                <EditableText text={slide.text} className="text-xs font-bold opacity-60 leading-tight" />
+              </div>
+            </div>
+            <div className="flex justify-between items-end">
+              {CTA()}
+              <EditableTag text={slide.pageLabel ?? `#0${slideIdx + 1}`} className="text-[9px] font-black opacity-30" field="pageLabel" />
+            </div>
+          </div>
+        );
+      case 23: // Brutalist Poster
+        return (
+          <div className="absolute inset-0 bg-[#ccff00] text-black p-10 flex flex-col justify-between border-[12px] border-black">
+            <div className="flex justify-between items-start">
+              {Wordmark()}
+              <EditableTag text={slide.tag ?? 'CRITICAL'} className="text-[9px] font-black tracking-widest uppercase border border-black px-2 py-0.5" field="tag" />
+            </div>
+            <div className="my-auto">
+              <EditableTitle text={slide.title} className="text-[2.6rem] font-syne font-black uppercase leading-[0.9] tracking-tighter" />
+              <div className="w-full h-2 bg-black my-4" />
+              <EditableText text={slide.text} className="text-sm font-black leading-snug uppercase tracking-tight" />
+            </div>
+            <div className="flex justify-between items-end">
+              {CTA()}
+              <EditableTag text={slide.pageLabel ?? `STEP 0${slideIdx + 1}`} className="text-[9px] font-black uppercase tracking-wider" field="pageLabel" />
+            </div>
+          </div>
+        );
+      case 24: // Minimalist Border Pill
+        return (
+          <div className="absolute inset-0 bg-[#d1d9cf] p-10 flex flex-col justify-between">
+            <div className="flex justify-between items-center">
+              {Wordmark()}
+              <EditableTag text={slide.tag ?? 'EDITORIAL'} className="text-[8px] font-black tracking-widest opacity-40 uppercase" field="tag" />
+            </div>
+            <div className="my-auto flex flex-col items-center text-center">
+              <div className="border border-black px-6 py-3 rounded-full mb-6 max-w-full">
+                <EditableTitle text={slide.title} className="text-[1.5rem] font-syne font-black uppercase leading-none tracking-tight" />
+              </div>
+              <div className="w-1.5 h-1.5 rounded-full bg-black mb-6" />
+              <EditableText text={slide.text} className="text-sm font-bold opacity-60 leading-snug max-w-[85%]" />
+            </div>
+            <div className="flex justify-between items-end">
+              {CTA()}
+              <EditableTag text={slide.pageLabel ?? `PAGE 0${slideIdx + 1}`} className="text-[9px] font-black opacity-30" field="pageLabel" />
+            </div>
+          </div>
+        );
       default: // 0 — flagship Cinematic look
         return (
           <div className="absolute inset-0 p-10 flex flex-col justify-between text-black bg-[#d1d9cf]">
@@ -751,12 +934,14 @@ export default function SocialStudio() {
   }
 
   const isStoryFormat = selectedPost.format === 'STORY';
+  const isPortraitFormat = selectedPost.format === 'PORTRAIT';
 
   const stats = {
     total: posts.length,
     ready: posts.filter((p) => p.status === 'READY' || p.status === 'PUBLISHED').length,
     draft: posts.filter((p) => p.status === 'DRAFT').length,
     posts: posts.filter((p) => p.format === 'POST').length,
+    portraits: posts.filter((p) => p.format === 'PORTRAIT').length,
     stories: posts.filter((p) => p.format === 'STORY').length
   };
 
@@ -923,6 +1108,7 @@ export default function SocialStudio() {
                     >
                       <option value="all">Tutti i formati</option>
                       <option value="POST">Post 1:1</option>
+                      <option value="PORTRAIT">Ritratto 4:5</option>
                       <option value="STORY">Story 9:16</option>
                     </select>
                   </div>
@@ -1022,13 +1208,19 @@ export default function SocialStudio() {
                   onClick={() => updateFormat('POST')}
                   className={`px-3 lg:px-4 py-2 rounded-lg text-[10px] font-black uppercase flex items-center gap-1.5 transition-all ${selectedPost.format === 'POST' ? 'bg-white shadow-sm' : 'opacity-40'}`}
                 >
-                  <Instagram size={13} /> Post
+                  <Instagram size={13} /> Post 1:1
+                </button>
+                <button
+                  onClick={() => updateFormat('PORTRAIT')}
+                  className={`px-3 lg:px-4 py-2 rounded-lg text-[10px] font-black uppercase flex items-center gap-1.5 transition-all ${selectedPost.format === 'PORTRAIT' ? 'bg-white shadow-sm' : 'opacity-40'}`}
+                >
+                  <Instagram size={13} /> Ritratto 4:5
                 </button>
                 <button
                   onClick={() => updateFormat('STORY')}
                   className={`px-3 lg:px-4 py-2 rounded-lg text-[10px] font-black uppercase flex items-center gap-1.5 transition-all ${selectedPost.format === 'STORY' ? 'bg-white shadow-sm' : 'opacity-40'}`}
                 >
-                  <Smartphone size={13} /> Story
+                  <Smartphone size={13} /> Story 9:16
                 </button>
               </div>
               <button
@@ -1064,9 +1256,9 @@ export default function SocialStudio() {
           <div className="bg-white border-b border-black/5 px-6 py-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 z-40 overflow-x-auto no-scrollbar">
             <div className="flex items-center gap-4 shrink-0">
               <div className="flex flex-col">
-                <span className="text-[8px] font-black opacity-30 uppercase tracking-widest leading-none mb-1.5">Layout Variant ({selectedPost.styleVariant + 1}/16)</span>
+                <span className="text-[8px] font-black opacity-30 uppercase tracking-widest leading-none mb-1.5">Layout Variant ({selectedPost.styleVariant + 1}/25)</span>
                 <div className="flex gap-1.5 flex-wrap">
-                  {Array.from({ length: 16 }, (_, v) => (
+                  {Array.from({ length: 25 }, (_, v) => (
                     <button
                       key={v}
                       onClick={() => updateStyleVariant(v)}
@@ -1109,11 +1301,13 @@ export default function SocialStudio() {
                     className={`relative transition-all duration-500 ease-in-out ${
                       isStoryFormat
                         ? 'w-[320px] h-[568px] sm:w-[360px] sm:h-[640px]'
+                        : isPortraitFormat
+                        ? 'w-[360px] h-[450px] sm:w-[400px] sm:h-[500px]'
                         : 'w-[450px] h-[450px] sm:w-[500px] sm:h-[500px]'
                     } bg-[#d1d9cf] rounded-[32px] sm:rounded-[40px] shadow-[0_40px_100px_rgba(0,0,0,0.1)] overflow-hidden isolate`}
                   >
                     <div className="absolute inset-0 overflow-hidden">
-                      {renderSlideContent(selectedPost, currentSlide, { isStory: isStoryFormat })}
+                      {renderSlideContent(selectedPost, currentSlide, { isStory: isStoryFormat || isPortraitFormat })}
                     </div>
                   </div>
                 </div>
@@ -1220,9 +1414,11 @@ export default function SocialStudio() {
               onClick={() => setIsPreviewOpen(false)}
               className="absolute top-6 lg:top-12 right-6 lg:right-12 text-black opacity-40 hover:opacity-100 transition-all hover:rotate-90 duration-300"
             ><X size={32} className="lg:w-12 lg:h-12" /></button>
-            <div className={`relative scale-[0.6] sm:scale-75 md:scale-90 lg:scale-100 ${isStoryFormat ? 'h-[70vh] aspect-[9/16]' : 'w-[90vw] max-w-[600px] lg:w-[700px] aspect-square'} bg-[#d1d9cf] rounded-[40px] lg:rounded-[60px] overflow-hidden shadow-2xl border border-black/5 isolate`}>
+            <div className={`relative scale-[0.6] sm:scale-75 md:scale-90 lg:scale-100 ${
+              isStoryFormat ? 'h-[70vh] aspect-[9/16]' : isPortraitFormat ? 'h-[70vh] aspect-[4/5]' : 'w-[90vw] max-w-[600px] lg:w-[700px] aspect-square'
+            } bg-[#d1d9cf] rounded-[40px] lg:rounded-[60px] overflow-hidden shadow-2xl border border-black/5 isolate`}>
               <div className="absolute inset-0 overflow-hidden">
-                {renderSlideContent(selectedPost, currentSlide, { isStory: isStoryFormat })}
+                {renderSlideContent(selectedPost, currentSlide, { isStory: isStoryFormat || isPortraitFormat })}
               </div>
             </div>
             <div className="mt-8 lg:mt-12 flex gap-4 lg:gap-8">
@@ -1270,7 +1466,7 @@ export default function SocialStudio() {
               </div>
               {/* Grid */}
               <div className="grid grid-cols-3 gap-[2px] bg-black/5">
-                {posts.filter((p) => p.format === 'POST').slice(0, 30).map((post) => (
+                {posts.filter((p) => p.format === 'POST' || p.format === 'PORTRAIT').slice(0, 30).map((post) => (
                   <button
                     key={post.id}
                     onClick={() => { setSelectedPostId(post.id); setCurrentSlide(0); setIsIgGridOpen(false); }}
@@ -1299,9 +1495,16 @@ export default function SocialStudio() {
       <div className="fixed -left-[3000px] top-0 pointer-events-none">
         <div
           ref={batchRef}
-          className={`${batchPost?.post.format === 'STORY' ? 'w-[360px] h-[640px]' : 'w-[500px] h-[500px]'} bg-[#d1d9cf] relative overflow-hidden isolate`}
+          className={`${
+            batchPost?.post.format === 'STORY' ? 'w-[360px] h-[640px]' :
+            batchPost?.post.format === 'PORTRAIT' ? 'w-[500px] h-[625px]' :
+            'w-[500px] h-[500px]'
+          } bg-[#d1d9cf] relative overflow-hidden isolate`}
         >
-          {batchPost && renderSlideContent(batchPost.post, batchPost.sIdx, { isStory: batchPost.post.format === 'STORY', isEditingOverride: false })}
+          {batchPost && renderSlideContent(batchPost.post, batchPost.sIdx, {
+            isStory: batchPost.post.format === 'STORY' || batchPost.post.format === 'PORTRAIT',
+            isEditingOverride: false
+          })}
         </div>
       </div>
 

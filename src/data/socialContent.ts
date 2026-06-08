@@ -5,7 +5,7 @@
 // ============================================================================
 
 export type PostStatus = 'DRAFT' | 'READY' | 'PUBLISHED';
-export type PostFormat = 'POST' | 'STORY' | 'REEL_COVER';
+export type PostFormat = 'POST' | 'STORY' | 'PORTRAIT' | 'REEL_COVER';
 
 export type Pillar =
   | 'PROBLEM_SOLUTION'
@@ -837,7 +837,7 @@ export const generatePosts = (countOrOpts: number | GenerateOptions = 300): Post
   for (const group of customSource) {
     const angleLabel = ANGLES.find((a) => a.id === group.angle)?.label ?? group.category;
     for (const phrase of group.phrases) {
-      const styleVariant = (customId - 1) % 16;
+      const styleVariant = (customId - 1) % 25;
       const format: PostFormat = formatPref ?? 'POST';
       
       const slide: Slide = {
@@ -892,7 +892,7 @@ export const generatePosts = (countOrOpts: number | GenerateOptions = 300): Post
     const titles = pool[pillar] ?? [];
     const title = titles[Math.floor(rng() * titles.length)] ?? 'Strategia Digitale';
 
-    const styleVariant = Math.floor(rng() * 16);
+    const styleVariant = Math.floor(rng() * 25);
     const format: PostFormat = formatPref ?? (rng() < 0.18 ? 'STORY' : 'POST');
 
     const logicTemplates = format === 'STORY'
