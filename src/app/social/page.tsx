@@ -56,7 +56,8 @@ const L2D_WORDMARK = ({ size = 'sm', inverted = false }: { size?: 'xs' | 'sm' | 
 const SlideEditContext = React.createContext<{
   editing: boolean;
   isStory: boolean;
-  updateSlide: (field: keyof Slide, val: string) => void;
+  updateSlide: (field: keyof Slide, val: any) => void;
+  slide: Slide;
 } | null>(null);
 
 const fitTitleClass = (text: string, className: string, isStory: boolean): string => {
@@ -64,23 +65,58 @@ const fitTitleClass = (text: string, className: string, isStory: boolean): strin
   const totalLen = text.length;
   const stripped = className.replace(/text-\[[^\]]+\]|text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl)/g, '').trim();
   let sizeClass: string;
-  if (longestWord >= 15 || totalLen >= 40) sizeClass = isStory ? 'text-[1.5rem]' : 'text-[1.4rem]';
-  else if (longestWord >= 12 || totalLen >= 30) sizeClass = isStory ? 'text-[1.85rem]' : 'text-[1.7rem]';
-  else if (longestWord >= 9 || totalLen >= 20) sizeClass = isStory ? 'text-[2.2rem]' : 'text-[2.05rem]';
-  else if (totalLen >= 12) sizeClass = isStory ? 'text-[2.6rem]' : 'text-[2.4rem]';
-  else sizeClass = isStory ? 'text-[3rem]' : 'text-[2.8rem]';
+  if (longestWord >= 16 || totalLen >= 50) sizeClass = isStory ? 'text-[1.35rem]' : 'text-[1.2rem]';
+  else if (longestWord >= 12 || totalLen >= 35) sizeClass = isStory ? 'text-[1.65rem]' : 'text-[1.5rem]';
+  else if (longestWord >= 9 || totalLen >= 22) sizeClass = isStory ? 'text-[1.95rem]' : 'text-[1.8rem]';
+  else if (totalLen >= 12) sizeClass = isStory ? 'text-[2.3rem]' : 'text-[2.1rem]';
+  else sizeClass = isStory ? 'text-[2.7rem]' : 'text-[2.5rem]';
   const tracking = stripped.replace(/tracking-tighter/g, 'tracking-tight');
-  return `${sizeClass} ${tracking} whitespace-normal hyphens-none max-w-full`;
+  return `${sizeClass} ${tracking} whitespace-normal break-words max-w-full`;
 };
 
 const EditableTitle = React.memo(({ text, className }: { text: string; className: string }) => {
   const ctx = React.useContext(SlideEditContext);
   if (!ctx) return null;
-  const { editing, isStory, updateSlide } = ctx;
+  const { editing, isStory, updateSlide, slide } = ctx;
+  
+  if (slide.hideTitle) {
+    if (!editing) return null;
+    return (
+      <button
+        onClick={() => updateSlide('hideTitle', false)}
+        className="px-3 py-1 border border-dashed border-black/30 hover:border-black/60 text-black/50 hover:text-black rounded text-[10px] font-bold my-2 cursor-pointer transition-all inline-block"
+      >
+        + Aggiungi Titolo
+      </button>
+    );
+  }
+  
   const finalClass = fitTitleClass(text, className, isStory);
-  return !editing ? <h3 className={finalClass}>{text}</h3> : (
-    <textarea value={text} onChange={(e) => updateSlide('title', e.target.value)}
-      className={`${finalClass} bg-white/10 border-b border-[#ccff00] outline-none resize-none w-full`} rows={2} />
+  return (
+    <div className="relative group/title-field w-full">
+      {editing && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            updateSlide('hideTitle', true);
+          }}
+          className="absolute -top-3 -right-3 w-5 h-5 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center text-[9px] font-black shadow-md z-30 transition-all cursor-pointer opacity-0 group-hover/title-field:opacity-100"
+          title="Nascondi Titolo"
+        >
+          ✕
+        </button>
+      )}
+      {!editing ? (
+        <h3 className={finalClass}>{text}</h3>
+      ) : (
+        <textarea
+          value={text}
+          onChange={(e) => updateSlide('title', e.target.value)}
+          className={`${finalClass} bg-white/10 border-b border-[#ccff00] outline-none resize-none w-full`}
+          rows={2}
+        />
+      )}
+    </div>
   );
 });
 EditableTitle.displayName = 'EditableTitle';
@@ -88,13 +124,64 @@ EditableTitle.displayName = 'EditableTitle';
 const EditableText = React.memo(({ text, className }: { text: string; className: string }) => {
   const ctx = React.useContext(SlideEditContext);
   if (!ctx) return null;
-  const { editing, updateSlide } = ctx;
-  return !editing ? <p className={`${className} whitespace-normal max-w-full`}>{text}</p> : (
-    <textarea value={text} onChange={(e) => updateSlide('text', e.target.value)}
-      className={`${className} max-w-full bg-white/10 border-b border-[#ccff00] outline-none resize-none w-full`} rows={3} />
+  const { editing, updateSlide, slide } = ctx;
+
+  if (slide.hideText) {
+    if (!editing) return null;
+    return (
+      <button
+        onClick={() => updateSlide('hideText', false)}
+        className="px-3 py-1 border border-dashed border-black/30 hover:border-black/60 text-black/50 hover:text-black rounded text-[10px] font-bold my-2 cursor-pointer transition-all inline-block"
+      >
+        + Aggiungi Descrizione
+      </button>
+    );
+  }
+
+  return (
+    <div className="relative group/text-field w-full">
+      {editing && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            updateSlide('hideText', true);
+          }}
+          className="absolute -top-3 -right-3 w-5 h-5 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center text-[9px] font-black shadow-md z-30 transition-all cursor-pointer opacity-0 group-hover/text-field:opacity-100"
+          title="Nascondi Descrizione"
+        >
+          ✕
+        </button>
+      )}
+      {!editing ? (
+        <p className={`${className} whitespace-normal max-w-full break-words`}>{text}</p>
+      ) : (
+        <textarea
+          value={text}
+          onChange={(e) => updateSlide('text', e.target.value)}
+          className={`${className} max-w-full bg-white/10 border-b border-[#ccff00] outline-none resize-none w-full break-words`}
+          rows={3}
+        />
+      )}
+    </div>
   );
 });
 EditableText.displayName = 'EditableText';
+
+const getHideFlagKey = (field: keyof Slide): keyof Slide | null => {
+  if (field === 'tag') return 'hideTag';
+  if (field === 'tag2') return 'hideTag2';
+  if (field === 'subTitle') return 'hideSubTitle';
+  if (field === 'pageLabel') return 'hidePageLabel';
+  return null;
+};
+
+const getFieldNameLabel = (field: keyof Slide): string => {
+  if (field === 'tag') return 'Tag';
+  if (field === 'tag2') return 'Tag 2';
+  if (field === 'subTitle') return 'Sottotitolo';
+  if (field === 'pageLabel') return 'Pagina';
+  return String(field);
+};
 
 const EditableTag = React.memo(({
   text,
@@ -109,18 +196,58 @@ const EditableTag = React.memo(({
 }) => {
   const ctx = React.useContext(SlideEditContext);
   if (!ctx) return null;
-  const { editing, updateSlide } = ctx;
-  return !editing ? (
-    <span className={className} style={style}>{text}</span>
-  ) : (
-    <input
-      type="text"
-      value={text}
-      onChange={(e) => updateSlide(field, e.target.value)}
-      className={`${className} bg-white/10 border-b border-[#ccff00] outline-none max-w-[180px] inline-block`}
-      style={style}
-      onClick={(e) => e.stopPropagation()}
-    />
+  const { editing, updateSlide, slide } = ctx;
+  
+  const hideKey = getHideFlagKey(field);
+  
+  if (hideKey && slide[hideKey]) {
+    if (!editing) return null;
+    return (
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          updateSlide(hideKey, false);
+        }}
+        className="px-2 py-0.5 border border-dashed border-black/30 hover:border-black/60 text-[8px] text-black/50 hover:text-black rounded cursor-pointer transition-all inline-block my-1 font-mono uppercase"
+      >
+        + {getFieldNameLabel(field)}
+      </button>
+    );
+  }
+
+  const chWidth = text ? Math.max(1, text.length) : 3;
+
+  return (
+    <div className="relative group/tag-field inline-flex items-center">
+      {editing && hideKey && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            updateSlide(hideKey, true);
+          }}
+          className="absolute -top-2.5 -right-2.5 w-4 h-4 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center text-[7px] font-black shadow-md z-30 transition-all cursor-pointer opacity-0 group-hover/tag-field:opacity-100"
+          title={`Nascondi ${getFieldNameLabel(field)}`}
+        >
+          ✕
+        </button>
+      )}
+      {!editing ? (
+        <span className={`${className} break-words`} style={style}>{text}</span>
+      ) : (
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => updateSlide(field, e.target.value)}
+          className={`${className} bg-white/10 border-b border-[#ccff00] outline-none inline-block text-center break-words`}
+          style={{
+            ...style,
+            width: `${chWidth}ch`,
+            minWidth: '2ch',
+          }}
+          onClick={(e) => e.stopPropagation()}
+        />
+      )}
+    </div>
   );
 });
 EditableTag.displayName = 'EditableTag';
@@ -138,12 +265,42 @@ const EditableNumber = React.memo(({
 }) => {
   const ctx = React.useContext(SlideEditContext);
   if (!ctx) return null;
-  const { editing, updateSlide } = ctx;
+  const { editing, updateSlide, slide } = ctx;
+
+  if (slide.hideNumber) {
+    if (!editing) return null;
+    return (
+      <div className="absolute top-2 right-24 bg-black/80 text-white p-2 rounded-lg border border-dashed border-[#ccff00]/40 flex items-center justify-center z-50 text-[10px]">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            updateSlide('hideNumber', false);
+          }}
+          className="text-[#ccff00] font-bold cursor-pointer hover:underline"
+        >
+          + Mostra Numero
+        </button>
+      </div>
+    );
+  }
+
   return !editing ? (
-    <div className={className}>{text}</div>
+    <div className={`${className} break-words`}>{text}</div>
   ) : (
     <div className="absolute top-2 right-12 bg-black/80 text-white p-2 rounded-lg border border-[#ccff00]/40 flex flex-col gap-1 z-50 text-[10px] opacity-100 select-all normal-case font-sans">
-      <span className="text-[9px] text-[#ccff00] font-bold">{label}:</span>
+      <div className="flex justify-between items-center gap-4">
+        <span className="text-[9px] text-[#ccff00] font-bold">{label}:</span>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            updateSlide('hideNumber', true);
+          }}
+          className="text-red-500 hover:text-red-400 font-black cursor-pointer text-[9px]"
+          title="Nascondi Numero"
+        >
+          ✕
+        </button>
+      </div>
       <input
         type="text"
         value={text}
@@ -422,7 +579,6 @@ export default function SocialStudio() {
     // This is the brand anchor (mai cambiare): pillola nera, dot blu, testo Inter ExtraBold bianco.
     // Lo stesso pill che trovi nell'Header della homepage.
     const LogoPill = () => {
-      const logoText = slide.logoText ?? 'LINK2DIGITAL';
       return (
         <div
           className={`inline-flex items-center bg-black text-white rounded-full shrink-0 w-fit ${
@@ -430,12 +586,12 @@ export default function SocialStudio() {
           }`}
         >
           <span className={`${isSmall ? 'w-2 h-2' : 'w-3 h-3'} rounded-full bg-blue-500 shrink-0`} />
-          <EditableTag
-            text={logoText}
+          <span
             className={`font-extrabold uppercase leading-none ${isSmall ? 'text-[7px]' : 'text-[11px]'}`}
-            field="logoText"
             style={{ letterSpacing: '0.02em' }}
-          />
+          >
+            LINK2DIGITAL
+          </span>
         </div>
       );
     };
@@ -629,10 +785,36 @@ export default function SocialStudio() {
               <EditableTitle text={slide.title} className="text-[2.2rem] font-syne font-black uppercase leading-none tracking-tighter" />
               <EditableText text={slide.text} className="text-sm font-bold opacity-60 leading-snug max-w-[90%]" />
             </div>
-            <div className="bg-[#ccff00] rounded-[20px] p-4 flex justify-between items-center text-black">
-              <EditableTag text={slide.cta ?? 'GET STARTED'} className="text-[10px] font-black uppercase tracking-widest" field="cta" />
-              <ArrowRight size={16} />
-            </div>
+            {!slide.hideCta ? (
+              <div className="bg-[#ccff00] rounded-[20px] p-4 flex justify-between items-center text-black relative group/cta shrink-0">
+                <EditableTag text={slide.cta ?? 'GET STARTED'} className="text-[10px] font-black uppercase tracking-widest" field="cta" />
+                <ArrowRight size={16} />
+                {editing && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      updateSlide('hideCta', true);
+                    }}
+                    className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center text-[9px] font-black shadow-md transition-all z-30 cursor-pointer"
+                    title="Nascondi Pulsante"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+            ) : (
+              editing && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    updateSlide('hideCta', false);
+                  }}
+                  className="px-4 py-2 border-2 border-dashed border-black/30 hover:border-black/60 text-black/50 hover:text-black rounded-full font-black uppercase tracking-widest flex items-center justify-center gap-2 mt-2 w-full cursor-pointer transition-all text-[9px] h-12 shrink-0"
+                >
+                  + Aggiungi Pulsante
+                </button>
+              )
+            )}
           </div>
         );
       case 14: // Story-style oversized title (great for 9:16)
@@ -1330,7 +1512,7 @@ export default function SocialStudio() {
   })();
 
   return (
-    <SlideEditContext.Provider value={{ editing, isStory, updateSlide }}>
+    <SlideEditContext.Provider value={{ editing, isStory, updateSlide, slide }}>
       {slideElement}
     </SlideEditContext.Provider>
   );

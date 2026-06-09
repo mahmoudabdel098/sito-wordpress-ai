@@ -42,6 +42,13 @@ export interface Slide {
   number?: string;
   pageLabel?: string;
   hideCta?: boolean;
+  hideTitle?: boolean;
+  hideText?: boolean;
+  hideTag?: boolean;
+  hideTag2?: boolean;
+  hideSubTitle?: boolean;
+  hideNumber?: boolean;
+  hidePageLabel?: boolean;
 }
 
 export interface Post {
