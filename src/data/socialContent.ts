@@ -41,6 +41,7 @@ export interface Slide {
   logoText?: string;
   number?: string;
   pageLabel?: string;
+  hideCta?: boolean;
 }
 
 export interface Post {
@@ -837,7 +838,7 @@ export const generatePosts = (countOrOpts: number | GenerateOptions = 300): Post
   for (const group of customSource) {
     const angleLabel = ANGLES.find((a) => a.id === group.angle)?.label ?? group.category;
     for (const phrase of group.phrases) {
-      const styleVariant = (customId - 1) % 35;
+      const styleVariant = (customId - 1) % 45;
       const format: PostFormat = formatPref ?? 'POST';
       
       const slide: Slide = {
@@ -892,7 +893,7 @@ export const generatePosts = (countOrOpts: number | GenerateOptions = 300): Post
     const titles = pool[pillar] ?? [];
     const title = titles[Math.floor(rng() * titles.length)] ?? 'Strategia Digitale';
 
-    const styleVariant = Math.floor(rng() * 35);
+    const styleVariant = Math.floor(rng() * 45);
     const format: PostFormat = formatPref ?? (rng() < 0.18 ? 'STORY' : 'POST');
 
     const logicTemplates = format === 'STORY'
