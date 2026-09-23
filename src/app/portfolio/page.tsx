@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
-import { ArrowUpRight, Globe, Layout, ShoppingBag, Video, ExternalLink, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Globe, Layout, ShoppingBag, Video, ExternalLink, Sparkles, Layers, Palette } from 'lucide-react';
 import Magnetic from '@/components/Magnetic';
 import Header from '@/components/Header';
 
@@ -73,6 +73,28 @@ const projects = [
     icon: <Sparkles className="w-12 h-12 text-white" />,
     url: "https://giovanniarioni.com/",
     description: "End-to-end video production and high-end motion graphics for premium brands."
+  },
+  {
+    id: "07",
+    title: "ALAMA",
+    subtitle: "Design Objects",
+    category: "Brand & E-commerce",
+    color: "bg-[#e5e0d5]",
+    darkText: true,
+    icon: <Palette className="w-12 h-12 text-black" />,
+    url: "https://alamastudio.com/",
+    description: "Alama redefines gym equipment as objects of design. No longer machines to be concealed, but functional sculptures, crafted to inhabit space with presence."
+  },
+  {
+    id: "08",
+    title: "PORTFOLY.SPACE",
+    subtitle: "Portfolio Platform",
+    category: "Web Application",
+    color: "bg-[#ccff00]",
+    darkText: true,
+    icon: <Layers className="w-12 h-12 text-black" />,
+    url: "https://www.portfoly.space/",
+    description: "Web app that lets anyone build a portfolio — and swap it out for a new one whenever their work evolves."
   }
 ];
 
@@ -93,7 +115,7 @@ export default function Portfolio() {
     target: targetRef,
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", isMobile ? "0%" : "-88%"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", isMobile ? "0%" : "-91%"]);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     if (isMobile) return;
@@ -193,7 +215,7 @@ export default function Portfolio() {
         </div>
       </div>
 
-      <section ref={targetRef} className={`relative bg-black ${isMobile ? 'h-auto pb-40' : 'h-[800vh]'}`}>
+      <section ref={targetRef} className={`relative bg-black ${isMobile ? 'h-auto pb-40' : 'h-[1000vh]'}`}>
         <div className={`relative pt-24 ${isMobile ? '' : 'sticky top-0 h-screen flex items-center pt-20 overflow-hidden'}`}>
           {isMobile ? (
             <div className="flex flex-col items-center gap-5 px-6">
