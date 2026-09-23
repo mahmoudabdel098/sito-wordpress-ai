@@ -91,9 +91,7 @@ const jsonLd = {
       "priceRange": "$$$",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Via Montenapoleone, 12",
         "addressLocality": "Milano",
-        "postalCode": "20121",
         "addressCountry": "IT"
       },
       "geo": {

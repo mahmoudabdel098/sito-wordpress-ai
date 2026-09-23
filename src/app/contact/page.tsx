@@ -70,7 +70,7 @@ export default function Contact() {
                 </div>
                 <div>
                    <h3 className="text-xl lg:text-2xl font-syne font-black text-white uppercase tracking-tighter">Milano, Italy</h3>
-                   <p className="text-white/40 text-xs sm:text-sm font-bold mt-2">Via Montenapoleone, 12</p>
+                   <p className="text-white/40 text-xs sm:text-sm font-bold mt-2">Available worldwide</p>
                 </div>
              </div>
 
@@ -125,9 +125,9 @@ export default function Contact() {
         <section className="sr-only" aria-hidden="true">
           <h2>Contatta la nostra Web Agency a Milano</h2>
           <p>
-            Vieni a trovarci nel nostro studio a Milano in Via Montenapoleone 12, o scrivici a info@link2digital.com 
-            o chiamaci al +39 329 167 9904 per una consulenza su sviluppo web Next.js, strategie SEO e branding d'élite.
-            Link2Digital è attiva su tutto il territorio milanese e lombardo.
+            Scrivici a info@link2digital.com o chiamaci al +39 329 167 9904 per una consulenza su
+            sviluppo web Next.js, strategie SEO e branding d'élite. Link2Digital opera da Milano
+            in tutta Italia e in remoto in tutto il mondo.
           </p>
         </section>
       </motion.div>
