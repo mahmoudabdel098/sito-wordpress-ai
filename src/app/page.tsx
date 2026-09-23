@@ -37,11 +37,14 @@ export default function Home() {
           </div>
           
           <div className="flex flex-col items-start lg:items-end gap-8 lg:gap-10 text-left lg:text-right pr-4">
-             <div className="max-w-[320px]">
+             <div className="max-w-[360px]">
                 <span className="text-label !opacity-100 !text-black mb-4 block font-black text-xs">THE AGENCY</span>
-                <h2 className="text-lg lg:text-xl font-syne font-bold leading-tight opacity-50">
-                   Build better digital versions of your brand. We design high-performance experiences that scale globally.
+                <h2 className="text-lg lg:text-xl font-syne font-bold leading-tight opacity-70 mb-3">
+                   We build <span className="!opacity-100 text-black">websites</span>, <span className="!opacity-100 text-black">e-commerce</span> and <span className="!opacity-100 text-black">web applications</span> for companies ready to grow online.
                 </h2>
+                <p className="text-sm font-bold opacity-40 leading-snug">
+                   Cinematic design, elite performance, conversion first. From scratch, redesign or headless platforms.
+                </p>
              </div>
              
              <Magnetic>
@@ -57,15 +60,18 @@ export default function Home() {
           <TiltCard className="card card-dark !flex !flex-col !justify-between group !p-8 lg:!p-12 !rounded-[40px] lg:!rounded-[50px] !min-h-[300px] lg:!min-h-[320px] shadow-2xl relative">
             <div className="flex flex-col h-full justify-between">
               <div>
-                <span className="text-label text-white/40 mb-6 block text-[10px]">IMPROVE</span>
-                <h3 className="text-2xl lg:text-3xl font-syne font-black text-white leading-none">Project velocity</h3>
+                <span className="text-label text-white/40 mb-6 block text-[10px]">APPROACH</span>
+                <h3 className="text-2xl lg:text-3xl font-syne font-black text-white leading-none">Built for growth</h3>
+                <p className="text-white/50 text-[11px] lg:text-xs font-bold leading-snug mt-3 max-w-[240px]">
+                  Sites, e-commerce and apps engineered to convert &mdash; not just to look good.
+                </p>
               </div>
               <div className="relative h-24 mt-8 flex flex-col justify-end">
                 <svg className="w-full h-full overflow-visible" viewBox="0 0 100 30" preserveAspectRatio="none">
-                  <motion.path 
-                    d="M0,25 C20,25 30,15 50,20 C70,25 80,5 100,10" 
-                    fill="none" 
-                    stroke="var(--accent-lime)" 
+                  <motion.path
+                    d="M0,25 C20,25 30,15 50,20 C70,25 80,5 100,10"
+                    fill="none"
+                    stroke="var(--accent-lime)"
                     strokeWidth="3"
                     strokeLinecap="round"
                     initial={{ pathLength: 0 }}
@@ -75,7 +81,7 @@ export default function Home() {
                   <motion.circle cx="100" cy="10" r="4" fill="var(--accent-lime)" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 2 }} />
                 </svg>
                 <div className="graph-labels !flex !justify-between !w-full !mt-6">
-                  <span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span>
+                  <span>Launch</span><span>M+1</span><span>M+2</span><span>M+3</span>
                 </div>
               </div>
             </div>
@@ -84,15 +90,15 @@ export default function Home() {
           <TiltCard className="card card-light !flex !flex-col !justify-between !p-8 lg:!p-12 !rounded-[40px] lg:!rounded-[50px] border border-black/5 bg-white !min-h-[300px] lg:!min-h-[320px] shadow-2xl relative overflow-hidden">
             <div className="flex flex-col h-full justify-between">
               <div>
-                <span className="text-label mb-6 block text-[10px]">EXPLORE</span>
-                <h3 className="text-2xl lg:text-3xl font-syne font-black leading-none mb-8">Expertise</h3>
+                <span className="text-label mb-6 block text-[10px]">SERVICES</span>
+                <h3 className="text-2xl lg:text-3xl font-syne font-black leading-none mb-8">What we build</h3>
                 <div className="!flex !flex-row !flex-wrap !gap-3 relative z-10">
                   {[
-                    { label: "Design", style: "bg-black text-white" },
-                    { label: "Code", style: "bg-black/5" },
-                    { label: "SEO", style: "bg-accent-lime text-black" },
-                    { label: "Ads", style: "bg-blue-600 text-white" },
-                    { label: "UI", style: "border border-black/10" }
+                    { label: "Websites", style: "bg-black text-white" },
+                    { label: "E-commerce", style: "bg-accent-lime text-black" },
+                    { label: "Web Apps", style: "bg-blue-600 text-white" },
+                    { label: "Redesign", style: "bg-black/5" },
+                    { label: "SEO / AEO", style: "border border-black/10" }
                   ].map((tag, i) => (
                     <div key={i} className={`tag-pill ${tag.style}`}>
                       {tag.label}
@@ -114,19 +120,19 @@ export default function Home() {
                      <Users className="text-white" size={24} />
                   </div>
                   <div className="text-right">
-                     <h3 className="text-xl lg:text-2xl font-black text-white uppercase leading-tight tracking-tighter">Elite<br/>Community</h3>
-                     <span className="text-[9px] lg:text-[10px] text-white/60 font-bold uppercase tracking-widest mt-1 block">Trusted worldwide</span>
+                     <h3 className="text-xl lg:text-2xl font-black text-white uppercase leading-tight tracking-tighter">Track<br/>Record</h3>
+                     <span className="text-[9px] lg:text-[10px] text-white/60 font-bold uppercase tracking-widest mt-1 block">Milano &middot; Worldwide</span>
                 </div>
                </div>
-               
+
                <div className="flex items-end justify-between mt-8">
                   <div>
                      <div className="text-5xl lg:text-7xl font-syne font-black text-white leading-none tracking-tighter">20+</div>
-                     <span className="text-[9px] lg:text-[10px] text-white/50 uppercase font-black tracking-widest mt-3 block">Successful Projects</span>
+                     <span className="text-[9px] lg:text-[10px] text-white/50 uppercase font-black tracking-widest mt-3 block">Websites &amp; Apps Shipped</span>
                   </div>
                   <div className="text-right">
                      <div className="text-5xl lg:text-7xl font-syne font-black text-white leading-none tracking-tighter">10+</div>
-                     <span className="text-[9px] lg:text-[10px] text-white/50 uppercase font-black tracking-widest mt-3 block">Years Experience</span>
+                     <span className="text-[9px] lg:text-[10px] text-white/50 uppercase font-black tracking-widest mt-3 block">Years Building Digital</span>
                   </div>
                </div>
              </div>
@@ -142,10 +148,11 @@ export default function Home() {
           >
             {[...Array(10)].map((_, i) => (
               <div key={i} className="flex gap-32 items-center text-[10px] font-black uppercase tracking-[0.4em] opacity-20">
+                <span className="flex items-center gap-4"><Sparkles size={14}/> Websites</span>
                 <span className="flex items-center gap-4"><Cpu size={14}/> Next.js</span>
-                <span className="flex items-center gap-4"><Zap size={14}/> Framer Motion</span>
-                <span className="flex items-center gap-4"><Database size={14}/> Headless WP</span>
-                <span className="flex items-center gap-4"><Globe size={14}/> Cloudflare</span>
+                <span className="flex items-center gap-4"><Zap size={14}/> E-commerce</span>
+                <span className="flex items-center gap-4"><Database size={14}/> Web Apps</span>
+                <span className="flex items-center gap-4"><Globe size={14}/> Redesign</span>
               </div>
             ))}
           </motion.div>
