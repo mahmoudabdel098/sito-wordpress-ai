@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
-import { ArrowUpRight, Globe, Layout, ShoppingBag, Video, ExternalLink, Sparkles, Layers, Palette } from 'lucide-react';
+import { ArrowUpRight, Globe, Layout, ShoppingBag, Video, ExternalLink, Sparkles, Layers, Palette, HardHat, Watch } from 'lucide-react';
 import Magnetic from '@/components/Magnetic';
 import Header from '@/components/Header';
 
@@ -95,6 +95,28 @@ const projects = [
     icon: <Layers className="w-12 h-12 text-black" />,
     url: "https://www.portfoly.space/",
     description: "Web app that lets anyone build a portfolio — and swap it out for a new one whenever their work evolves."
+  },
+  {
+    id: "09",
+    title: "IMHOTEP BUILD",
+    subtitle: "Construction & Engineering",
+    category: "Corporate Website",
+    color: "bg-[#2b2e26]",
+    darkText: false,
+    icon: <HardHat className="w-12 h-12 text-white" />,
+    url: "https://imhotep-build.com/",
+    description: "Corporate platform for Imhotep Build — a construction firm blending engineering precision with architectural craft across private and public projects."
+  },
+  {
+    id: "10",
+    title: "NILSSEN WATCHES",
+    subtitle: "Timepiece Brand",
+    category: "E-commerce",
+    color: "bg-[#0e0e0e]",
+    darkText: false,
+    icon: <Watch className="w-12 h-12 text-white" />,
+    url: "https://www.nilssenwatches.com/",
+    description: "E-commerce and brand platform for Nilssen, a Scandinavian watch label crafting timepieces for a new generation of collectors."
   }
 ];
 
@@ -115,7 +137,7 @@ export default function Portfolio() {
     target: targetRef,
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", isMobile ? "0%" : "-91%"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", isMobile ? "0%" : "-93%"]);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     if (isMobile) return;
@@ -215,7 +237,7 @@ export default function Portfolio() {
         </div>
       </div>
 
-      <section ref={targetRef} className={`relative bg-black ${isMobile ? 'h-auto pb-40' : 'h-[1000vh]'}`}>
+      <section ref={targetRef} className={`relative bg-black ${isMobile ? 'h-auto pb-40' : 'h-[1200vh]'}`}>
         <div className={`relative pt-24 ${isMobile ? '' : 'sticky top-0 h-screen flex items-center pt-20 overflow-hidden'}`}>
           {isMobile ? (
             <div className="flex flex-col items-center gap-5 px-6">
