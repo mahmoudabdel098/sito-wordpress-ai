@@ -149,7 +149,7 @@ export default function Portfolio() {
 
   const cardsContent = (
     <>
-      <div className="w-[85vw] lg:w-[700px] h-[55vh] lg:h-[72vh] flex flex-col justify-center gap-6 lg:gap-8 p-8 lg:p-20 rounded-[40px] lg:rounded-[60px] bg-white/5 border border-white/10 shrink-0">
+      <div className="w-[85vw] lg:w-[700px] h-[55vh] lg:h-[62vh] flex flex-col justify-center gap-6 lg:gap-8 p-8 lg:p-14 rounded-[40px] lg:rounded-[60px] bg-white/5 border border-white/10 shrink-0">
          <span className="text-label text-accent-lime">OUR WORK</span>
          <h1 className="text-4xl sm:text-5xl lg:text-8xl font-syne font-black text-white leading-[1.0] uppercase tracking-tighter">
            THE<br/>GALLERY.
@@ -164,9 +164,9 @@ export default function Portfolio() {
       </div>
 
       {projects.map((project) => (
-        <div 
-          key={project.id} 
-          className={`w-[85vw] lg:w-[75vw] h-[55vh] lg:h-[72vh] rounded-[40px] lg:rounded-[60px] overflow-hidden shrink-0 relative transform-gpu group p-6 sm:p-8 lg:p-16 flex flex-col justify-between ${project.color}`}
+        <div
+          key={project.id}
+          className={`w-[85vw] lg:w-[75vw] h-[55vh] lg:h-[62vh] rounded-[40px] lg:rounded-[60px] overflow-hidden shrink-0 relative transform-gpu group p-6 sm:p-8 lg:p-10 flex flex-col justify-between ${project.color}`}
         >
           <div className="flex justify-between items-start relative z-10">
              <div className="flex flex-col gap-2">
@@ -184,29 +184,29 @@ export default function Portfolio() {
              </Magnetic>
           </div>
 
-          <div className="flex items-center justify-center py-4 lg:py-6 relative z-10">
+          <div className="flex items-center justify-center py-2 lg:py-4 relative z-10">
              <div className="lg:hidden p-6 sm:p-8 bg-white/10 rounded-full border border-white/10 flex items-center justify-center">
                 {React.cloneElement(project.icon as React.ReactElement, { className: 'w-8 h-8 text-current' })}
              </div>
-             <motion.div 
+             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true, margin: "100px" }}
-              className="hidden lg:flex p-16 bg-white/10 rounded-full border border-white/10 lg:backdrop-blur-xl"
+              className="hidden lg:flex p-10 bg-white/10 rounded-full border border-white/10 lg:backdrop-blur-xl"
              >
-                {React.cloneElement(project.icon as React.ReactElement, { className: 'w-12 h-12 text-current' })}
+                {React.cloneElement(project.icon as React.ReactElement, { className: 'w-10 h-10 text-current' })}
              </motion.div>
           </div>
 
-          <div className="flex justify-between items-end border-t border-black/10 pt-4 lg:pt-8 relative z-10">
-             <div className="max-w-md lg:max-w-xl">
-                <p className={`text-base sm:text-lg lg:text-2xl font-bold font-syne leading-tight ${project.darkText ? 'text-black/60' : 'text-white/60'}`}>
+          <div className={`flex justify-between items-end gap-6 border-t ${project.darkText ? 'border-black/10' : 'border-white/10'} pt-4 lg:pt-5 relative z-10`}>
+             <div className="max-w-md lg:max-w-[560px] min-w-0">
+                <p className={`text-sm sm:text-base lg:text-lg font-bold font-syne leading-snug ${project.darkText ? 'text-black/70' : 'text-white/70'}`}>
                   {project.description}
                 </p>
              </div>
-             <div className="flex flex-col items-end">
+             <div className="flex flex-col items-end shrink-0">
                 <span className={`text-[8px] lg:text-[10px] font-black uppercase tracking-widest mb-1 ${project.darkText ? 'text-black/20' : 'text-white/20'}`}>Case Study</span>
-                <span className={`text-2xl sm:text-3xl lg:text-5xl font-black ${project.darkText ? 'text-black' : 'text-white'}`}>NO.{project.id}</span>
+                <span className={`text-2xl sm:text-3xl lg:text-4xl font-black leading-none ${project.darkText ? 'text-black' : 'text-white'}`}>NO.{project.id}</span>
              </div>
           </div>
 
@@ -216,7 +216,7 @@ export default function Portfolio() {
         </div>
       ))}
 
-      <div className="w-[85vw] lg:w-[700px] h-[55vh] lg:h-[75vh] flex flex-col justify-center items-center gap-8 lg:gap-12 p-8 sm:p-10 lg:p-20 rounded-[40px] lg:rounded-[60px] bg-accent-lime shrink-0 text-center lg:shadow-[0_0_100px_rgba(204,255,0,0.2)]">
+      <div className="w-[85vw] lg:w-[700px] h-[55vh] lg:h-[62vh] flex flex-col justify-center items-center gap-8 lg:gap-12 p-8 sm:p-10 lg:p-14 rounded-[40px] lg:rounded-[60px] bg-accent-lime shrink-0 text-center lg:shadow-[0_0_100px_rgba(204,255,0,0.2)]">
          <h2 className="text-3xl sm:text-4xl lg:text-6xl font-syne font-black text-black leading-[1.0] uppercase tracking-tighter">
            READY FOR<br/>THE NEXT<br/>LEVEL?
          </h2>
